@@ -1,0 +1,40 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="photoAccent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0F6DF2"/>
+      <stop offset="100%" stop-color="#21C9E0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="760" rx="40" fill="#EAF3FF"/>
+  <rect x="22" y="22" width="1156" height="716" rx="34" fill="#FFFFFF" stroke="#D7E7FA" stroke-width="2"/>
+  <rect x="442" y="50" width="316" height="46" rx="23" fill="#0C2E58"/>
+  <text x="600" y="80" text-anchor="middle" fill="#FFFFFF" font-size="22" font-weight="800" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif">写真報告の改善イメージ</text>
+  <text x="600" y="164" text-anchor="middle" fill="#0D1E36" font-size="54" font-weight="900" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif">写真説明と報告文を</text>
+  <text x="600" y="224" text-anchor="middle" fill="#0D1E36" font-size="54" font-weight="900" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif">まとめて整える</text>
+  <text x="600" y="328" text-anchor="middle" fill="#0D1E36" font-size="112" font-weight="900" font-family="'Outfit', 'Hiragino Sans', sans-serif">60分 → 20分</text>
+  <text x="600" y="370" text-anchor="middle" fill="#5B6B80" font-size="28" font-weight="700" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif">写真ごとの説明文と報告文を一括整理</text>
+
+  <line x1="600" y1="424" x2="600" y2="620" stroke="#D9E8F9" stroke-width="3"/>
+  <text x="330" y="462" text-anchor="middle" fill="#0C2E58" font-size="34" font-weight="800" font-family="'Outfit', sans-serif">BEFORE</text>
+  <text x="870" y="462" text-anchor="middle" fill="#0F6DF2" font-size="34" font-weight="800" font-family="'Outfit', sans-serif">AFTER</text>
+  <path d="M282 482h96" stroke="#F06B6B" stroke-width="10" stroke-linecap="round"/>
+  <path d="M822 482h96" stroke="#21C9E0" stroke-width="10" stroke-linecap="round"/>
+  <text x="330" y="538" text-anchor="middle" fill="#0D1E36" font-size="34" font-weight="800" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif">写真ごとに</text>
+  <text x="330" y="578" text-anchor="middle" fill="#0D1E36" font-size="34" font-weight="800" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif">文面を考える</text>
+  <text x="870" y="526" text-anchor="middle" fill="#0D1E36" font-size="34" font-weight="800" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif">説明文と報告文を</text>
+  <text x="870" y="566" text-anchor="middle" fill="#0D1E36" font-size="34" font-weight="800" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif">セットで整える</text>
+
+  <rect x="84" y="632" width="230" height="50" rx="25" fill="#F3F8FF" stroke="#D8E7FA"/>
+  <rect x="342" y="632" width="230" height="50" rx="25" fill="#F3F8FF" stroke="#D8E7FA"/>
+  <rect x="628" y="632" width="230" height="50" rx="25" fill="#EAF9FF" stroke="#CFE8F8"/>
+  <rect x="886" y="632" width="230" height="50" rx="25" fill="#EAF9FF" stroke="#CFE8F8"/>
+  <text x="199" y="664" text-anchor="middle" fill="#587493" font-size="18" font-weight="700" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif">写真とメモ</text>
+  <text x="457" y="664" text-anchor="middle" fill="#587493" font-size="18" font-weight="700" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif">写真ごとに整文</text>
+  <text x="743" y="664" text-anchor="middle" fill="#0F6DF2" font-size="18" font-weight="700" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif">AI 要約</text>
+  <text x="1001" y="664" text-anchor="middle" fill="#0F6DF2" font-size="18" font-weight="700" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif">是正確認</text>
+
+  <rect x="968" y="110" width="118" height="118" rx="26" fill="#F4FAFF" stroke="#D6E7FA"/>
+  <rect x="994" y="138" width="66" height="46" rx="10" fill="#EAF4FF" stroke="#C7DCF7" stroke-width="3"/>
+  <path d="M1006 174l14-16 18 16 10-8 12 8" stroke="url(#photoAccent)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="1016" cy="150" r="6" fill="#21C9E0"/>
+</svg>

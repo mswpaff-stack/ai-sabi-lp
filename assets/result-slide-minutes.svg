@@ -1,0 +1,40 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="minutesAccent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0F6DF2"/>
+      <stop offset="100%" stop-color="#21C9E0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="760" rx="40" fill="#EAF3FF"/>
+  <rect x="22" y="22" width="1156" height="716" rx="34" fill="#FFFFFF" stroke="#D7E7FA" stroke-width="2"/>
+  <rect x="72" y="58" width="132" height="42" rx="21" fill="#E7F2FF" stroke="#C7DCF8"/>
+  <text x="138" y="85" text-anchor="middle" fill="#0F6DF2" font-size="20" font-weight="800" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif">議事録</text>
+  <text x="88" y="154" fill="#0D1E36" font-size="52" font-weight="900" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif">会議後すぐに</text>
+  <text x="88" y="212" fill="#0D1E36" font-size="52" font-weight="900" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif">共有できる形へ</text>
+  <rect x="802" y="70" width="300" height="158" rx="28" fill="#0C2E58"/>
+  <text x="952" y="114" text-anchor="middle" fill="#D7ECFF" font-size="20" font-weight="800" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif">作成時間</text>
+  <text x="952" y="174" text-anchor="middle" fill="#FFFFFF" font-size="72" font-weight="900" font-family="'Outfit', 'Hiragino Sans', sans-serif">40分 → 12分</text>
+  <text x="952" y="206" text-anchor="middle" fill="#7BDFF1" font-size="18" font-weight="700" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif">打ち合わせメモを整理して共有</text>
+
+  <line x1="150" y1="386" x2="1050" y2="386" stroke="url(#minutesAccent)" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="248" cy="386" r="34" fill="#0F6DF2"/>
+  <circle cx="600" cy="386" r="34" fill="#21C9E0"/>
+  <circle cx="952" cy="386" r="34" fill="#0C2E58"/>
+  <text x="248" y="396" text-anchor="middle" fill="#FFFFFF" font-size="24" font-weight="800" font-family="'Outfit', sans-serif">1</text>
+  <text x="600" y="396" text-anchor="middle" fill="#FFFFFF" font-size="24" font-weight="800" font-family="'Outfit', sans-serif">2</text>
+  <text x="952" y="396" text-anchor="middle" fill="#FFFFFF" font-size="24" font-weight="800" font-family="'Outfit', sans-serif">3</text>
+  <text x="248" y="452" text-anchor="middle" fill="#0D1E36" font-size="28" font-weight="800" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif">箇条書き</text>
+  <text x="600" y="452" text-anchor="middle" fill="#0D1E36" font-size="28" font-weight="800" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif">AI 要約</text>
+  <text x="952" y="452" text-anchor="middle" fill="#0D1E36" font-size="28" font-weight="800" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif">社内共有</text>
+  <text x="248" y="492" text-anchor="middle" fill="#5C7189" font-size="20" font-weight="700" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif">話した内容を残す</text>
+  <text x="600" y="492" text-anchor="middle" fill="#5C7189" font-size="20" font-weight="700" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif">論点と次の対応を整理</text>
+  <text x="952" y="492" text-anchor="middle" fill="#5C7189" font-size="20" font-weight="700" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif">すぐ共有できる形にする</text>
+
+  <rect x="88" y="548" width="468" height="126" rx="28" fill="#F8FBFF" stroke="#D7E6F8"/>
+  <rect x="644" y="548" width="468" height="126" rx="28" fill="#F2FBFF" stroke="#CDE6F8"/>
+  <text x="118" y="590" fill="#70839A" font-size="22" font-weight="800" font-family="'Outfit', sans-serif">BEFORE</text>
+  <text x="674" y="590" fill="#0F6DF2" font-size="22" font-weight="800" font-family="'Outfit', sans-serif">AFTER</text>
+  <text x="118" y="636" fill="#0D1E36" font-size="30" font-weight="800" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif">後で清書する必要がある</text>
+  <text x="674" y="624" fill="#0D1E36" font-size="28" font-weight="800" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif">論点と次の対応を</text>
+  <text x="674" y="658" fill="#0D1E36" font-size="28" font-weight="800" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif">先に整理して共有</text>
+</svg>

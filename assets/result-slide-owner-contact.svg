@@ -1,0 +1,45 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="contactPill" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0F6DF2"/>
+      <stop offset="100%" stop-color="#21C9E0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="760" rx="40" fill="#EAF3FF"/>
+  <rect x="22" y="22" width="1156" height="716" rx="34" fill="#FFFFFF" stroke="#D7E7FA" stroke-width="2"/>
+  <rect x="72" y="56" width="150" height="42" rx="21" fill="#E7F2FF" stroke="#C8DCF8"/>
+  <text x="147" y="84" text-anchor="middle" fill="#0F6DF2" font-size="20" font-weight="800" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif">施主連絡</text>
+  <text x="86" y="154" fill="#0D1E36" font-size="52" font-weight="900" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif">要点メモから</text>
+  <text x="86" y="212" fill="#0D1E36" font-size="52" font-weight="900" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif">丁寧な連絡文へ</text>
+  <rect x="844" y="70" width="270" height="84" rx="42" fill="url(#contactPill)"/>
+  <text x="979" y="106" text-anchor="middle" fill="#DFF8FF" font-size="18" font-weight="800" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif">作成時間</text>
+  <text x="979" y="134" text-anchor="middle" fill="#FFFFFF" font-size="44" font-weight="900" font-family="'Outfit', 'Hiragino Sans', sans-serif">20分 → 5分</text>
+  <text x="86" y="258" fill="#5B6B80" font-size="28" font-weight="700" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif">文面の整形と情報漏れ確認を同時に進める</text>
+
+  <rect x="86" y="320" width="466" height="278" rx="30" fill="#F8FBFF" stroke="#D9E8FA"/>
+  <path d="M126 406h246a20 20 0 0 0 20-20v-14a20 20 0 0 0-20-20H126a20 20 0 0 0-20 20v14a20 20 0 0 0 20 20z" fill="#FFFFFF" stroke="#D7E6F8"/>
+  <path d="M166 406l-26 22 8-22" fill="#FFFFFF" stroke="#D7E6F8"/>
+  <text x="130" y="386" fill="#6D8096" font-size="20" font-weight="800" font-family="'Outfit', sans-serif">BEFORE</text>
+  <text x="132" y="454" fill="#0D1E36" font-size="32" font-weight="800" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif">要点だけを急いで送る</text>
+  <rect x="126" y="492" width="90" height="18" rx="9" fill="#E4ECF8"/>
+  <rect x="126" y="526" width="166" height="18" rx="9" fill="#E4ECF8"/>
+  <rect x="126" y="560" width="132" height="18" rx="9" fill="#E4ECF8"/>
+  <text x="126" y="628" fill="#5C7189" font-size="26" font-weight="700" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif">担当者ごとに文面がばらつく</text>
+
+  <rect x="648" y="320" width="466" height="278" rx="30" fill="#F2FBFF" stroke="#CDE7F7"/>
+  <path d="M742 452h246a20 20 0 0 0 20-20v-14a20 20 0 0 0-20-20H742a20 20 0 0 0-20 20v14a20 20 0 0 0 20 20z" fill="#FFFFFF" stroke="#CFE5F8"/>
+  <path d="M1000 452l26 22-8-22" fill="#FFFFFF" stroke="#CFE5F8"/>
+  <text x="968" y="432" text-anchor="end" fill="#0F6DF2" font-size="20" font-weight="800" font-family="'Outfit', sans-serif">AFTER</text>
+  <text x="742" y="500" fill="#0D1E36" font-size="32" font-weight="800" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif">丁寧さと必要情報を両立</text>
+  <rect x="742" y="536" width="204" height="18" rx="9" fill="#DDF3FF"/>
+  <rect x="742" y="570" width="172" height="18" rx="9" fill="#DDF3FF"/>
+  <rect x="742" y="604" width="224" height="18" rx="9" fill="#DDF3FF"/>
+  <text x="742" y="660" fill="#0D1E36" font-size="26" font-weight="700" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif">返信しやすい文面に統一</text>
+
+  <rect x="250" y="640" width="196" height="40" rx="20" fill="#F3F8FF" stroke="#D7E6F8"/>
+  <rect x="502" y="640" width="196" height="40" rx="20" fill="#F3F8FF" stroke="#D7E6F8"/>
+  <rect x="754" y="640" width="196" height="40" rx="20" fill="#EAF9FF" stroke="#CDE7F7"/>
+  <text x="348" y="666" text-anchor="middle" fill="#5D7590" font-size="17" font-weight="700" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif">要点メモ</text>
+  <text x="600" y="666" text-anchor="middle" fill="#5D7590" font-size="17" font-weight="700" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif">AI 整文</text>
+  <text x="852" y="666" text-anchor="middle" fill="#0F6DF2" font-size="17" font-weight="700" font-family="'Hiragino Sans', 'Noto Sans JP', sans-serif">送信前確認</text>
+</svg>
