@@ -2370,6 +2370,29 @@ body::before {
   margin-top: 26px;
 }
 
+.portal-category-stack {
+  display: grid;
+  gap: 28px;
+  margin-top: 26px;
+}
+
+.portal-category-block {
+  display: grid;
+  gap: 0;
+}
+
+.portal-category-block .portal-list-grid {
+  margin-top: 16px;
+}
+
+.portal-category-title {
+  margin: 0;
+  color: #0a1a2d;
+  font-size: clamp(1.3rem, 2.4vw, 2rem);
+  font-weight: 800;
+  line-height: 1.18;
+}
+
 .portal-list-link {
   display: flex;
   flex-direction: column;
@@ -2418,6 +2441,10 @@ body::before {
   .portal-list-grid {
     grid-template-columns: 1fr;
     gap: 14px;
+  }
+
+  .portal-category-stack {
+    gap: 22px;
   }
 
   .portal-list-link {

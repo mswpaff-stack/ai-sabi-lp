@@ -1,0 +1,249 @@
+{
+  "slug": "replace-industry-slug",
+  "page": {
+    "title": "AI-SABI | REPLACE 業向け AI 活用伴走コンサル",
+    "description": "REPLACE 業向けの LP 説明文を入れてください。"
+  },
+  "brand": {
+    "mark": "AI-SABI",
+    "sub": "REPLACE 業向け AI 活用伴走コンサル"
+  },
+  "navigation": [
+    { "label": "課題", "href": "#issues" },
+    { "label": "理由", "href": "#reasons" },
+    { "label": "活用例", "href": "#cases" },
+    { "label": "支援プラン", "href": "#plans" },
+    { "label": "FAQ", "href": "#faq" }
+  ],
+  "cta": {
+    "header": "無料相談",
+    "hero": "無料相談をする",
+    "plan": "無料相談をする",
+    "contact": "無料相談を申し込む"
+  },
+  "hero": {
+    "image": "assets/replace-hero.png",
+    "image_alt": "REPLACE 業向けのヒーロー画像説明",
+    "topline": "REPLACE 業の主要業務",
+    "headline_lines": [
+      "REPLACE 業の",
+      "主要業務を、",
+      "現場目線で変える。"
+    ],
+    "subline_prefix": "対象業務を、現場で回る形に整える",
+    "subline_nowrap": "伴走型 AI コンサル",
+    "description": "REPLACE 業の課題整理から入力方法、確認フロー、定着支援まで伴走する説明文を入れてください。",
+    "proof_items": [
+      "業務A XX分 → YY分",
+      "業務B XX時間 → YY分",
+      "業務C XX分 → YY分"
+    ]
+  },
+  "issues": {
+    "id": "issues",
+    "label": "現場で起きやすい課題",
+    "heading_lines": [
+      "REPLACE 業で起きやすい課題を、",
+      "現場業務の言葉で記載してください。"
+    ],
+    "cards": [
+      {
+        "icon": "clock",
+        "title": "課題タイトル 1",
+        "body": "業種固有の困りごとを記載してください。"
+      },
+      {
+        "icon": "document-arrow",
+        "title": "課題タイトル 2",
+        "body": "業種固有の困りごとを記載してください。"
+      },
+      {
+        "icon": "photo",
+        "title": "課題タイトル 3",
+        "body": "業種固有の困りごとを記載してください。"
+      },
+      {
+        "icon": "chat",
+        "title": "課題タイトル 4",
+        "body": "業種固有の困りごとを記載してください。"
+      }
+    ]
+  },
+  "steps_section": {
+    "label": "現場目線で変える 4 ステップ",
+    "heading_lines": [
+      "AI-SABI は、最新 AI を",
+      "紹介するだけでなく、",
+      "現場で使える流れまで設計します。"
+    ],
+    "cards": [
+      { "index": "01", "title": "課題整理", "body": "最初に整理する内容を記載してください。" },
+      { "index": "02", "title": "対象業務の選定", "body": "最初の対象業務の決め方を記載してください。" },
+      { "index": "03", "title": "AI 活用設計", "body": "AI と人の役割分担を記載してください。" },
+      { "index": "04", "title": "定着支援", "body": "定着までどう伴走するかを記載してください。" }
+    ]
+  },
+  "services": {
+    "label": "現場目線で変える業務",
+    "heading_lines": [
+      "REPLACE 業の主要業務に、",
+      "AIを活用した最適化を実現します。"
+    ],
+    "cards": [
+      { "title": "業務カテゴリ 1", "items": ["項目 1", "項目 2", "項目 3"] },
+      { "title": "業務カテゴリ 2", "items": ["項目 1", "項目 2", "項目 3"] },
+      { "title": "業務カテゴリ 3", "items": ["項目 1", "項目 2", "項目 3"] },
+      { "title": "業務カテゴリ 4", "items": ["項目 1", "項目 2", "項目 3"] },
+      { "title": "業務カテゴリ 5", "items": ["項目 1", "項目 2", "項目 3"] },
+      { "title": "業務カテゴリ 6", "items": ["項目 1", "項目 2", "項目 3"] }
+    ]
+  },
+  "reasons": {
+    "id": "reasons",
+    "label": "現場目線で選ばれる 3 つの理由",
+    "heading_lines": [
+      "最新技術を入れるだけでなく、",
+      "現場で使い続けられる形まで整えます。"
+    ],
+    "cards": [
+      {
+        "number": "1",
+        "mini": "小さく始めやすい",
+        "title_lines": ["理由タイトル 1 行目", "理由タイトル 2 行目"],
+        "body": "理由の説明文を入れてください。",
+        "image": "assets/replace-reason-1.png",
+        "image_alt": "理由 1 の画像説明",
+        "reverse": false
+      },
+      {
+        "number": "2",
+        "mini": "運用まで設計する",
+        "title_lines": ["理由タイトル 1 行目", "理由タイトル 2 行目"],
+        "body": "理由の説明文を入れてください。",
+        "image": "assets/replace-reason-2.png",
+        "image_alt": "理由 2 の画像説明",
+        "reverse": true
+      },
+      {
+        "number": "3",
+        "mini": "定着まで伴走する",
+        "title_lines": ["理由タイトル 1 行目", "理由タイトル 2 行目"],
+        "body": "理由の説明文を入れてください。",
+        "image": "assets/replace-reason-3.png",
+        "image_alt": "理由 3 の画像説明",
+        "reverse": false
+      }
+    ]
+  },
+  "cases": {
+    "id": "cases",
+    "label": "運用イメージ",
+    "heading_lines": [
+      "現場でどう使うかまで、",
+      "一緒に考えます。"
+    ],
+    "cards": [
+      {
+        "label": "Case 01",
+        "title": "ユースケース 1 を記載してください",
+        "image": "assets/replace-usecase-1.png",
+        "image_alt": "ユースケース 1 の画像説明",
+        "items": ["入力: REPLACE", "出力: REPLACE", "改善イメージ: XX → YY"]
+      },
+      {
+        "label": "Case 02",
+        "title": "ユースケース 2 を記載してください",
+        "image": "assets/replace-usecase-2.png",
+        "image_alt": "ユースケース 2 の画像説明",
+        "items": ["入力: REPLACE", "出力: REPLACE", "改善イメージ: XX → YY"]
+      }
+    ]
+  },
+  "voice": {
+    "label": "こんな相談から始められます",
+    "heading_lines": [
+      "こんなお悩みも",
+      "お気軽にご相談ください。"
+    ],
+    "cards": [
+      { "icon": "A", "title": "悩みタイトル 1", "body": "悩みの説明文を入れてください。" },
+      { "icon": "B", "title": "悩みタイトル 2", "body": "悩みの説明文を入れてください。" },
+      { "icon": "C", "title": "悩みタイトル 3", "body": "悩みの説明文を入れてください。" }
+    ]
+  },
+  "compare": {
+    "label": "他サービスとの違い",
+    "heading_lines": [
+      "最新AIツールの導入だけでなく、",
+      "現場に合う運用まで一緒に整える支援"
+    ],
+    "columns": ["", "AI-SABI", "汎用 AI ツール導入", "外注代行"],
+    "rows": [
+      { "label": "比較軸 1", "emphasis": "AI-SABI の強み", "generic": "ツール導入側の見え方", "outsource": "外注側の見え方" },
+      { "label": "比較軸 2", "emphasis": "AI-SABI の強み", "generic": "ツール導入側の見え方", "outsource": "外注側の見え方" },
+      { "label": "比較軸 3", "emphasis": "AI-SABI の強み", "generic": "ツール導入側の見え方", "outsource": "外注側の見え方" },
+      { "label": "比較軸 4", "emphasis": "AI-SABI の強み", "generic": "ツール導入側の見え方", "outsource": "外注側の見え方" }
+    ]
+  },
+  "plans": {
+    "id": "plans",
+    "label": "支援プラン",
+    "heading_lines": [
+      "現場それぞれに合わせた",
+      "最適なプランをご用意しております。"
+    ],
+    "cards": [
+      { "title": "プラン 1", "highlight": true, "items": ["項目 1", "項目 2", "項目 3"] },
+      { "title": "プラン 2", "highlight": false, "items": ["項目 1", "項目 2", "項目 3"] },
+      { "title": "プラン 3", "highlight": false, "items": ["項目 1", "項目 2", "項目 3"] },
+      { "title": "プラン 4", "highlight": false, "items": ["項目 1", "項目 2", "項目 3"] }
+    ],
+    "note_lines": [
+      "支援対象業務、伴走期間、必要なサポート内容に応じてご案内します。",
+      "まずはお問い合わせください。"
+    ]
+  },
+  "flow": {
+    "label": "ご利用までの流れ",
+    "heading_lines": [
+      "お問い合わせから導入までの、",
+      "4ステップ"
+    ],
+    "cards": [
+      { "step": "STEP 1", "title": "無料相談", "body": "ステップ 1 の説明文を入れてください。" },
+      { "step": "STEP 2", "title": "対象業務の決定", "body": "ステップ 2 の説明文を入れてください。" },
+      { "step": "STEP 3", "title": "試行と調整", "body": "ステップ 3 の説明文を入れてください。" },
+      { "step": "STEP 4", "title": "定着と横展開", "body": "ステップ 4 の説明文を入れてください。" }
+    ]
+  },
+  "faq": {
+    "id": "faq",
+    "label": "よくあるご質問",
+    "items": [
+      { "question": "質問 1", "answer": "回答 1" },
+      { "question": "質問 2", "answer": "回答 2" },
+      { "question": "質問 3", "answer": "回答 3" },
+      { "question": "質問 4", "answer": "回答 4" },
+      { "question": "質問 5", "answer": "回答 5" }
+    ]
+  },
+  "contact": {
+    "id": "contact",
+    "label": "お問い合わせ",
+    "heading_lines": [
+      "まずは無料相談で、",
+      "現場目線で変えやすい業務を整理しませんか。"
+    ],
+    "description": "最終問い合わせ帯に表示する説明文を入れてください。",
+    "details": [
+      { "label": "サービス名", "value": "AI-SABI" },
+      { "label": "会社名", "value": "REPLACE 会社名" },
+      { "label": "代表者", "value": "REPLACE 代表者名" },
+      { "label": "担当者", "value": "REPLACE 担当者名" }
+    ]
+  },
+  "footer": {
+    "left": "AI-SABI / REPLACE 会社名",
+    "right": "REPLACE 業向け AI 活用伴走コンサル LP Prototype"
+  }
+}
