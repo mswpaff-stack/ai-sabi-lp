@@ -229,6 +229,22 @@ section[id] {
   text-wrap: balance;
 }
 
+.hero-stage h1,
+.hero-subline,
+.hero-description,
+.section-heading h2,
+.reason-text h3,
+.case-content h3,
+.flow-card h3,
+.issue-card h3,
+.service-card h3,
+.voice-card h3,
+.plan-title,
+.final-contact h2,
+.faq-list summary {
+  text-wrap: pretty;
+}
+
 .section-heading h2,
 .final-contact h2 {
   font-size: clamp(1.9rem, 3.7vw, 3.2rem);
@@ -1158,18 +1174,34 @@ section[id] {
   }
 
   .site-header {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 10px;
+    top: 10px;
     padding: 14px 16px;
-    border-radius: 24px;
+    border-radius: 20px;
   }
 
   .brand {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 2px;
+    align-items: center;
+    gap: 0;
+    min-width: 0;
+  }
+
+  .brand-mark {
+    font-size: 1.08rem;
+  }
+
+  .brand-sub {
+    display: none;
   }
 
   .header-button {
-    display: none;
+    display: inline-flex;
+    min-width: 0;
+    min-height: 42px;
+    padding: 0 14px;
+    font-size: 0.86rem;
+    white-space: nowrap;
   }
 
   .hero-card,
@@ -1479,18 +1511,19 @@ section[id] {
   }
 
   .hero-stage h1 {
-    font-size: clamp(2.55rem, 10.2vw, 3.55rem);
-    line-height: 1;
+    font-size: clamp(2.32rem, 9.6vw, 3.22rem);
+    line-height: 0.97;
   }
 
   .hero-subline {
     margin-top: 14px;
-    font-size: clamp(0.98rem, 4.8vw, 1.24rem);
+    font-size: clamp(0.96rem, 4.5vw, 1.14rem);
+    line-height: 1.38;
   }
 
   .hero-description {
-    font-size: 0.94rem;
-    line-height: 1.7;
+    font-size: 0.91rem;
+    line-height: 1.74;
   }
 
   .hero-button-row {
@@ -1513,6 +1546,31 @@ section[id] {
   .issue-section .heading-line,
   .reason-text .heading-line {
     white-space: normal;
+  }
+
+  .section-heading h2,
+  .final-contact h2 {
+    font-size: clamp(1.64rem, 7.1vw, 2.18rem);
+    line-height: 1.16;
+  }
+
+  .section-heading.heading-compact h2 {
+    font-size: clamp(1.5rem, 6.5vw, 1.94rem);
+    line-height: 1.14;
+  }
+
+  .issue-section .section-heading h2 {
+    font-size: clamp(1.48rem, 6.4vw, 1.88rem);
+    line-height: 1.13;
+  }
+
+  .reason-text h3,
+  .case-content h3,
+  .flow-card h3,
+  .issue-card h3,
+  .service-card h3,
+  .voice-card h3 {
+    line-height: 1.28;
   }
 }
 
