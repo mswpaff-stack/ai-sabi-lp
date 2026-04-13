@@ -31,10 +31,13 @@
     }
   ],
   "cta": {
-    "header": "無料相談",
-    "hero": "無料相談をする",
-    "plan": "無料相談をする",
-    "contact": "無料相談を申し込む"
+    "header": "LINE相談",
+    "hero": "LINEで無料相談",
+    "plan": "LINEで無料相談",
+    "contact": "公式LINEで相談する",
+    "href": "https://lin.ee/OMcemid",
+    "target": "_blank",
+    "rel": "noopener noreferrer"
   },
   "hero": {
     "image": "assets/wholesale-hero.png",
@@ -365,14 +368,14 @@
   "flow": {
     "label": "ご利用までの流れ",
     "heading_lines": [
-      "お問い合わせから導入までの、",
+      "公式LINEから導入までの、",
       "4ステップ"
     ],
     "cards": [
       {
         "step": "STEP 1",
-        "title": "無料相談",
-        "body": "提案や見積でどこが重いかをヒアリングします。"
+        "title": "LINEで無料相談",
+        "body": "公式LINEから、現在の課題と重い業務をヒアリングします。"
       },
       {
         "step": "STEP 2",
@@ -395,6 +398,10 @@
     "id": "faq",
     "label": "よくあるご質問",
     "items": [
+      {
+        "question": "まずは LINE から相談できますか？",
+        "answer": "はい。公式LINEから無料相談いただけます。友だち追加後に、いま重い業務や気になっている業務を書いていただければ、着手しやすい改善テーマを整理します。"
+      },
       {
         "question": "AI に詳しくなくても相談できますか？",
         "answer": "問題ありません。見積補足や提案メールなど、どの業務から始めると効果が出やすいかを営業フローに合わせて整理します。"
@@ -419,13 +426,17 @@
   },
   "contact": {
     "id": "contact",
-    "label": "お問い合わせ",
+    "label": "公式LINE",
     "heading_lines": [
-      "まずは無料相談で、",
+      "まずは公式LINEを追加して、",
       "営業で変えやすい業務を整理しませんか。"
     ],
-    "description": "AI-SABI は、卸売業の業務を現場目線で最適化する伴走型コンサルです。AI ツールの紹介だけで終わらず、課題整理から活用方針、運用設計、連携・自動化設計、実務定着まで支援します。",
+    "description": "公式LINEの初回相談では、卸売業で今重い業務、活用方針、ツール選定、連携・自動化候補まで一緒に整理します。",
     "details": [
+      {
+        "label": "相談方法",
+        "value": "公式LINE"
+      },
       {
         "label": "サービス名",
         "value": "AI-SABI"

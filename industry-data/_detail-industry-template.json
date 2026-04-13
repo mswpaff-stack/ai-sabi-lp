@@ -36,10 +36,13 @@
     { "label": "FAQ", "href": "#faq" }
   ],
   "cta": {
-    "header": "無料相談",
-    "hero": "無料相談をする",
-    "plan": "無料相談をする",
-    "contact": "無料相談を申し込む"
+    "header": "LINE相談",
+    "hero": "LINEで無料相談",
+    "plan": "LINEで無料相談",
+    "contact": "公式LINEで相談する",
+    "href": "https://lin.ee/OMcemid",
+    "target": "_blank",
+    "rel": "noopener noreferrer"
   },
   "hero": {
     "image": "assets/{{UNIT_CODE}}-hero.png",
@@ -226,11 +229,11 @@
   "flow": {
     "label": "ご利用までの流れ",
     "heading_lines": [
-      "お問い合わせから導入までの、",
+      "公式LINEから導入までの、",
       "4ステップ"
     ],
     "cards": [
-      { "step": "STEP 1", "title": "無料相談", "body": "{{DETAIL_INDUSTRY}}向けの課題と対象業務を整理します。" },
+      { "step": "STEP 1", "title": "LINEで無料相談", "body": "公式LINEから、現在の課題と重い業務をヒアリングします。" },
       { "step": "STEP 2", "title": "対象業務の決定", "body": "まず何を変えるか、どこまで変えるかを決めます。" },
       { "step": "STEP 3", "title": "試行と調整", "body": "AI 活用の試行、連携・自動化範囲、確認ポイントを整えます。" },
       { "step": "STEP 4", "title": "定着と横展開", "body": "現場で回る形に整え、必要に応じて次業務へ広げます。" }
@@ -240,6 +243,7 @@
     "id": "faq",
     "label": "よくあるご質問",
     "items": [
+      { "question": "まずは LINE から相談できますか？", "answer": "はい。公式LINEから無料相談いただけます。友だち追加後に、いま重い業務や気になっている業務を書いていただければ、着手しやすい改善テーマを整理します。" },
       { "question": "{{DETAIL_INDUSTRY}}でも小さく始められますか。", "answer": "はい。まずは 1 業務から始め、成果を見ながら広げる前提で設計します。" },
       { "question": "ツールが決まっていなくても相談できますか。", "answer": "はい。ツール選定より前に、対象業務と確認フローの整理からご相談いただけます。" },
       { "question": "どこまで AI 化・自動化できますか。", "answer": "業務によります。文案作成、要約、一次対応、共有、転記削減、ツール連携などは自動化候補です。判断や確認が必要な部分は残しつつ、どこまで任せるかを一緒に設計します。" },
@@ -249,13 +253,14 @@
   },
   "contact": {
     "id": "contact",
-    "label": "お問い合わせ",
+    "label": "公式LINE",
     "heading_lines": [
-      "まずは無料相談で、",
+      "まずは公式LINEを追加して、",
       "{{DETAIL_INDUSTRY}}で変えやすい業務を整理しませんか。"
     ],
-    "description": "{{DETAIL_INDUSTRY}}向けの初回相談では、課題整理、対象業務、活用方針、運用設計、自動化候補まで一緒に整理します。",
+    "description": "公式LINEの初回相談では、{{DETAIL_INDUSTRY}}で今重い業務、活用方針、ツール選定、連携・自動化候補まで一緒に整理します。",
     "details": [
+      { "label": "相談方法", "value": "公式LINE" },
       { "label": "サービス名", "value": "AI-SABI" },
       { "label": "対象業種", "value": "{{DETAIL_INDUSTRY}}" },
       { "label": "大カテゴリ", "value": "{{MAJOR_CATEGORY}}" },
