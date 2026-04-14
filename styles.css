@@ -1363,6 +1363,10 @@ section[id] {
   max-width: min(760px, 56vw);
 }
 
+.hero-stage-copy--two-line {
+  max-width: min(860px, 64vw);
+}
+
 .hero-topline {
   margin: 0;
   color: var(--orange-deep);
@@ -1378,6 +1382,19 @@ section[id] {
   font-weight: 900;
   line-height: 1.02;
   letter-spacing: -0.04em;
+}
+
+.hero-stage h1.hero-headline--two-line {
+  font-size: clamp(2.45rem, 4.1vw, 3.9rem);
+  line-height: 1.06;
+  letter-spacing: -0.05em;
+  text-wrap: initial;
+}
+
+.hero-headline--two-line .heading-line {
+  white-space: nowrap !important;
+  word-break: keep-all;
+  overflow-wrap: normal;
 }
 
 .hero-subline {
@@ -1452,9 +1469,18 @@ section[id] {
     max-width: min(720px, 58vw);
   }
 
+  .hero-stage-copy--two-line {
+    max-width: min(800px, 64vw);
+  }
+
   .hero-stage h1 {
     font-size: clamp(2.8rem, 4.55vw, 4.45rem);
     line-height: 0.98;
+  }
+
+  .hero-stage h1.hero-headline--two-line {
+    font-size: clamp(2.28rem, 3.7vw, 3.35rem);
+    line-height: 1.04;
   }
 
   .hero-subline {
@@ -1491,6 +1517,10 @@ section[id] {
   .hero-stage-copy {
     max-width: min(700px, 100%);
   }
+
+  .hero-stage-copy--two-line {
+    max-width: min(820px, 100%);
+  }
 }
 
 @media (max-width: 680px) {
@@ -1513,6 +1543,11 @@ section[id] {
   .hero-stage h1 {
     font-size: clamp(2.32rem, 9.6vw, 3.22rem);
     line-height: 0.97;
+  }
+
+  .hero-stage h1.hero-headline--two-line {
+    font-size: clamp(1.56rem, 6.4vw, 2.08rem);
+    line-height: 1.08;
   }
 
   .hero-subline {
