@@ -274,6 +274,13 @@ section[id] {
   white-space: nowrap;
 }
 
+.service-section .heading-line,
+.case-section .heading-line,
+.plan-section .heading-line,
+.final-contact .heading-line {
+  white-space: nowrap;
+}
+
 .section-note,
 .hero-lead,
 .hero-form-lead,
@@ -1579,7 +1586,11 @@ section[id] {
   }
 
   .issue-section .heading-line,
-  .reason-text .heading-line {
+  .reason-text .heading-line,
+  .service-section .heading-line,
+  .case-section .heading-line,
+  .plan-section .heading-line,
+  .final-contact .heading-line {
     white-space: normal;
   }
 
