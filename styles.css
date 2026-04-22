@@ -3423,3 +3423,690 @@ body.page-main-shigyo .site-footer {
     max-width: none;
   }
 }
+
+/* 2026-04-22 main-shigyo gpt-image-2 full LP prototype */
+body.page-main-shigyo-gpt2 {
+  --shigyo-ink: #06111f;
+  --shigyo-ink-soft: #0d1b2e;
+  --shigyo-ivory: #f5efe5;
+  --shigyo-paper: #fffaf2;
+  --shigyo-gold: #b58a46;
+  --shigyo-gold-soft: #d8b26b;
+  --shigyo-line: rgba(181, 138, 70, 0.22);
+  background:
+    radial-gradient(circle at top left, rgba(181, 138, 70, 0.1), transparent 28%),
+    linear-gradient(180deg, #f1ece3 0%, #eef1f6 100%);
+  color: #111826;
+}
+
+body.page-main-shigyo-gpt2 .site-shell {
+  gap: 36px;
+}
+
+body.page-main-shigyo-gpt2 .site-header {
+  background: rgba(255, 250, 242, 0.92);
+  border: 1px solid rgba(181, 138, 70, 0.14);
+  box-shadow: 0 20px 50px rgba(12, 21, 35, 0.08);
+  backdrop-filter: blur(14px);
+}
+
+body.page-main-shigyo-gpt2 .brand-mark {
+  color: var(--shigyo-ink);
+}
+
+body.page-main-shigyo-gpt2 .brand-sub,
+body.page-main-shigyo-gpt2 .site-nav a {
+  color: rgba(17, 24, 38, 0.76);
+}
+
+body.page-main-shigyo-gpt2 .header-button {
+  background: linear-gradient(135deg, var(--shigyo-gold-soft), var(--shigyo-gold));
+  color: #17120c;
+  box-shadow: 0 18px 34px rgba(181, 138, 70, 0.22);
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-main {
+  display: grid;
+  gap: 0;
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-hero {
+  position: relative;
+  overflow: hidden;
+  border-radius: 40px 40px 0 0;
+  background: var(--shigyo-paper);
+  box-shadow: 0 28px 56px rgba(10, 18, 30, 0.1);
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: min(46vw, 620px);
+  background:
+    radial-gradient(circle at 18% 22%, rgba(181, 138, 70, 0.18), transparent 18%),
+    linear-gradient(180deg, #07111d 0%, #08182a 100%);
+  clip-path: polygon(0 0, 100% 0, 82% 100%, 0 100%);
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-hero::after {
+  content: "";
+  position: absolute;
+  left: min(43vw, 575px);
+  top: -10%;
+  width: 2px;
+  height: 120%;
+  background: linear-gradient(180deg, rgba(216, 178, 107, 0), rgba(216, 178, 107, 0.9), rgba(216, 178, 107, 0));
+  transform: rotate(18deg);
+  transform-origin: center;
+  pointer-events: none;
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-hero-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(380px, 0.95fr);
+  min-height: 760px;
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-hero-copy {
+  position: relative;
+  z-index: 2;
+  padding: 82px 56px 180px;
+  color: #f8f1e5;
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-kicker,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-section-mini {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 22px;
+  font-size: 0.92rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--shigyo-gold-soft);
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-kicker::before,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-section-mini::before {
+  content: "";
+  width: 40px;
+  height: 1px;
+  background: rgba(216, 178, 107, 0.54);
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-hero h1,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-section-heading h2,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-intro-copy h2,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-consult-box h2,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-final h2 {
+  margin: 0;
+  font-family: "Noto Serif JP", serif;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-hero h1 {
+  font-size: clamp(3.8rem, 4.9vw, 5.75rem);
+  line-height: 1.1;
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-subline {
+  margin: 22px 0 0;
+  font-size: 1.22rem;
+  line-height: 1.8;
+  color: rgba(248, 241, 229, 0.82);
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-description {
+  max-width: 520px;
+  margin: 28px 0 0;
+  font-size: 1.04rem;
+  line-height: 2;
+  color: rgba(248, 241, 229, 0.88);
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-button-row {
+  margin-top: 36px;
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-button-row .button-primary,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-consult-box .button-primary,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-final-card .button-primary {
+  background: linear-gradient(135deg, #c8a35f, #a97d38);
+  color: #18120a;
+  box-shadow: 0 18px 38px rgba(169, 125, 56, 0.26);
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-hero-media {
+  position: relative;
+  overflow: hidden;
+  min-height: 760px;
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-hero-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(245, 239, 229, 0.04) 0%, rgba(7, 17, 29, 0.08) 100%);
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-side-quote {
+  position: absolute;
+  right: 48px;
+  top: 120px;
+  z-index: 2;
+  padding: 26px 18px;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-family: "Noto Serif JP", serif;
+  font-size: 1.35rem;
+  line-height: 1.8;
+  color: #2b2317;
+  background: rgba(255, 250, 242, 0.86);
+  box-shadow: 0 16px 34px rgba(12, 21, 35, 0.14);
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-summary-band {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  margin: -46px 54px 0;
+  background: linear-gradient(180deg, rgba(255, 250, 242, 0.98), rgba(247, 240, 230, 0.98));
+  border: 1px solid rgba(181, 138, 70, 0.16);
+  box-shadow: 0 26px 48px rgba(10, 18, 30, 0.12);
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-summary-band article {
+  padding: 34px 30px;
+  border-right: 1px solid rgba(181, 138, 70, 0.12);
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-summary-band article:last-child {
+  border-right: 0;
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-summary-icon {
+  display: inline-flex;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(181, 138, 70, 0.46);
+  border-radius: 999px;
+  font-size: 0.86rem;
+  letter-spacing: 0.08em;
+  color: var(--shigyo-gold);
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-summary-band h2 {
+  margin: 16px 0 10px;
+  font-family: "Noto Serif JP", serif;
+  font-size: 1.65rem;
+  color: var(--shigyo-ink);
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-summary-band p,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-metrics-copy p,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-intro-copy p,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-consult-box p,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-issue-grid p,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-process-grid p,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-services-grid li,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-case-grid li,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-faq-list p,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-final p {
+  font-size: 0.98rem;
+  line-height: 1.95;
+  color: rgba(17, 24, 38, 0.76);
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-metrics {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  gap: 36px;
+  padding: 92px 54px 72px;
+  background:
+    radial-gradient(circle at 20% 38%, rgba(181, 138, 70, 0.08), transparent 20%),
+    linear-gradient(180deg, #07111d 0%, #0c1829 100%);
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-metrics-copy,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-metrics-grid article,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-process,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-final {
+  color: #f8f1e5;
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-metrics-copy p,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-metrics-copy h2,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-process .shigyo-gpt2-section-heading h2,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-process .shigyo-gpt2-section-mini,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-final h2,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-final .shigyo-gpt2-section-mini,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-final p {
+  color: inherit;
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  align-self: center;
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-metrics-grid article {
+  padding: 30px 18px;
+  border-left: 1px solid rgba(216, 178, 107, 0.28);
+  text-align: center;
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-metrics-grid article:first-child {
+  border-left: 0;
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-metrics-grid span {
+  display: block;
+  margin-bottom: 16px;
+  font-size: 0.92rem;
+  letter-spacing: 0.12em;
+  color: rgba(248, 241, 229, 0.72);
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-metrics-grid strong {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 6px;
+  font-family: "Noto Serif JP", serif;
+  font-size: clamp(3.1rem, 4vw, 4.5rem);
+  line-height: 0.92;
+  color: var(--shigyo-gold-soft);
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-metrics-grid strong span {
+  margin: 0 0 10px;
+  font-size: 1.2rem;
+  color: inherit;
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-outline-link {
+  display: inline-flex;
+  margin-top: 24px;
+  padding: 14px 20px;
+  border: 1px solid rgba(216, 178, 107, 0.34);
+  color: #f8f1e5;
+  text-decoration: none;
+  transition: 180ms ease;
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-outline-link:hover {
+  border-color: rgba(216, 178, 107, 0.72);
+  transform: translateY(-1px);
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-intro,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-issues,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-services,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-cases,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-faq {
+  padding: 92px 54px;
+  background: var(--shigyo-paper);
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 400px);
+  gap: 46px;
+  align-items: start;
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-intro-copy h2,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-consult-box h2,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-section-heading h2 {
+  font-size: clamp(2.5rem, 4vw, 4.2rem);
+  line-height: 1.2;
+  color: var(--shigyo-ink);
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-principles {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  margin-top: 44px;
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-principles article {
+  padding-top: 18px;
+  border-top: 1px solid rgba(181, 138, 70, 0.2);
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-principles h3,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-issue-grid h3,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-process-grid h3,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-services-grid h3,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-case-grid h3 {
+  margin: 0 0 10px;
+  font-size: 1.3rem;
+  line-height: 1.45;
+  color: var(--shigyo-ink);
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-consult-box {
+  padding: 44px 36px;
+  background: linear-gradient(180deg, #131f30 0%, #0a1220 100%);
+  color: #f8f1e5;
+  box-shadow: 0 22px 40px rgba(10, 18, 30, 0.18);
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-consult-box p,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-consult-box h2,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-consult-box .shigyo-gpt2-section-mini {
+  color: inherit;
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-section-heading {
+  max-width: 920px;
+  margin-bottom: 44px;
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-section-heading.center {
+  margin-inline: auto;
+  text-align: center;
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-issue-grid,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-issue-grid article,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-services-grid article {
+  padding: 30px 28px;
+  background: #fff;
+  border: 1px solid rgba(181, 138, 70, 0.14);
+  box-shadow: 0 18px 34px rgba(10, 18, 30, 0.06);
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-services-grid ul,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-case-grid ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-process {
+  padding: 92px 54px;
+  background:
+    radial-gradient(circle at 80% 20%, rgba(216, 178, 107, 0.08), transparent 18%),
+    linear-gradient(180deg, #08111c 0%, #0d1726 100%);
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-process-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-process-grid article {
+  padding: 28px 24px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(216, 178, 107, 0.18);
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-process-grid span {
+  display: inline-flex;
+  margin-bottom: 18px;
+  font-size: 0.92rem;
+  color: var(--shigyo-gold-soft);
+  letter-spacing: 0.14em;
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-process-grid h3,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-final h2,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-final-card strong,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-faq-list summary {
+  color: #f8f1e5;
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-process-grid p {
+  color: rgba(248, 241, 229, 0.76);
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-cases {
+  background: linear-gradient(180deg, rgba(245, 239, 229, 0.96) 0%, rgba(239, 235, 227, 0.98) 100%);
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-case-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-case-grid article {
+  background: #0c1726;
+  color: #f8f1e5;
+  box-shadow: 0 24px 44px rgba(10, 18, 30, 0.14);
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-case-grid img {
+  display: block;
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-case-grid article > div {
+  padding: 26px 24px 28px;
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-case-grid h3,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-case-grid li,
+body.page-main-shigyo-gpt2 .shigyo-gpt2-case-label {
+  color: inherit;
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-case-label {
+  display: inline-flex;
+  margin-bottom: 14px;
+  font-size: 0.86rem;
+  letter-spacing: 0.16em;
+  color: var(--shigyo-gold-soft);
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-faq-list {
+  display: grid;
+  gap: 14px;
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-faq-list details {
+  background: #0f1a2b;
+  border: 1px solid rgba(181, 138, 70, 0.16);
+  padding: 22px 24px;
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-faq-list summary {
+  cursor: pointer;
+  font-size: 1.08rem;
+  font-weight: 700;
+  list-style: none;
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-faq-list summary::-webkit-details-marker {
+  display: none;
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-faq-list p {
+  margin: 14px 0 0;
+  color: rgba(248, 241, 229, 0.76);
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-final {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 400px);
+  gap: 42px;
+  padding: 88px 54px 92px;
+  background: linear-gradient(180deg, #08111c 0%, #0d1726 100%);
+  border-radius: 0 0 40px 40px;
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-final-card {
+  padding: 34px 30px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(216, 178, 107, 0.18);
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-final-card p {
+  margin: 0 0 18px;
+  color: rgba(248, 241, 229, 0.76);
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-final-card span {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.88rem;
+  color: rgba(248, 241, 229, 0.62);
+}
+
+body.page-main-shigyo-gpt2 .shigyo-gpt2-final-card .button-primary {
+  width: 100%;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+body.page-main-shigyo-gpt2 .site-footer {
+  color: rgba(17, 24, 38, 0.64);
+}
+
+@media (max-width: 1180px) {
+  body.page-main-shigyo-gpt2 .shigyo-gpt2-hero-inner,
+  body.page-main-shigyo-gpt2 .shigyo-gpt2-intro,
+  body.page-main-shigyo-gpt2 .shigyo-gpt2-final {
+    grid-template-columns: 1fr;
+  }
+
+  body.page-main-shigyo-gpt2 .shigyo-gpt2-hero::before {
+    width: 58%;
+  }
+
+  body.page-main-shigyo-gpt2 .shigyo-gpt2-side-quote {
+    right: 28px;
+    top: 96px;
+  }
+
+  body.page-main-shigyo-gpt2 .shigyo-gpt2-summary-band,
+  body.page-main-shigyo-gpt2 .shigyo-gpt2-metrics-grid,
+  body.page-main-shigyo-gpt2 .shigyo-gpt2-principles,
+  body.page-main-shigyo-gpt2 .shigyo-gpt2-process-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 880px) {
+  body.page-main-shigyo-gpt2 .site-shell {
+    gap: 24px;
+  }
+
+  body.page-main-shigyo-gpt2 .shigyo-gpt2-hero {
+    border-radius: 28px 28px 0 0;
+  }
+
+  body.page-main-shigyo-gpt2 .shigyo-gpt2-hero::before,
+  body.page-main-shigyo-gpt2 .shigyo-gpt2-hero::after {
+    display: none;
+  }
+
+  body.page-main-shigyo-gpt2 .shigyo-gpt2-hero-inner {
+    min-height: 0;
+  }
+
+  body.page-main-shigyo-gpt2 .shigyo-gpt2-hero-copy {
+    padding: 52px 24px 32px;
+    background: linear-gradient(180deg, #07111d 0%, #08182a 100%);
+  }
+
+  body.page-main-shigyo-gpt2 .shigyo-gpt2-hero h1 {
+    font-size: clamp(2.6rem, 13vw, 4rem);
+  }
+
+  body.page-main-shigyo-gpt2 .shigyo-gpt2-hero-media {
+    min-height: 420px;
+  }
+
+  body.page-main-shigyo-gpt2 .shigyo-gpt2-side-quote {
+    right: 18px;
+    top: 20px;
+    font-size: 1rem;
+    padding: 14px 10px;
+  }
+
+  body.page-main-shigyo-gpt2 .shigyo-gpt2-summary-band,
+  body.page-main-shigyo-gpt2 .shigyo-gpt2-metrics,
+  body.page-main-shigyo-gpt2 .shigyo-gpt2-intro,
+  body.page-main-shigyo-gpt2 .shigyo-gpt2-issues,
+  body.page-main-shigyo-gpt2 .shigyo-gpt2-process,
+  body.page-main-shigyo-gpt2 .shigyo-gpt2-services,
+  body.page-main-shigyo-gpt2 .shigyo-gpt2-cases,
+  body.page-main-shigyo-gpt2 .shigyo-gpt2-faq,
+  body.page-main-shigyo-gpt2 .shigyo-gpt2-final {
+    padding-inline: 24px;
+  }
+
+  body.page-main-shigyo-gpt2 .shigyo-gpt2-summary-band {
+    margin: 0;
+    grid-template-columns: 1fr;
+  }
+
+  body.page-main-shigyo-gpt2 .shigyo-gpt2-summary-band article {
+    border-right: 0;
+    border-bottom: 1px solid rgba(181, 138, 70, 0.12);
+  }
+
+  body.page-main-shigyo-gpt2 .shigyo-gpt2-summary-band article:last-child {
+    border-bottom: 0;
+  }
+
+  body.page-main-shigyo-gpt2 .shigyo-gpt2-metrics-grid,
+  body.page-main-shigyo-gpt2 .shigyo-gpt2-principles,
+  body.page-main-shigyo-gpt2 .shigyo-gpt2-issue-grid,
+  body.page-main-shigyo-gpt2 .shigyo-gpt2-services-grid,
+  body.page-main-shigyo-gpt2 .shigyo-gpt2-process-grid,
+  body.page-main-shigyo-gpt2 .shigyo-gpt2-case-grid {
+    grid-template-columns: 1fr;
+  }
+
+  body.page-main-shigyo-gpt2 .shigyo-gpt2-metrics {
+    gap: 28px;
+    padding-top: 54px;
+  }
+
+  body.page-main-shigyo-gpt2 .shigyo-gpt2-metrics-grid article {
+    border-left: 0;
+    border-top: 1px solid rgba(216, 178, 107, 0.22);
+  }
+
+  body.page-main-shigyo-gpt2 .shigyo-gpt2-metrics-grid article:first-child {
+    border-top: 0;
+  }
+
+  body.page-main-shigyo-gpt2 .shigyo-gpt2-intro-copy h2,
+  body.page-main-shigyo-gpt2 .shigyo-gpt2-consult-box h2,
+  body.page-main-shigyo-gpt2 .shigyo-gpt2-section-heading h2,
+  body.page-main-shigyo-gpt2 .shigyo-gpt2-final h2 {
+    font-size: clamp(2rem, 10vw, 3rem);
+  }
+
+  body.page-main-shigyo-gpt2 .shigyo-gpt2-final {
+    border-radius: 0 0 28px 28px;
+  }
+}
