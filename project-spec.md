@@ -43,6 +43,12 @@
 - 2026-04-13 時点では、公開中 LP の主要 CTA は公式LINE `https://lin.ee/OMcemid` へ統一し、ヘッダー、Hero、導入フロー、FAQ、最終セクションまで LINE 導線に合わせて整えている
 - 2026-04-13 時点では、SP 版でもヘッダー右上に `LINE相談` CTA を表示し、主要見出しの孤立改行が出にくいよう共通 CSS を調整済みである
 - 2026-04-14 時点では、詳細業種 LP の Hero 見出しを `業種名を繰り返す` 形から、`重い業務を2つ並べる / 〇〇目線で整える。` の 2 行型へ寄せる方針に切り替えている
+- 2026-04-16 時点では、残っていた `士業` `小売・卸売` `建設` `物流・運輸` `自動車` `製造` `農業・食品` `金融・保険` の詳細業種 LP をまとめて追加し、CSV 掲載の 101 詳細業種をすべて公開できる状態にした
+- 2026-04-16 時点では、詳細業種 LP の主要画像は `unit_code` ごとの専用画像を原則とし、カテゴリ共通画像は「見た目に違和感がない」と確認できる場合に限って限定利用する方針へ更新した
+- 2026-04-16 時点では、`タクシー` と `引越し` のように詳細業種と画像文脈がずれる例が確認されたため、カテゴリ共通画像の再監査と専用画像への差し替えを順次進めている
+- 2026-04-17 時点では、問い合わせツール由来の新マスタ `データベース -> 大カテゴリ` へ運用を切り替え、`旧Pending` を除く 7 グループの大カテゴリ LP を一通り生成した
+- 2026-04-17 時点では、新マスタの公開一覧は `不動産・士業` `建設・物流` `IT・サービス` `製造` `医療・福祉` `小売・自動車` `その他（農業・金融）` の 7 グループだけを表示し、`旧Pending` は引き続き非表示としている
+- 2026-04-22 時点では、`GPT Image 2` を LP デザインの主導役として使うテストを `main-shigyo` で実施し、単なる色替えではなく、セクション構造や見出しトーンまで含めて別のLPに見えるレベルへ再設計する方針を採用した
 - 分析結果をもとに次の制作・営業準備へつなげる
 
 現在のフォルダ構成としては、主に以下を管理対象とします。
@@ -62,8 +68,11 @@
   - Kie.ai を使った画像生成補助スクリプト
   - LP 再生成と見た目確認の補助スクリプト
   - 詳細業種 LP の叩き台生成スクリプト
+  - 残り詳細業種 LP を一括生成するスクリプト
 - `deliverables/`
   - 完成した LP を外部共有しやすい形で切り出した出力先
+- `site/industry-data/group-categories/`
+  - 問い合わせツール由来の新マスタに基づく大カテゴリ LP の正本 JSON
 - `temp-stepbase.html`
   - StepBase LP の HTML スナップショット
   - 現行の AI-SABI LP 本体ではなく、参照確認用ファイルとして扱う
@@ -106,6 +115,9 @@
 - `docs/source-handoff-bundle-guide-2026-04-13.md`
   - 外部共有や Cloudflare 反映向けの bundle 出力ルール
   - `tools/export_share_bundle.py` の使い方
+- `docs/all-remaining-detail-lp-batch-2026-04-16.md`
+  - 残り詳細業種 LP 68 本の一括追加メモ
+  - カテゴリ共通画像の生成方針と代表確認結果
 - `docs/*.md` の分析資料
   - 個別テーマの市場調査
   - LP 方針
@@ -321,9 +333,13 @@
 - `site/industry-data/detail-units/it-services-11.json` `it-services-12.json` `other-01.json` `other-02.json` `other-03.json` を正本とし、公開出力は `site/industries/it-services-11/` `it-services-12/` `other-01/` `other-02/` `other-03/` で管理する
 - 2026-04-13 時点で、`医療・福祉` カテゴリ 8 件にあたる `介護・デイサービス` `整骨院・鍼灸` `歯科` `病院・クリニック` `老人ホーム・施設` `訪問看護・訪問介護` `調剤薬局` `障害者支援・就労支援` の詳細業種 LP を追加済みである
 - `site/industry-data/detail-units/healthcare-welfare-01.json` から `healthcare-welfare-08.json` を正本とし、公開出力は `site/industries/healthcare-welfare-01/` から `healthcare-welfare-08/` で管理する
-- `site/industries/index.html` は、ユーザー提供 CSV の大カテゴリ名に合わせて、公開中 LP をカテゴリ別に並べる一覧ポータルとして運用する
+- `site/industries/index.html` は、問い合わせツールから取得した `data/outreach-tool-db-category-map-2026-04-17.csv` を正本とし、`データベース` ごとの大カテゴリ LP を一覧表示するポータルとして運用する
+- 大カテゴリ LP の正本 JSON は `site/industry-data/group-categories/<db_value>-<category_slug>.json` に置く
+- 一覧に表示するのは、新マスタ基準で `published` になっている大カテゴリ LP のみとし、旧来の詳細業種 LP は公開ファイルが残っていても一覧からは外す
+- 新マスタでグループ単位制作を進める際、`旧Pending` は当面制作対象から外す
 - 一覧ページでは、CSV に存在しない親カテゴリ LP のリンクは一旦表示しない
 - Kie.ai を使った画像生成スクリプト、LP 再生成スクリプト、Playwright による見た目確認スクリプトを `tools/` 配下に追加済みである
+- `GPT Image 2` を使う試作では、まず LP 全体のデザインモックを生成し、その見た目を基準に Hero 画像と HTML/CSS を調整する流れを採用できる状態にしてある
 - `tools/build_industry_unit_catalog.py` を追加し、CSV から詳細業種カタログ JSON を再生成できるようにしてある
 - `tools/create_detailed_industry_lp_stub.py` を追加し、詳細業種カタログの 1 件から叩き台 JSON を生成できるようにしてある
 - `tools/build_industries_portal.py` を追加し、`data/industry-unit-catalog.json` の `published` 状態から `site/industries/index.html` を自動再生成できるようにしてある

@@ -40,8 +40,8 @@
     "rel": "noopener noreferrer"
   },
   "hero": {
-    "image": "assets/main-shigyo-hero-gpt-image2.png",
-    "image_alt": "士業の担当者が AI 活用による業務改善を上質な会議空間で検討しているイメージ",
+    "image": "assets/main-shigyo-hero-gpt-image2-v3.png",
+    "image_alt": "士業の担当者が落ち着いた法律事務所で AI 活用を検討しているイメージ",
     "topline": "士業の AI 活用・業務改善",
     "headline_lines": [
       "相談記録と顧客対応を、",
@@ -51,7 +51,7 @@
     "subline_nowrap": "伴走型 AI コンサル",
     "description": "AI-SABI が、課題整理から活用方針、ツール選定、連携・自動化設計、定着支援まで伴走し、士業の業務改善を現場に合う形で進めます。相談記録、顧客対応、回答文など、成果が見えやすい業務から整え、必要に応じて半自動化や自動化候補まで設計します。",
     "proof_items": [
-      "議事録 45分 → 15分",
+      "相談整理 45分 → 15分",
       "回答文案 60分 → 20分",
       "説明資料 90分 → 30分"
     ]
