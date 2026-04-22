@@ -2568,3 +2568,447 @@ body::before {
     border-radius: 18px;
   }
 }
+
+/* 2026-04-22 main-shigyo gpt-image-2 design test */
+
+body.page-main-shigyo {
+  --line: rgba(197, 164, 103, 0.2);
+  --surface: rgba(255, 249, 241, 0.9);
+  --surface-strong: rgba(255, 252, 247, 0.98);
+  --surface-muted: #f4ecdf;
+  --text: #0d1727;
+  --muted: #586474;
+  --orange: #c9a15c;
+  --orange-deep: #a77b36;
+  --orange-soft: rgba(201, 161, 92, 0.14);
+  --yellow: #f1d290;
+  background:
+    radial-gradient(circle at top left, rgba(201, 161, 92, 0.16), transparent 20%),
+    radial-gradient(circle at top right, rgba(15, 47, 86, 0.18), transparent 26%),
+    linear-gradient(180deg, #eef3f9 0%, #f7f3ec 44%, #edf2f7 100%);
+}
+
+body.page-main-shigyo .site-header {
+  border-color: rgba(205, 178, 123, 0.24);
+  background: rgba(255, 250, 244, 0.82);
+  box-shadow: 0 18px 36px rgba(16, 33, 58, 0.1);
+}
+
+body.page-main-shigyo .brand-mark {
+  color: #071427;
+}
+
+body.page-main-shigyo .brand-sub {
+  color: #726658;
+}
+
+body.page-main-shigyo .site-nav {
+  color: #4f5b6b;
+}
+
+body.page-main-shigyo .site-nav a:hover {
+  color: #a77b36;
+}
+
+body.page-main-shigyo .header-button {
+  background: linear-gradient(135deg, #2db86d, #19a44d);
+  box-shadow: 0 14px 28px rgba(24, 145, 74, 0.24);
+  color: #fff;
+}
+
+body.page-main-shigyo .hero-stage {
+  min-height: min(97svh, 790px);
+  border-radius: 0 0 34px 34px;
+  background: #091528;
+  box-shadow: 0 30px 70px rgba(10, 24, 43, 0.22);
+}
+
+body.page-main-shigyo .hero-stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(201, 161, 92, 0.14), transparent 26%),
+    radial-gradient(circle at 72% 72%, rgba(103, 146, 208, 0.12), transparent 24%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+body.page-main-shigyo .hero-stage::after {
+  content: "";
+  position: absolute;
+  inset: 18px;
+  border-radius: 28px;
+  border: 1px solid rgba(216, 190, 138, 0.12);
+  pointer-events: none;
+  z-index: 0;
+}
+
+body.page-main-shigyo .hero-stage-image {
+  object-position: 68% center;
+  filter: saturate(0.92) contrast(1.08) brightness(0.84);
+  transform: scale(1.02);
+}
+
+body.page-main-shigyo .hero-stage-overlay {
+  background:
+    linear-gradient(90deg, rgba(6, 17, 31, 0.96) 0%, rgba(8, 24, 42, 0.93) 32%, rgba(9, 25, 45, 0.72) 54%, rgba(9, 25, 45, 0.2) 80%, rgba(9, 25, 45, 0.06) 100%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(0, 0, 0, 0.15));
+}
+
+body.page-main-shigyo .hero-stage-inner {
+  padding-top: clamp(120px, 16svh, 168px);
+  padding-bottom: clamp(44px, 8svh, 80px);
+}
+
+body.page-main-shigyo .hero-stage-copy {
+  max-width: min(760px, 52vw);
+}
+
+body.page-main-shigyo .hero-stage-copy--two-line {
+  max-width: min(820px, 56vw);
+}
+
+body.page-main-shigyo .hero-topline {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 18px;
+  border: 1px solid rgba(217, 191, 140, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  color: #e7c88e;
+  font-size: clamp(0.98rem, 1.5vw, 1.16rem);
+  letter-spacing: 0.03em;
+}
+
+body.page-main-shigyo .hero-stage h1 {
+  margin-top: 16px;
+  color: #f8f1e6;
+  text-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+}
+
+body.page-main-shigyo .hero-subline {
+  max-width: 680px;
+  margin-top: 20px;
+  color: #dce4ee;
+  font-size: clamp(1.04rem, 1.7vw, 1.28rem);
+  font-weight: 700;
+}
+
+body.page-main-shigyo .hero-description {
+  max-width: 640px;
+  margin-top: 18px;
+  color: rgba(232, 239, 247, 0.84);
+}
+
+body.page-main-shigyo .button-primary {
+  background: linear-gradient(135deg, #c59b59, #eed49a);
+  color: #13243b;
+  box-shadow: 0 18px 34px rgba(185, 145, 83, 0.24);
+}
+
+body.page-main-shigyo .hero-primary-button,
+body.page-main-shigyo .plan-note .button-primary,
+body.page-main-shigyo .final-contact .button-primary {
+  min-height: 60px;
+  font-weight: 800;
+}
+
+body.page-main-shigyo .hero-proof-row {
+  gap: 12px;
+}
+
+body.page-main-shigyo .hero-proof-row span {
+  background: rgba(255, 255, 255, 0.08);
+  color: #f6efe3;
+  border: 1px solid rgba(217, 191, 140, 0.14);
+  box-shadow: none;
+}
+
+body.page-main-shigyo .section-label {
+  border: 1px solid rgba(201, 161, 92, 0.2);
+  background: rgba(201, 161, 92, 0.08);
+  color: #a67c36;
+}
+
+body.page-main-shigyo .issue-section,
+body.page-main-shigyo .orange-section {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 26px 60px rgba(11, 25, 44, 0.14);
+}
+
+body.page-main-shigyo .issue-section {
+  padding: 46px 38px 38px;
+  border: 1px solid rgba(221, 198, 156, 0.1);
+  border-radius: 32px;
+  background:
+    linear-gradient(180deg, #071629 0%, #102640 100%);
+}
+
+body.page-main-shigyo .issue-section::after,
+body.page-main-shigyo .orange-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 126px),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 126px);
+  opacity: 0.12;
+}
+
+body.page-main-shigyo .issue-section > *,
+body.page-main-shigyo .orange-section > * {
+  position: relative;
+  z-index: 1;
+}
+
+body.page-main-shigyo .issue-section .section-label,
+body.page-main-shigyo .orange-section .section-label {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(228, 202, 149, 0.18);
+  color: #e7c88e;
+}
+
+body.page-main-shigyo .issue-section .section-heading h2,
+body.page-main-shigyo .orange-section .section-heading h2 {
+  color: #f8f1e6;
+}
+
+body.page-main-shigyo .issue-card,
+body.page-main-shigyo .orange-card {
+  border: 1px solid rgba(229, 205, 160, 0.12);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(10, 23, 39, 0.18));
+  box-shadow: none;
+}
+
+body.page-main-shigyo .issue-card h3,
+body.page-main-shigyo .orange-card h3 {
+  color: #f8f1e6;
+}
+
+body.page-main-shigyo .issue-card p,
+body.page-main-shigyo .orange-card p {
+  color: rgba(231, 239, 247, 0.78);
+}
+
+body.page-main-shigyo .icon-badge {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(228, 202, 149, 0.16);
+  box-shadow: none;
+  color: #e7c88e;
+}
+
+body.page-main-shigyo .orange-card span {
+  background: rgba(228, 202, 149, 0.12);
+  color: #f7e2b5;
+}
+
+body.page-main-shigyo .service-section,
+body.page-main-shigyo .reason-section,
+body.page-main-shigyo .case-section,
+body.page-main-shigyo .voice-section,
+body.page-main-shigyo .compare-section,
+body.page-main-shigyo .plan-section,
+body.page-main-shigyo .faq-section,
+body.page-main-shigyo .final-contact {
+  border: 1px solid rgba(205, 183, 141, 0.16);
+  background: linear-gradient(180deg, rgba(255, 252, 247, 0.96), rgba(247, 240, 230, 0.82));
+  box-shadow: 0 20px 52px rgba(15, 30, 51, 0.08);
+}
+
+body.page-main-shigyo .service-card,
+body.page-main-shigyo .case-card,
+body.page-main-shigyo .voice-card,
+body.page-main-shigyo .plan-card,
+body.page-main-shigyo .plan-note,
+body.page-main-shigyo .flow-card,
+body.page-main-shigyo .faq-list details,
+body.page-main-shigyo .final-contact-card {
+  border: 1px solid rgba(199, 172, 125, 0.16);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(246, 238, 226, 0.9));
+  box-shadow: 0 16px 34px rgba(22, 37, 60, 0.08);
+}
+
+body.page-main-shigyo .service-card {
+  position: relative;
+}
+
+body.page-main-shigyo .service-card h3 {
+  background: linear-gradient(135deg, #0b1c31, #17365d 55%, #244d7a);
+  color: #f7ead1;
+}
+
+body.page-main-shigyo .reason-mini,
+body.page-main-shigyo .case-label,
+body.page-main-shigyo .plan-title {
+  color: #a67c36;
+}
+
+body.page-main-shigyo .reason-number,
+body.page-main-shigyo .voice-icon,
+body.page-main-shigyo .flow-card span {
+  background: linear-gradient(135deg, #b78b46, #e5c98f);
+  color: #18263a;
+}
+
+body.page-main-shigyo .reason-text h3,
+body.page-main-shigyo .case-content h3,
+body.page-main-shigyo .voice-card h3,
+body.page-main-shigyo .flow-card h3,
+body.page-main-shigyo .plan-section h2,
+body.page-main-shigyo .compare-section h2,
+body.page-main-shigyo .faq-section h2,
+body.page-main-shigyo .final-contact h2 {
+  color: #0d1727;
+}
+
+body.page-main-shigyo .reason-image::before {
+  background: linear-gradient(180deg, rgba(201, 161, 92, 0.24), rgba(20, 50, 86, 0.18));
+}
+
+body.page-main-shigyo .reason-image img,
+body.page-main-shigyo .case-card img {
+  box-shadow: 0 18px 36px rgba(18, 33, 56, 0.12);
+}
+
+body.page-main-shigyo .compare-table {
+  border-color: rgba(199, 172, 125, 0.18);
+  box-shadow: 0 16px 34px rgba(22, 37, 60, 0.08);
+}
+
+body.page-main-shigyo .compare-table thead th {
+  background: linear-gradient(180deg, #fff8ef 0%, #f6eddc 100%);
+}
+
+body.page-main-shigyo .compare-table .emphasis {
+  background: rgba(201, 161, 92, 0.08);
+}
+
+body.page-main-shigyo .plan-card.highlight {
+  background: linear-gradient(180deg, rgba(11, 28, 49, 0.96), rgba(24, 50, 82, 0.92));
+}
+
+body.page-main-shigyo .plan-card.highlight .plan-title,
+body.page-main-shigyo .plan-card.highlight li {
+  color: #f7ead1;
+}
+
+body.page-main-shigyo .plan-note-emphasis {
+  background: linear-gradient(135deg, rgba(201, 161, 92, 0.14), rgba(12, 45, 80, 0.08));
+  color: #163050;
+  box-shadow: inset 0 0 0 1px rgba(201, 161, 92, 0.12);
+}
+
+body.page-main-shigyo .faq-list summary::after {
+  border-color: rgba(201, 161, 92, 0.24);
+  background: rgba(201, 161, 92, 0.1);
+  color: #a67c36;
+}
+
+body.page-main-shigyo .final-contact {
+  grid-template-columns: minmax(0, 1fr) minmax(340px, 420px);
+  background:
+    radial-gradient(circle at top right, rgba(201, 161, 92, 0.18), transparent 28%),
+    linear-gradient(135deg, #0a1b31 0%, #102844 100%);
+}
+
+body.page-main-shigyo .final-contact h2,
+body.page-main-shigyo .final-contact p,
+body.page-main-shigyo .final-contact .section-label {
+  color: #f8f1e6;
+}
+
+body.page-main-shigyo .final-contact .section-label {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(228, 202, 149, 0.18);
+}
+
+body.page-main-shigyo .final-contact-card {
+  background: linear-gradient(180deg, rgba(18, 40, 66, 0.92), rgba(12, 28, 47, 0.92));
+  border-color: rgba(228, 202, 149, 0.12);
+  box-shadow: none;
+}
+
+body.page-main-shigyo .final-contact-card strong,
+body.page-main-shigyo .final-contact-card .button-primary {
+  color: #fff;
+}
+
+body.page-main-shigyo .final-contact-card span {
+  color: rgba(235, 240, 247, 0.68);
+}
+
+body.page-main-shigyo .site-footer {
+  color: #6a6f79;
+}
+
+@media (max-width: 1100px) {
+  body.page-main-shigyo .hero-stage-copy,
+  body.page-main-shigyo .hero-stage-copy--two-line {
+    max-width: min(760px, 100%);
+  }
+
+  body.page-main-shigyo .final-contact {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  body.page-main-shigyo .site-header {
+    background: rgba(255, 250, 244, 0.9);
+  }
+
+  body.page-main-shigyo .hero-stage {
+    min-height: min(88svh, 620px);
+    border-radius: 0 0 24px 24px;
+  }
+
+  body.page-main-shigyo .hero-stage::after {
+    inset: 12px;
+    border-radius: 20px;
+  }
+
+  body.page-main-shigyo .hero-stage-overlay {
+    background:
+      linear-gradient(180deg, rgba(6, 17, 31, 0.88) 0%, rgba(8, 24, 42, 0.72) 34%, rgba(8, 24, 42, 0.38) 58%, rgba(8, 24, 42, 0.72) 100%);
+  }
+
+  body.page-main-shigyo .hero-stage-image {
+    object-position: 66% center;
+  }
+
+  body.page-main-shigyo .hero-topline {
+    font-size: 0.9rem;
+  }
+
+  body.page-main-shigyo .hero-subline {
+    font-size: 0.98rem;
+  }
+
+  body.page-main-shigyo .issue-section,
+  body.page-main-shigyo .orange-section,
+  body.page-main-shigyo .service-section,
+  body.page-main-shigyo .reason-section,
+  body.page-main-shigyo .case-section,
+  body.page-main-shigyo .voice-section,
+  body.page-main-shigyo .compare-section,
+  body.page-main-shigyo .plan-section,
+  body.page-main-shigyo .faq-section,
+  body.page-main-shigyo .final-contact {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  body.page-main-shigyo .issue-section {
+    padding-top: 30px;
+    padding-bottom: 24px;
+  }
+
+  body.page-main-shigyo .final-contact {
+    background:
+      radial-gradient(circle at top center, rgba(201, 161, 92, 0.2), transparent 28%),
+      linear-gradient(135deg, #0a1b31 0%, #102844 100%);
+  }
+}

@@ -212,7 +212,7 @@ def render_service_section(section: dict[str, Any]) -> str:
     return dedent(
         f"""
         <section class="section-card service-section">
-          {section_heading_html(section["label"], section["heading_lines"], center=True)}
+          {section_heading_html(section["label"], section["heading_lines"], center=True, use_spans=True)}
           <div class="service-grid">
             {"".join(cards_html)}
           </div>
@@ -282,7 +282,7 @@ def render_case_section(section: dict[str, Any], prefix: str) -> str:
     return dedent(
         f"""
         <section class="section-card case-section" id="{e(section["id"])}">
-          {section_heading_html(section["label"], section["heading_lines"], center=True)}
+          {section_heading_html(section["label"], section["heading_lines"], center=True, use_spans=True)}
           <div class="case-grid">
             {"".join(cards_html)}
           </div>
@@ -393,7 +393,7 @@ def render_plan_section(section: dict[str, Any], cta_label: str) -> str:
     return dedent(
         f"""
         <section class="section-card plan-section" id="{e(section["id"])}">
-          {section_heading_html(section["label"], section["heading_lines"], center=True)}
+          {section_heading_html(section["label"], section["heading_lines"], center=True, use_spans=True)}
           <div class="plan-grid">
             {"".join(cards_html)}
           </div>
@@ -484,7 +484,7 @@ def render_contact_section(section: dict[str, Any], cta_label: str) -> str:
         <section class="section-card final-contact" id="{e(section["id"])}">
           <div class="final-contact-copy">
             <p class="section-label">{body_text(section["label"])}</p>
-            <h2>{html_lines(section["heading_lines"])}</h2>
+            <h2>{html_lines(section["heading_lines"], use_spans=True)}</h2>
             <p>{body_text(section["description"])}</p>
           </div>
           <div class="final-contact-card">
@@ -585,11 +585,13 @@ def render_body(data: dict[str, Any], output_path: Path) -> str:
 
 def render_document(data: dict[str, Any], output_path: Path) -> str:
     prefix = site_relative_prefix(output_path)
+    body_class = f"page-{data['slug']}"
     template = BASE_TEMPLATE.read_text(encoding="utf-8")
     rendered = (
         template.replace("{{PAGE_TITLE}}", e(data["page"]["title"]))
         .replace("{{PAGE_DESCRIPTION}}", e(data["page"]["description"]))
         .replace("{{STYLE_HREF}}", e(site_href(prefix, "styles.css")))
+        .replace("{{BODY_CLASS}}", e(body_class))
         .replace("{{BODY_HTML}}", render_body(data, output_path))
     )
     return rendered
