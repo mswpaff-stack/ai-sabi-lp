@@ -554,3 +554,54 @@ powershell -ExecutionPolicy Bypass -File .\tools\publish_ai_sabi_lp.ps1 `
 - `site/assets/industry-index/icon-bulb-image2-v1.png`
 - `site/assets/industry-index/icon-truck-image2-v1.png`
 - `site/assets/industry-index/icon-chevron-image2-v1.png`
+
+## 12. 2026-04-25 CSVカテゴリマップ全件横展開
+
+`AIコンサル（LP量産）` 側の `industry-lp-v1` ハイブリッドテンプレートを正として、ユーザー提供 CSV の対象全件を公開用 `site/` と `publish/ai-sabi-lp/` へ反映した。
+
+対象 CSV:
+
+- `deliverables/outreach-tool-db-category-map-2026-04-17.utf8.csv`
+
+対象:
+
+- 元CSV: 185 件
+- 生成対象: 160 件
+- 除外: `旧Pending` / `pending`
+- グループ: `不動産・士業`、`建設・物流`、`IT・サービス`、`製造`、`医療・福祉`、`小売・自動車`、`その他（農業・金融）`
+- image-2 資産単位: 33 大カテゴリ
+
+slug ルール:
+
+- `main` の不動産: `/industries/main-real-estate/`
+- `main` の士業: `/industries/main-shigyo/`
+- その他: `/industries/<db_value>-<major_slug>/`
+
+公開側の主な成果物:
+
+- `site/industries/<slug>/`
+- `site/assets/industry-lp-v1/<major_slug>/hero-image2-v1.png`
+- `site/assets/industry-lp-v1/<major_slug>/icon-image2-v1.png`
+- `site/assets/industry-index/major-<major_slug>-image2-v1.png`
+- `publish/ai-sabi-lp/industries/<slug>/`
+- `publish/ai-sabi-lp/assets/industry-lp-v1/<major_slug>/`
+- `publish/ai-sabi-lp/assets/industry-index/major-<major_slug>-image2-v1.png`
+
+一覧ページ:
+
+- `site/industries/index.html` と `publish/ai-sabi-lp/industries/index.html` は 7 グループ・160カード表示
+- 添付参考画像の一覧デザインを維持する
+- SVGプレースホルダーは使わず、カードアイコンは image-2 生成PNGを使う
+
+画像運用:
+
+- 160ページそれぞれに画像を複製せず、33大カテゴリごとの共有 assets を参照する
+- 同じ `major_category` が複数DBに出る場合は、同じ `major_slug` の Hero / icon を共有する
+- この方針により GitHub Pages 側の容量増加を抑え、後続の画像差し替えも大カテゴリ単位で行える
+
+確認済み:
+
+- ローカル `http://127.0.0.1:8130/industries/` と160件のLPが HTTP 200
+- `site/`、`AIコンサル（LP量産）/site/`、`publish/ai-sabi-lp/` のローカル参照欠損 0
+- 一覧ページは160カード、SVG参照 0
+- Playwright の PC/SP 確認で画像破損 0、横スクロール 0

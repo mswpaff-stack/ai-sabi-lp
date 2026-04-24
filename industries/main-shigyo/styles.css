@@ -7,9 +7,9 @@
   --muted: #6f6960;
   --line: #eadfce;
   --line-soft: rgba(206, 185, 161, 0.28);
-  --accent: #285b75;
-  --accent-deep: #1f4960;
-  --accent-soft: #edf4f7;
+  --accent: #235948;
+  --accent-deep: #1c4a3b;
+  --accent-soft: #edf5f1;
   --copper: #c5894f;
   --shadow: 0 28px 56px rgba(53, 39, 25, 0.08);
   --shadow-soft: 0 16px 36px rgba(53, 39, 25, 0.06);
@@ -21,8 +21,8 @@
   --page-gutter: 20px;
   --container-current: min(calc(100vw - (var(--page-gutter) * 2)), var(--container));
   --container-bleed: calc((100vw - var(--container-current)) / 2);
-  --hero-fade-solid: #f8f5ef;
-  --hero-fade-soft: #f1ede5;
+  --hero-fade-solid: #faf7f1;
+  --hero-fade-soft: #f6f1e8;
   --hero-right-overscan: clamp(18px, 1.8vw, 30px);
   --hero-left-overlap: clamp(22px, 2vw, 34px);
 }
