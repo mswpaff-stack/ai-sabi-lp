@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI-SABI | 業種別 LP一覧</title>
-  <meta name="description" content="AI-SABI の業種別 LP一覧です。問い合わせツールのマスタに沿って公開中の大カテゴリ LP へ遷移できます。">
+  <meta name="description" content="AI-SABI の業種別 LP一覧です。業種ごとの AI 活用ソリューション LP へ遷移できます。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -13,694 +13,115 @@
   >
   <link rel="stylesheet" href="../styles.css">
 </head>
-<body class="portal-body">
-  <main class="portal-shell portal-shell-simple">
-    <section class="portal-list-section">
-      <h1 class="portal-list-title">業種別 LP一覧</h1>
-      <div class="portal-category-stack">
-        <section class="portal-category-block">
-          <h2 class="portal-category-title">不動産・士業</h2>
-          <div class="portal-list-grid">
-            <a class="portal-list-link" href="./main-shigyo/">
-              <span class="portal-list-name">士業向け LP</span>
-              <span class="portal-list-url">/industries/main-shigyo/</span>
-            </a>
-            <a class="portal-list-link" href="./main-real-estate/">
-              <span class="portal-list-name">不動産向け LP</span>
-              <span class="portal-list-url">/industries/main-real-estate/</span>
-            </a>
-          </div>
-        </section>
+<body class="portal-body industry-index-body">
+  <main class="portal-shell industry-index-shell">
+    <nav class="industry-index-breadcrumb" aria-label="パンくずリスト">
+      <a href="../" aria-label="ホーム">
+        <img src="../assets/industry-index/icon-house-image2-v1.png" alt="" aria-hidden="true">
+        <span>ホーム</span>
+      </a>
+      <img class="industry-index-breadcrumb-chevron" src="../assets/industry-index/icon-chevron-image2-v1.png" alt="" aria-hidden="true">
+      <span>業種別LP一覧</span>
+    </nav>
 
-        <section class="portal-category-block">
-          <h2 class="portal-category-title">建設・物流</h2>
-          <div class="portal-list-grid">
-            <a class="portal-list-link" href="./kensetsu_butsuryu-construction-builder/">
-              <span class="portal-list-name">建設・工務店向け LP</span>
-              <span class="portal-list-url">/industries/kensetsu_butsuryu-construction-builder/</span>
-            </a>
-            <a class="portal-list-link" href="./kensetsu_butsuryu-civil-engineering/">
-              <span class="portal-list-name">土木・工事向け LP</span>
-              <span class="portal-list-url">/industries/kensetsu_butsuryu-civil-engineering/</span>
-            </a>
-            <a class="portal-list-link" href="./kensetsu_butsuryu-electrical-facility/">
-              <span class="portal-list-name">電気・設備向け LP</span>
-              <span class="portal-list-url">/industries/kensetsu_butsuryu-electrical-facility/</span>
-            </a>
-            <a class="portal-list-link" href="./kensetsu_butsuryu-transport-logistics/">
-              <span class="portal-list-name">運送・物流向け LP</span>
-              <span class="portal-list-url">/industries/kensetsu_butsuryu-transport-logistics/</span>
-            </a>
-            <a class="portal-list-link" href="./kensetsu_butsuryu-automotive/">
-              <span class="portal-list-name">自動車向け LP</span>
-              <span class="portal-list-url">/industries/kensetsu_butsuryu-automotive/</span>
-            </a>
-            <a class="portal-list-link" href="./kensetsu_butsuryu-manufacturing/">
-              <span class="portal-list-name">製造向け LP</span>
-              <span class="portal-list-url">/industries/kensetsu_butsuryu-manufacturing/</span>
-            </a>
-            <a class="portal-list-link" href="./kensetsu_butsuryu-staffing/">
-              <span class="portal-list-name">人材・派遣向け LP</span>
-              <span class="portal-list-url">/industries/kensetsu_butsuryu-staffing/</span>
-            </a>
-            <a class="portal-list-link" href="./kensetsu_butsuryu-hospitality-tourism/">
-              <span class="portal-list-name">ホテル・観光向け LP</span>
-              <span class="portal-list-url">/industries/kensetsu_butsuryu-hospitality-tourism/</span>
-            </a>
-            <a class="portal-list-link" href="./kensetsu_butsuryu-software-it/">
-              <span class="portal-list-name">IT・ソフトウェア向け LP</span>
-              <span class="portal-list-url">/industries/kensetsu_butsuryu-software-it/</span>
-            </a>
-            <a class="portal-list-link" href="./kensetsu_butsuryu-food/">
-              <span class="portal-list-name">食品向け LP</span>
-              <span class="portal-list-url">/industries/kensetsu_butsuryu-food/</span>
-            </a>
-            <a class="portal-list-link" href="./kensetsu_butsuryu-healthcare-care/">
-              <span class="portal-list-name">医療・介護向け LP</span>
-              <span class="portal-list-url">/industries/kensetsu_butsuryu-healthcare-care/</span>
-            </a>
-            <a class="portal-list-link" href="./kensetsu_butsuryu-retail-sales/">
-              <span class="portal-list-name">小売・販売向け LP</span>
-              <span class="portal-list-url">/industries/kensetsu_butsuryu-retail-sales/</span>
-            </a>
-            <a class="portal-list-link" href="./kensetsu_butsuryu-real-estate/">
-              <span class="portal-list-name">不動産向け LP</span>
-              <span class="portal-list-url">/industries/kensetsu_butsuryu-real-estate/</span>
-            </a>
-            <a class="portal-list-link" href="./kensetsu_butsuryu-cleaning-maintenance/">
-              <span class="portal-list-name">清掃・メンテナンス向け LP</span>
-              <span class="portal-list-url">/industries/kensetsu_butsuryu-cleaning-maintenance/</span>
-            </a>
-            <a class="portal-list-link" href="./kensetsu_butsuryu-agriculture/">
-              <span class="portal-list-name">農業向け LP</span>
-              <span class="portal-list-url">/industries/kensetsu_butsuryu-agriculture/</span>
-            </a>
-            <a class="portal-list-link" href="./kensetsu_butsuryu-advertising-design/">
-              <span class="portal-list-name">広告・デザイン向け LP</span>
-              <span class="portal-list-url">/industries/kensetsu_butsuryu-advertising-design/</span>
-            </a>
-            <a class="portal-list-link" href="./kensetsu_butsuryu-consulting/">
-              <span class="portal-list-name">コンサルティング向け LP</span>
-              <span class="portal-list-url">/industries/kensetsu_butsuryu-consulting/</span>
-            </a>
-            <a class="portal-list-link" href="./kensetsu_butsuryu-education/">
-              <span class="portal-list-name">教育向け LP</span>
-              <span class="portal-list-url">/industries/kensetsu_butsuryu-education/</span>
-            </a>
-            <a class="portal-list-link" href="./kensetsu_butsuryu-trading-wholesale/">
-              <span class="portal-list-name">商社・卸売向け LP</span>
-              <span class="portal-list-url">/industries/kensetsu_butsuryu-trading-wholesale/</span>
-            </a>
-            <a class="portal-list-link" href="./kensetsu_butsuryu-shigyo/">
-              <span class="portal-list-name">士業向け LP</span>
-              <span class="portal-list-url">/industries/kensetsu_butsuryu-shigyo/</span>
-            </a>
-            <a class="portal-list-link" href="./kensetsu_butsuryu-events-entertainment/">
-              <span class="portal-list-name">イベント・エンタメ向け LP</span>
-              <span class="portal-list-url">/industries/kensetsu_butsuryu-events-entertainment/</span>
-            </a>
-            <a class="portal-list-link" href="./kensetsu_butsuryu-construction/">
-              <span class="portal-list-name">建設向け LP</span>
-              <span class="portal-list-url">/industries/kensetsu_butsuryu-construction/</span>
-            </a>
-            <a class="portal-list-link" href="./kensetsu_butsuryu-insurance-finance/">
-              <span class="portal-list-name">保険・金融向け LP</span>
-              <span class="portal-list-url">/industries/kensetsu_butsuryu-insurance-finance/</span>
-            </a>
-            <a class="portal-list-link" href="./kensetsu_butsuryu-beauty/">
-              <span class="portal-list-name">美容向け LP</span>
-              <span class="portal-list-url">/industries/kensetsu_butsuryu-beauty/</span>
-            </a>
-            <a class="portal-list-link" href="./kensetsu_butsuryu-logistics-transport/">
-              <span class="portal-list-name">物流・運輸向け LP</span>
-              <span class="portal-list-url">/industries/kensetsu_butsuryu-logistics-transport/</span>
-            </a>
-            <a class="portal-list-link" href="./kensetsu_butsuryu-sports-fitness/">
-              <span class="portal-list-name">スポーツ・フィットネス向け LP</span>
-              <span class="portal-list-url">/industries/kensetsu_butsuryu-sports-fitness/</span>
-            </a>
-            <a class="portal-list-link" href="./kensetsu_butsuryu-pet/">
-              <span class="portal-list-name">ペット向け LP</span>
-              <span class="portal-list-url">/industries/kensetsu_butsuryu-pet/</span>
-            </a>
-          </div>
-        </section>
-
-        <section class="portal-category-block">
-          <h2 class="portal-category-title">IT・サービス</h2>
-          <div class="portal-list-grid">
-            <a class="portal-list-link" href="./it_service-software-it/">
-              <span class="portal-list-name">IT・ソフトウェア向け LP</span>
-              <span class="portal-list-url">/industries/it_service-software-it/</span>
-            </a>
-            <a class="portal-list-link" href="./it_service-advertising-design/">
-              <span class="portal-list-name">広告・デザイン向け LP</span>
-              <span class="portal-list-url">/industries/it_service-advertising-design/</span>
-            </a>
-            <a class="portal-list-link" href="./it_service-staffing/">
-              <span class="portal-list-name">人材・派遣向け LP</span>
-              <span class="portal-list-url">/industries/it_service-staffing/</span>
-            </a>
-            <a class="portal-list-link" href="./it_service-consulting/">
-              <span class="portal-list-name">コンサルティング向け LP</span>
-              <span class="portal-list-url">/industries/it_service-consulting/</span>
-            </a>
-            <a class="portal-list-link" href="./it_service-cleaning-maintenance/">
-              <span class="portal-list-name">清掃・メンテナンス向け LP</span>
-              <span class="portal-list-url">/industries/it_service-cleaning-maintenance/</span>
-            </a>
-            <a class="portal-list-link" href="./it_service-retail-sales/">
-              <span class="portal-list-name">小売・販売向け LP</span>
-              <span class="portal-list-url">/industries/it_service-retail-sales/</span>
-            </a>
-            <a class="portal-list-link" href="./it_service-shigyo/">
-              <span class="portal-list-name">士業向け LP</span>
-              <span class="portal-list-url">/industries/it_service-shigyo/</span>
-            </a>
-            <a class="portal-list-link" href="./it_service-electrical-facility/">
-              <span class="portal-list-name">電気・設備向け LP</span>
-              <span class="portal-list-url">/industries/it_service-electrical-facility/</span>
-            </a>
-            <a class="portal-list-link" href="./it_service-construction-builder/">
-              <span class="portal-list-name">建設・工務店向け LP</span>
-              <span class="portal-list-url">/industries/it_service-construction-builder/</span>
-            </a>
-            <a class="portal-list-link" href="./it_service-education/">
-              <span class="portal-list-name">教育向け LP</span>
-              <span class="portal-list-url">/industries/it_service-education/</span>
-            </a>
-            <a class="portal-list-link" href="./it_service-manufacturing/">
-              <span class="portal-list-name">製造向け LP</span>
-              <span class="portal-list-url">/industries/it_service-manufacturing/</span>
-            </a>
-            <a class="portal-list-link" href="./it_service-healthcare-care/">
-              <span class="portal-list-name">医療・介護向け LP</span>
-              <span class="portal-list-url">/industries/it_service-healthcare-care/</span>
-            </a>
-            <a class="portal-list-link" href="./it_service-real-estate/">
-              <span class="portal-list-name">不動産向け LP</span>
-              <span class="portal-list-url">/industries/it_service-real-estate/</span>
-            </a>
-            <a class="portal-list-link" href="./it_service-automotive/">
-              <span class="portal-list-name">自動車向け LP</span>
-              <span class="portal-list-url">/industries/it_service-automotive/</span>
-            </a>
-            <a class="portal-list-link" href="./it_service-events-entertainment/">
-              <span class="portal-list-name">イベント・エンタメ向け LP</span>
-              <span class="portal-list-url">/industries/it_service-events-entertainment/</span>
-            </a>
-            <a class="portal-list-link" href="./it_service-agriculture/">
-              <span class="portal-list-name">農業向け LP</span>
-              <span class="portal-list-url">/industries/it_service-agriculture/</span>
-            </a>
-            <a class="portal-list-link" href="./it_service-hospitality-tourism/">
-              <span class="portal-list-name">ホテル・観光向け LP</span>
-              <span class="portal-list-url">/industries/it_service-hospitality-tourism/</span>
-            </a>
-            <a class="portal-list-link" href="./it_service-insurance-finance/">
-              <span class="portal-list-name">保険・金融向け LP</span>
-              <span class="portal-list-url">/industries/it_service-insurance-finance/</span>
-            </a>
-            <a class="portal-list-link" href="./it_service-transport-logistics/">
-              <span class="portal-list-name">運送・物流向け LP</span>
-              <span class="portal-list-url">/industries/it_service-transport-logistics/</span>
-            </a>
-            <a class="portal-list-link" href="./it_service-beauty/">
-              <span class="portal-list-name">美容向け LP</span>
-              <span class="portal-list-url">/industries/it_service-beauty/</span>
-            </a>
-            <a class="portal-list-link" href="./it_service-civil-engineering/">
-              <span class="portal-list-name">土木・工事向け LP</span>
-              <span class="portal-list-url">/industries/it_service-civil-engineering/</span>
-            </a>
-            <a class="portal-list-link" href="./it_service-food/">
-              <span class="portal-list-name">食品向け LP</span>
-              <span class="portal-list-url">/industries/it_service-food/</span>
-            </a>
-            <a class="portal-list-link" href="./it_service-it-services/">
-              <span class="portal-list-name">IT・サービス向け LP</span>
-              <span class="portal-list-url">/industries/it_service-it-services/</span>
-            </a>
-            <a class="portal-list-link" href="./it_service-trading-wholesale/">
-              <span class="portal-list-name">商社・卸売向け LP</span>
-              <span class="portal-list-url">/industries/it_service-trading-wholesale/</span>
-            </a>
-            <a class="portal-list-link" href="./it_service-sports-fitness/">
-              <span class="portal-list-name">スポーツ・フィットネス向け LP</span>
-              <span class="portal-list-url">/industries/it_service-sports-fitness/</span>
-            </a>
-            <a class="portal-list-link" href="./it_service-pet/">
-              <span class="portal-list-name">ペット向け LP</span>
-              <span class="portal-list-url">/industries/it_service-pet/</span>
-            </a>
-          </div>
-        </section>
-
-        <section class="portal-category-block">
-          <h2 class="portal-category-title">製造</h2>
-          <div class="portal-list-grid">
-            <a class="portal-list-link" href="./seizou-manufacturing/">
-              <span class="portal-list-name">製造向け LP</span>
-              <span class="portal-list-url">/industries/seizou-manufacturing/</span>
-            </a>
-            <a class="portal-list-link" href="./seizou-automotive/">
-              <span class="portal-list-name">自動車向け LP</span>
-              <span class="portal-list-url">/industries/seizou-automotive/</span>
-            </a>
-            <a class="portal-list-link" href="./seizou-construction-builder/">
-              <span class="portal-list-name">建設・工務店向け LP</span>
-              <span class="portal-list-url">/industries/seizou-construction-builder/</span>
-            </a>
-            <a class="portal-list-link" href="./seizou-retail-sales/">
-              <span class="portal-list-name">小売・販売向け LP</span>
-              <span class="portal-list-url">/industries/seizou-retail-sales/</span>
-            </a>
-            <a class="portal-list-link" href="./seizou-staffing/">
-              <span class="portal-list-name">人材・派遣向け LP</span>
-              <span class="portal-list-url">/industries/seizou-staffing/</span>
-            </a>
-            <a class="portal-list-link" href="./seizou-healthcare-care/">
-              <span class="portal-list-name">医療・介護向け LP</span>
-              <span class="portal-list-url">/industries/seizou-healthcare-care/</span>
-            </a>
-            <a class="portal-list-link" href="./seizou-advertising-design/">
-              <span class="portal-list-name">広告・デザイン向け LP</span>
-              <span class="portal-list-url">/industries/seizou-advertising-design/</span>
-            </a>
-            <a class="portal-list-link" href="./seizou-software-it/">
-              <span class="portal-list-name">IT・ソフトウェア向け LP</span>
-              <span class="portal-list-url">/industries/seizou-software-it/</span>
-            </a>
-            <a class="portal-list-link" href="./seizou-food/">
-              <span class="portal-list-name">食品向け LP</span>
-              <span class="portal-list-url">/industries/seizou-food/</span>
-            </a>
-            <a class="portal-list-link" href="./seizou-trading-wholesale/">
-              <span class="portal-list-name">商社・卸売向け LP</span>
-              <span class="portal-list-url">/industries/seizou-trading-wholesale/</span>
-            </a>
-            <a class="portal-list-link" href="./seizou-transport-logistics/">
-              <span class="portal-list-name">運送・物流向け LP</span>
-              <span class="portal-list-url">/industries/seizou-transport-logistics/</span>
-            </a>
-            <a class="portal-list-link" href="./seizou-agriculture/">
-              <span class="portal-list-name">農業向け LP</span>
-              <span class="portal-list-url">/industries/seizou-agriculture/</span>
-            </a>
-            <a class="portal-list-link" href="./seizou-electrical-facility/">
-              <span class="portal-list-name">電気・設備向け LP</span>
-              <span class="portal-list-url">/industries/seizou-electrical-facility/</span>
-            </a>
-            <a class="portal-list-link" href="./seizou-real-estate/">
-              <span class="portal-list-name">不動産向け LP</span>
-              <span class="portal-list-url">/industries/seizou-real-estate/</span>
-            </a>
-            <a class="portal-list-link" href="./seizou-consulting/">
-              <span class="portal-list-name">コンサルティング向け LP</span>
-              <span class="portal-list-url">/industries/seizou-consulting/</span>
-            </a>
-            <a class="portal-list-link" href="./seizou-civil-engineering/">
-              <span class="portal-list-name">土木・工事向け LP</span>
-              <span class="portal-list-url">/industries/seizou-civil-engineering/</span>
-            </a>
-            <a class="portal-list-link" href="./seizou-education/">
-              <span class="portal-list-name">教育向け LP</span>
-              <span class="portal-list-url">/industries/seizou-education/</span>
-            </a>
-            <a class="portal-list-link" href="./seizou-beauty/">
-              <span class="portal-list-name">美容向け LP</span>
-              <span class="portal-list-url">/industries/seizou-beauty/</span>
-            </a>
-            <a class="portal-list-link" href="./seizou-hospitality-tourism/">
-              <span class="portal-list-name">ホテル・観光向け LP</span>
-              <span class="portal-list-url">/industries/seizou-hospitality-tourism/</span>
-            </a>
-            <a class="portal-list-link" href="./seizou-events-entertainment/">
-              <span class="portal-list-name">イベント・エンタメ向け LP</span>
-              <span class="portal-list-url">/industries/seizou-events-entertainment/</span>
-            </a>
-            <a class="portal-list-link" href="./seizou-insurance-finance/">
-              <span class="portal-list-name">保険・金融向け LP</span>
-              <span class="portal-list-url">/industries/seizou-insurance-finance/</span>
-            </a>
-            <a class="portal-list-link" href="./seizou-sports-fitness/">
-              <span class="portal-list-name">スポーツ・フィットネス向け LP</span>
-              <span class="portal-list-url">/industries/seizou-sports-fitness/</span>
-            </a>
-            <a class="portal-list-link" href="./seizou-pet/">
-              <span class="portal-list-name">ペット向け LP</span>
-              <span class="portal-list-url">/industries/seizou-pet/</span>
-            </a>
-            <a class="portal-list-link" href="./seizou-shigyo/">
-              <span class="portal-list-name">士業向け LP</span>
-              <span class="portal-list-url">/industries/seizou-shigyo/</span>
-            </a>
-            <a class="portal-list-link" href="./seizou-cleaning-maintenance/">
-              <span class="portal-list-name">清掃・メンテナンス向け LP</span>
-              <span class="portal-list-url">/industries/seizou-cleaning-maintenance/</span>
-            </a>
-          </div>
-        </section>
-
-        <section class="portal-category-block">
-          <h2 class="portal-category-title">医療・福祉</h2>
-          <div class="portal-list-grid">
-            <a class="portal-list-link" href="./iryo_fukushi-healthcare-care/">
-              <span class="portal-list-name">医療・介護向け LP</span>
-              <span class="portal-list-url">/industries/iryo_fukushi-healthcare-care/</span>
-            </a>
-            <a class="portal-list-link" href="./iryo_fukushi-staffing/">
-              <span class="portal-list-name">人材・派遣向け LP</span>
-              <span class="portal-list-url">/industries/iryo_fukushi-staffing/</span>
-            </a>
-            <a class="portal-list-link" href="./iryo_fukushi-automotive/">
-              <span class="portal-list-name">自動車向け LP</span>
-              <span class="portal-list-url">/industries/iryo_fukushi-automotive/</span>
-            </a>
-            <a class="portal-list-link" href="./iryo_fukushi-retail-sales/">
-              <span class="portal-list-name">小売・販売向け LP</span>
-              <span class="portal-list-url">/industries/iryo_fukushi-retail-sales/</span>
-            </a>
-            <a class="portal-list-link" href="./iryo_fukushi-software-it/">
-              <span class="portal-list-name">IT・ソフトウェア向け LP</span>
-              <span class="portal-list-url">/industries/iryo_fukushi-software-it/</span>
-            </a>
-            <a class="portal-list-link" href="./iryo_fukushi-sports-fitness/">
-              <span class="portal-list-name">スポーツ・フィットネス向け LP</span>
-              <span class="portal-list-url">/industries/iryo_fukushi-sports-fitness/</span>
-            </a>
-            <a class="portal-list-link" href="./iryo_fukushi-insurance-finance/">
-              <span class="portal-list-name">保険・金融向け LP</span>
-              <span class="portal-list-url">/industries/iryo_fukushi-insurance-finance/</span>
-            </a>
-            <a class="portal-list-link" href="./iryo_fukushi-education/">
-              <span class="portal-list-name">教育向け LP</span>
-              <span class="portal-list-url">/industries/iryo_fukushi-education/</span>
-            </a>
-            <a class="portal-list-link" href="./iryo_fukushi-beauty/">
-              <span class="portal-list-name">美容向け LP</span>
-              <span class="portal-list-url">/industries/iryo_fukushi-beauty/</span>
-            </a>
-            <a class="portal-list-link" href="./iryo_fukushi-manufacturing/">
-              <span class="portal-list-name">製造向け LP</span>
-              <span class="portal-list-url">/industries/iryo_fukushi-manufacturing/</span>
-            </a>
-            <a class="portal-list-link" href="./iryo_fukushi-electrical-facility/">
-              <span class="portal-list-name">電気・設備向け LP</span>
-              <span class="portal-list-url">/industries/iryo_fukushi-electrical-facility/</span>
-            </a>
-            <a class="portal-list-link" href="./iryo_fukushi-agriculture/">
-              <span class="portal-list-name">農業向け LP</span>
-              <span class="portal-list-url">/industries/iryo_fukushi-agriculture/</span>
-            </a>
-            <a class="portal-list-link" href="./iryo_fukushi-real-estate/">
-              <span class="portal-list-name">不動産向け LP</span>
-              <span class="portal-list-url">/industries/iryo_fukushi-real-estate/</span>
-            </a>
-            <a class="portal-list-link" href="./iryo_fukushi-construction-builder/">
-              <span class="portal-list-name">建設・工務店向け LP</span>
-              <span class="portal-list-url">/industries/iryo_fukushi-construction-builder/</span>
-            </a>
-            <a class="portal-list-link" href="./iryo_fukushi-advertising-design/">
-              <span class="portal-list-name">広告・デザイン向け LP</span>
-              <span class="portal-list-url">/industries/iryo_fukushi-advertising-design/</span>
-            </a>
-            <a class="portal-list-link" href="./iryo_fukushi-food/">
-              <span class="portal-list-name">食品向け LP</span>
-              <span class="portal-list-url">/industries/iryo_fukushi-food/</span>
-            </a>
-            <a class="portal-list-link" href="./iryo_fukushi-consulting/">
-              <span class="portal-list-name">コンサルティング向け LP</span>
-              <span class="portal-list-url">/industries/iryo_fukushi-consulting/</span>
-            </a>
-            <a class="portal-list-link" href="./iryo_fukushi-healthcare-welfare/">
-              <span class="portal-list-name">医療・福祉向け LP</span>
-              <span class="portal-list-url">/industries/iryo_fukushi-healthcare-welfare/</span>
-            </a>
-            <a class="portal-list-link" href="./iryo_fukushi-shigyo/">
-              <span class="portal-list-name">士業向け LP</span>
-              <span class="portal-list-url">/industries/iryo_fukushi-shigyo/</span>
-            </a>
-            <a class="portal-list-link" href="./iryo_fukushi-events-entertainment/">
-              <span class="portal-list-name">イベント・エンタメ向け LP</span>
-              <span class="portal-list-url">/industries/iryo_fukushi-events-entertainment/</span>
-            </a>
-            <a class="portal-list-link" href="./iryo_fukushi-trading-wholesale/">
-              <span class="portal-list-name">商社・卸売向け LP</span>
-              <span class="portal-list-url">/industries/iryo_fukushi-trading-wholesale/</span>
-            </a>
-            <a class="portal-list-link" href="./iryo_fukushi-civil-engineering/">
-              <span class="portal-list-name">土木・工事向け LP</span>
-              <span class="portal-list-url">/industries/iryo_fukushi-civil-engineering/</span>
-            </a>
-            <a class="portal-list-link" href="./iryo_fukushi-hospitality-tourism/">
-              <span class="portal-list-name">ホテル・観光向け LP</span>
-              <span class="portal-list-url">/industries/iryo_fukushi-hospitality-tourism/</span>
-            </a>
-            <a class="portal-list-link" href="./iryo_fukushi-transport-logistics/">
-              <span class="portal-list-name">運送・物流向け LP</span>
-              <span class="portal-list-url">/industries/iryo_fukushi-transport-logistics/</span>
-            </a>
-            <a class="portal-list-link" href="./iryo_fukushi-pet/">
-              <span class="portal-list-name">ペット向け LP</span>
-              <span class="portal-list-url">/industries/iryo_fukushi-pet/</span>
-            </a>
-            <a class="portal-list-link" href="./iryo_fukushi-cleaning-maintenance/">
-              <span class="portal-list-name">清掃・メンテナンス向け LP</span>
-              <span class="portal-list-url">/industries/iryo_fukushi-cleaning-maintenance/</span>
-            </a>
-          </div>
-        </section>
-
-        <section class="portal-category-block">
-          <h2 class="portal-category-title">小売・自動車</h2>
-          <div class="portal-list-grid">
-            <a class="portal-list-link" href="./kouri_jidosha-automotive/">
-              <span class="portal-list-name">自動車向け LP</span>
-              <span class="portal-list-url">/industries/kouri_jidosha-automotive/</span>
-            </a>
-            <a class="portal-list-link" href="./kouri_jidosha-retail-sales/">
-              <span class="portal-list-name">小売・販売向け LP</span>
-              <span class="portal-list-url">/industries/kouri_jidosha-retail-sales/</span>
-            </a>
-            <a class="portal-list-link" href="./kouri_jidosha-trading-wholesale/">
-              <span class="portal-list-name">商社・卸売向け LP</span>
-              <span class="portal-list-url">/industries/kouri_jidosha-trading-wholesale/</span>
-            </a>
-            <a class="portal-list-link" href="./kouri_jidosha-manufacturing/">
-              <span class="portal-list-name">製造向け LP</span>
-              <span class="portal-list-url">/industries/kouri_jidosha-manufacturing/</span>
-            </a>
-            <a class="portal-list-link" href="./kouri_jidosha-construction-builder/">
-              <span class="portal-list-name">建設・工務店向け LP</span>
-              <span class="portal-list-url">/industries/kouri_jidosha-construction-builder/</span>
-            </a>
-            <a class="portal-list-link" href="./kouri_jidosha-food/">
-              <span class="portal-list-name">食品向け LP</span>
-              <span class="portal-list-url">/industries/kouri_jidosha-food/</span>
-            </a>
-            <a class="portal-list-link" href="./kouri_jidosha-staffing/">
-              <span class="portal-list-name">人材・派遣向け LP</span>
-              <span class="portal-list-url">/industries/kouri_jidosha-staffing/</span>
-            </a>
-            <a class="portal-list-link" href="./kouri_jidosha-agriculture/">
-              <span class="portal-list-name">農業向け LP</span>
-              <span class="portal-list-url">/industries/kouri_jidosha-agriculture/</span>
-            </a>
-            <a class="portal-list-link" href="./kouri_jidosha-healthcare-care/">
-              <span class="portal-list-name">医療・介護向け LP</span>
-              <span class="portal-list-url">/industries/kouri_jidosha-healthcare-care/</span>
-            </a>
-            <a class="portal-list-link" href="./kouri_jidosha-civil-engineering/">
-              <span class="portal-list-name">土木・工事向け LP</span>
-              <span class="portal-list-url">/industries/kouri_jidosha-civil-engineering/</span>
-            </a>
-            <a class="portal-list-link" href="./kouri_jidosha-software-it/">
-              <span class="portal-list-name">IT・ソフトウェア向け LP</span>
-              <span class="portal-list-url">/industries/kouri_jidosha-software-it/</span>
-            </a>
-            <a class="portal-list-link" href="./kouri_jidosha-transport-logistics/">
-              <span class="portal-list-name">運送・物流向け LP</span>
-              <span class="portal-list-url">/industries/kouri_jidosha-transport-logistics/</span>
-            </a>
-            <a class="portal-list-link" href="./kouri_jidosha-electrical-facility/">
-              <span class="portal-list-name">電気・設備向け LP</span>
-              <span class="portal-list-url">/industries/kouri_jidosha-electrical-facility/</span>
-            </a>
-            <a class="portal-list-link" href="./kouri_jidosha-hospitality-tourism/">
-              <span class="portal-list-name">ホテル・観光向け LP</span>
-              <span class="portal-list-url">/industries/kouri_jidosha-hospitality-tourism/</span>
-            </a>
-            <a class="portal-list-link" href="./kouri_jidosha-real-estate/">
-              <span class="portal-list-name">不動産向け LP</span>
-              <span class="portal-list-url">/industries/kouri_jidosha-real-estate/</span>
-            </a>
-            <a class="portal-list-link" href="./kouri_jidosha-advertising-design/">
-              <span class="portal-list-name">広告・デザイン向け LP</span>
-              <span class="portal-list-url">/industries/kouri_jidosha-advertising-design/</span>
-            </a>
-            <a class="portal-list-link" href="./kouri_jidosha-education/">
-              <span class="portal-list-name">教育向け LP</span>
-              <span class="portal-list-url">/industries/kouri_jidosha-education/</span>
-            </a>
-            <a class="portal-list-link" href="./kouri_jidosha-beauty/">
-              <span class="portal-list-name">美容向け LP</span>
-              <span class="portal-list-url">/industries/kouri_jidosha-beauty/</span>
-            </a>
-            <a class="portal-list-link" href="./kouri_jidosha-consulting/">
-              <span class="portal-list-name">コンサルティング向け LP</span>
-              <span class="portal-list-url">/industries/kouri_jidosha-consulting/</span>
-            </a>
-            <a class="portal-list-link" href="./kouri_jidosha-events-entertainment/">
-              <span class="portal-list-name">イベント・エンタメ向け LP</span>
-              <span class="portal-list-url">/industries/kouri_jidosha-events-entertainment/</span>
-            </a>
-            <a class="portal-list-link" href="./kouri_jidosha-sports-fitness/">
-              <span class="portal-list-name">スポーツ・フィットネス向け LP</span>
-              <span class="portal-list-url">/industries/kouri_jidosha-sports-fitness/</span>
-            </a>
-            <a class="portal-list-link" href="./kouri_jidosha-insurance-finance/">
-              <span class="portal-list-name">保険・金融向け LP</span>
-              <span class="portal-list-url">/industries/kouri_jidosha-insurance-finance/</span>
-            </a>
-            <a class="portal-list-link" href="./kouri_jidosha-retail-wholesale/">
-              <span class="portal-list-name">小売・卸売向け LP</span>
-              <span class="portal-list-url">/industries/kouri_jidosha-retail-wholesale/</span>
-            </a>
-            <a class="portal-list-link" href="./kouri_jidosha-pet/">
-              <span class="portal-list-name">ペット向け LP</span>
-              <span class="portal-list-url">/industries/kouri_jidosha-pet/</span>
-            </a>
-            <a class="portal-list-link" href="./kouri_jidosha-cleaning-maintenance/">
-              <span class="portal-list-name">清掃・メンテナンス向け LP</span>
-              <span class="portal-list-url">/industries/kouri_jidosha-cleaning-maintenance/</span>
-            </a>
-            <a class="portal-list-link" href="./kouri_jidosha-shigyo/">
-              <span class="portal-list-name">士業向け LP</span>
-              <span class="portal-list-url">/industries/kouri_jidosha-shigyo/</span>
-            </a>
-          </div>
-        </section>
-
-        <section class="portal-category-block">
-          <h2 class="portal-category-title">その他（農業・金融）</h2>
-          <div class="portal-list-grid">
-            <a class="portal-list-link" href="./sonota-food/">
-              <span class="portal-list-name">食品向け LP</span>
-              <span class="portal-list-url">/industries/sonota-food/</span>
-            </a>
-            <a class="portal-list-link" href="./sonota-beauty/">
-              <span class="portal-list-name">美容向け LP</span>
-              <span class="portal-list-url">/industries/sonota-beauty/</span>
-            </a>
-            <a class="portal-list-link" href="./sonota-agriculture/">
-              <span class="portal-list-name">農業向け LP</span>
-              <span class="portal-list-url">/industries/sonota-agriculture/</span>
-            </a>
-            <a class="portal-list-link" href="./sonota-hospitality-tourism/">
-              <span class="portal-list-name">ホテル・観光向け LP</span>
-              <span class="portal-list-url">/industries/sonota-hospitality-tourism/</span>
-            </a>
-            <a class="portal-list-link" href="./sonota-insurance-finance/">
-              <span class="portal-list-name">保険・金融向け LP</span>
-              <span class="portal-list-url">/industries/sonota-insurance-finance/</span>
-            </a>
-            <a class="portal-list-link" href="./sonota-education/">
-              <span class="portal-list-name">教育向け LP</span>
-              <span class="portal-list-url">/industries/sonota-education/</span>
-            </a>
-            <a class="portal-list-link" href="./sonota-pet/">
-              <span class="portal-list-name">ペット向け LP</span>
-              <span class="portal-list-url">/industries/sonota-pet/</span>
-            </a>
-            <a class="portal-list-link" href="./sonota-advertising-design/">
-              <span class="portal-list-name">広告・デザイン向け LP</span>
-              <span class="portal-list-url">/industries/sonota-advertising-design/</span>
-            </a>
-            <a class="portal-list-link" href="./sonota-sports-fitness/">
-              <span class="portal-list-name">スポーツ・フィットネス向け LP</span>
-              <span class="portal-list-url">/industries/sonota-sports-fitness/</span>
-            </a>
-            <a class="portal-list-link" href="./sonota-retail-sales/">
-              <span class="portal-list-name">小売・販売向け LP</span>
-              <span class="portal-list-url">/industries/sonota-retail-sales/</span>
-            </a>
-            <a class="portal-list-link" href="./sonota-staffing/">
-              <span class="portal-list-name">人材・派遣向け LP</span>
-              <span class="portal-list-url">/industries/sonota-staffing/</span>
-            </a>
-            <a class="portal-list-link" href="./sonota-manufacturing/">
-              <span class="portal-list-name">製造向け LP</span>
-              <span class="portal-list-url">/industries/sonota-manufacturing/</span>
-            </a>
-            <a class="portal-list-link" href="./sonota-real-estate/">
-              <span class="portal-list-name">不動産向け LP</span>
-              <span class="portal-list-url">/industries/sonota-real-estate/</span>
-            </a>
-            <a class="portal-list-link" href="./sonota-automotive/">
-              <span class="portal-list-name">自動車向け LP</span>
-              <span class="portal-list-url">/industries/sonota-automotive/</span>
-            </a>
-            <a class="portal-list-link" href="./sonota-events-entertainment/">
-              <span class="portal-list-name">イベント・エンタメ向け LP</span>
-              <span class="portal-list-url">/industries/sonota-events-entertainment/</span>
-            </a>
-            <a class="portal-list-link" href="./sonota-software-it/">
-              <span class="portal-list-name">IT・ソフトウェア向け LP</span>
-              <span class="portal-list-url">/industries/sonota-software-it/</span>
-            </a>
-            <a class="portal-list-link" href="./sonota-healthcare-care/">
-              <span class="portal-list-name">医療・介護向け LP</span>
-              <span class="portal-list-url">/industries/sonota-healthcare-care/</span>
-            </a>
-            <a class="portal-list-link" href="./sonota-construction-builder/">
-              <span class="portal-list-name">建設・工務店向け LP</span>
-              <span class="portal-list-url">/industries/sonota-construction-builder/</span>
-            </a>
-            <a class="portal-list-link" href="./sonota-trading-wholesale/">
-              <span class="portal-list-name">商社・卸売向け LP</span>
-              <span class="portal-list-url">/industries/sonota-trading-wholesale/</span>
-            </a>
-            <a class="portal-list-link" href="./sonota-electrical-facility/">
-              <span class="portal-list-name">電気・設備向け LP</span>
-              <span class="portal-list-url">/industries/sonota-electrical-facility/</span>
-            </a>
-            <a class="portal-list-link" href="./sonota-consulting/">
-              <span class="portal-list-name">コンサルティング向け LP</span>
-              <span class="portal-list-url">/industries/sonota-consulting/</span>
-            </a>
-            <a class="portal-list-link" href="./sonota-transport-logistics/">
-              <span class="portal-list-name">運送・物流向け LP</span>
-              <span class="portal-list-url">/industries/sonota-transport-logistics/</span>
-            </a>
-            <a class="portal-list-link" href="./sonota-agriculture-food/">
-              <span class="portal-list-name">農業・食品向け LP</span>
-              <span class="portal-list-url">/industries/sonota-agriculture-food/</span>
-            </a>
-            <a class="portal-list-link" href="./sonota-civil-engineering/">
-              <span class="portal-list-name">土木・工事向け LP</span>
-              <span class="portal-list-url">/industries/sonota-civil-engineering/</span>
-            </a>
-            <a class="portal-list-link" href="./sonota-shigyo/">
-              <span class="portal-list-name">士業向け LP</span>
-              <span class="portal-list-url">/industries/sonota-shigyo/</span>
-            </a>
-            <a class="portal-list-link" href="./sonota-other/">
-              <span class="portal-list-name">その他向け LP</span>
-              <span class="portal-list-url">/industries/sonota-other/</span>
-            </a>
-            <a class="portal-list-link" href="./sonota-cleaning-maintenance/">
-              <span class="portal-list-name">清掃・メンテナンス向け LP</span>
-              <span class="portal-list-url">/industries/sonota-cleaning-maintenance/</span>
-            </a>
-            <a class="portal-list-link" href="./sonota-finance-insurance/">
-              <span class="portal-list-name">金融・保険向け LP</span>
-              <span class="portal-list-url">/industries/sonota-finance-insurance/</span>
-            </a>
-          </div>
-        </section>
+    <section class="industry-index-hero" aria-labelledby="industry-index-title">
+      <div class="industry-index-hero-copy">
+        <h1 id="industry-index-title">業種別LP一覧</h1>
+        <span class="industry-index-title-line" aria-hidden="true"></span>
+        <p>AI-SABIのソリューションを業種別にご紹介します。</p>
       </div>
+      <img class="industry-index-city" src="../assets/industry-index/city-line-image2-v1.png" alt="" aria-hidden="true">
     </section>
+
+    <div class="industry-index-groups">
+      <section class="industry-index-group" aria-labelledby="industry-index-realestate-title">
+        <div class="industry-index-group-title">
+          <span class="industry-index-group-icon" aria-hidden="true">
+            <img src="../assets/industry-index/icon-house-image2-v1.png" alt="">
+          </span>
+          <h2 id="industry-index-realestate-title">不動産・士業</h2>
+        </div>
+
+        <div class="industry-index-card-grid">
+          <a class="industry-index-card" href="./main-shigyo/">
+            <span class="industry-index-card-icon" aria-hidden="true">
+              <img src="../assets/industry-index/icon-house-image2-v1.png" alt="">
+            </span>
+            <span class="industry-index-card-text">
+              <strong>士業向け LP</strong>
+              <span>/industries/main-shigyo/</span>
+            </span>
+            <img class="industry-index-card-arrow" src="../assets/industry-index/icon-chevron-image2-v1.png" alt="" aria-hidden="true">
+          </a>
+
+          <a class="industry-index-card" href="./main-real-estate/">
+            <span class="industry-index-card-icon" aria-hidden="true">
+              <img src="../assets/industry-index/icon-building-image2-v1.png" alt="">
+            </span>
+            <span class="industry-index-card-text">
+              <strong>不動産向け LP</strong>
+              <span>/industries/main-real-estate/</span>
+            </span>
+            <img class="industry-index-card-arrow" src="../assets/industry-index/icon-chevron-image2-v1.png" alt="" aria-hidden="true">
+          </a>
+        </div>
+      </section>
+
+      <section class="industry-index-group" aria-labelledby="industry-index-construction-title">
+        <div class="industry-index-group-title">
+          <span class="industry-index-group-icon" aria-hidden="true">
+            <img src="../assets/industry-index/icon-hardhat-image2-v1.png" alt="">
+          </span>
+          <h2 id="industry-index-construction-title">建設・物流</h2>
+        </div>
+
+        <div class="industry-index-card-grid">
+          <a class="industry-index-card" href="./kensetsu_butsuryu-construction-builder/">
+            <span class="industry-index-card-icon" aria-hidden="true">
+              <img src="../assets/industry-index/icon-crane-image2-v1.png" alt="">
+            </span>
+            <span class="industry-index-card-text">
+              <strong>建設・工務店向け LP</strong>
+              <span>/industries/kensetsu_butsuryu-construction-builder/</span>
+            </span>
+            <img class="industry-index-card-arrow" src="../assets/industry-index/icon-chevron-image2-v1.png" alt="" aria-hidden="true">
+          </a>
+
+          <a class="industry-index-card" href="./kensetsu_butsuryu-civil-engineering/">
+            <span class="industry-index-card-icon" aria-hidden="true">
+              <img src="../assets/industry-index/icon-bridge-image2-v1.png" alt="">
+            </span>
+            <span class="industry-index-card-text">
+              <strong>土木・工事向け LP</strong>
+              <span>/industries/kensetsu_butsuryu-civil-engineering/</span>
+            </span>
+            <img class="industry-index-card-arrow" src="../assets/industry-index/icon-chevron-image2-v1.png" alt="" aria-hidden="true">
+          </a>
+
+          <a class="industry-index-card" href="./kensetsu_butsuryu-electrical-facility/">
+            <span class="industry-index-card-icon" aria-hidden="true">
+              <img src="../assets/industry-index/icon-bulb-image2-v1.png" alt="">
+            </span>
+            <span class="industry-index-card-text">
+              <strong>電気・設備向け LP</strong>
+              <span>/industries/kensetsu_butsuryu-electrical-facility/</span>
+            </span>
+            <img class="industry-index-card-arrow" src="../assets/industry-index/icon-chevron-image2-v1.png" alt="" aria-hidden="true">
+          </a>
+
+          <a class="industry-index-card" href="./kensetsu_butsuryu-transport-logistics/">
+            <span class="industry-index-card-icon" aria-hidden="true">
+              <img src="../assets/industry-index/icon-truck-image2-v1.png" alt="">
+            </span>
+            <span class="industry-index-card-text">
+              <strong>運送・物流向け LP</strong>
+              <span>/industries/kensetsu_butsuryu-transport-logistics/</span>
+            </span>
+            <img class="industry-index-card-arrow" src="../assets/industry-index/icon-chevron-image2-v1.png" alt="" aria-hidden="true">
+          </a>
+        </div>
+      </section>
+    </div>
   </main>
 </body>
 </html>

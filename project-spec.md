@@ -73,6 +73,9 @@
   - 完成した LP を外部共有しやすい形で切り出した出力先
 - `site/industry-data/group-categories/`
   - 問い合わせツール由来の新マスタに基づく大カテゴリ LP の正本 JSON
+- `publish/ai-sabi-lp/`
+  - GitHub Pages 公開用の Git リポジトリ
+  - 現時点では公開 HTML だけでなく、`templates/` `industry-data/` `build_industry_lp.py` `project-spec.md` も含めた公開・再現用の最小構成を持つ
 - `temp-stepbase.html`
   - StepBase LP の HTML スナップショット
   - 現行の AI-SABI LP 本体ではなく、参照確認用ファイルとして扱う
@@ -137,6 +140,8 @@
 - LP が完成したら、レビュー URL の共有だけで終わらせず、外部共有や本番反映に使える HTML / CSS / assets の受け渡し単位も明示する
 - 外部共有用ファイルが必要になったら、LP 本体から必要 assets だけを抜き出した bundle を生成し、その bundle を受け渡し正本として扱う
 - CTA の遷移先は LP ごとに変えられる前提とし、外部導線が公式 LINE などに変わる場合は、ボタン文言、導入フロー、問い合わせセクションの表現も合わせて見直す
+- LP 作成後の `build -> publish同期 -> commit -> push -> bundle出力` は、Windows では `tools/publish_ai_sabi_lp.ps1` を標準入口として扱う
+- Windows 側で `git` が PATH に出ていない場合でも、`C:\Program Files\Git\cmd\git.exe` を優先候補として検出し、publish フローを継続できる前提で運用する
 
 ## 4. 必須の文書更新ルール
 
@@ -198,6 +203,94 @@
 以下のいずれかに当てはまる場合は、既存文書への追記だけで済ませず、新しい仕様書または分析資料を追加します。
 
 - 新しいテーマや検討軸が立ち上がったとき
+
+## 5. LP作成後の公開・Git運用フロー
+
+LP の設計やコンテンツ作成そのものとは別に、作成後の反映手順は以下を正本とする。
+
+### 5.1 反映対象
+
+`publish/ai-sabi-lp/` に同期する対象は、現時点では以下。
+
+- `site/index.html`
+- `site/styles.css`
+- `site/assets/`
+- `site/industries/`
+- `site/templates/`
+- `site/industry-data/`
+- `tools/build_industry_lp.py` -> `publish/ai-sabi-lp/build_industry_lp.py`
+- `docs/project-spec.md` -> `publish/ai-sabi-lp/project-spec.md`
+
+補足:
+
+- 過去文書では `index.html` `styles.css` `assets/` `industries/` の 4 点同期前提だったが、2026-04-22 時点の publish リポジトリ実態はそれより広い。
+- 現在は、公開確認だけでなく「publish 側だけ見ても最低限の再現ができる状態」を維持するため、`templates/` や `industry-data/` も同期対象に含める。
+
+### 5.2 標準コマンド
+
+Windows での標準コマンドは以下。
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\tools\publish_ai_sabi_lp.ps1 `
+  -ConfigPath .\site\industry-data\real-estate.json `
+  -CommitMessage "Update real-estate LP outputs" `
+  -Push
+```
+
+このコマンドが行うこと:
+
+1. 指定 JSON から LP を再生成する
+2. `publish/ai-sabi-lp/` へ同期する
+3. publish リポジトリで `git add` / `git commit` を行う
+4. `origin/main` へ push する
+
+### 5.3 よく使う実行パターン
+
+既存の生成物だけを同期・push したい場合:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\tools\publish_ai_sabi_lp.ps1 `
+  -SkipBuild `
+  -CommitMessage "Sync latest LP outputs" `
+  -Push
+```
+
+bundle も同時に出したい場合:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\tools\publish_ai_sabi_lp.ps1 `
+  -ConfigPath .\site\industry-data\real-estate.json `
+  -ExportBundle `
+  -ForceBundle `
+  -CommitMessage "Update real-estate LP outputs" `
+  -Push
+```
+
+### 5.4 Git 運用の前提
+
+- publish 用 Git リポジトリは `publish/ai-sabi-lp/.git`
+- remote `origin` は `https://github.com/mswpaff-stack/ai-sabi-lp.git`
+- branch は `main`
+- 現在の Windows 端末では Git for Windows を導入済みであり、PATH 未反映のシェルでも `tools/publish_ai_sabi_lp.ps1` 側で Git 実体を検出して継続できるようにしている
+
+### 5.5 Codex の運用ルール
+
+今後、LP 作成後に Git 反映まで求められた場合は、原則として以下の順で進める。
+
+1. 対象 JSON / 対象 slug / 変更範囲を確認する
+2. 必要なら `python tools/build_industry_lp.py --config ...` 相当の生成を行う
+3. `tools/publish_ai_sabi_lp.ps1` を使って publish リポジトリへ同期する
+4. commit 内容を説明できるメッセージで記録する
+5. push 後に公開 URL または deliverables の導線を案内する
+
+### 5.6 レビュー観点
+
+このフロー実行前後では、少なくとも以下を確認する。
+
+- 対象 LP が意図した slug に出力されているか
+- 主要 CTA、見出し、画像差し替えが崩れていないか
+- `publish/ai-sabi-lp/` の同期対象が古い仕様の 4 点だけに戻っていないか
+- 外部共有が必要なら bundle の出力要否を確認したか
 - 後続作業で繰り返し参照する内容をまとめる必要があるとき
 - `docs/project-spec.md` に入れると情報が肥大化し、正本として読みづらくなるとき
 - 実装、LP 制作、営業資料、業界別提案などで個別に詳細仕様が必要なとき
@@ -429,3 +522,35 @@
   - 文書更新順序
   - 新規文書追加基準
   - 根本変更時の確認フロー
+
+## 11. 2026-04-24 業種別LP一覧ページ更新
+
+公開一覧ページ `https://mswpaff-stack.github.io/ai-sabi-lp/industries/` は、2026-04-24 時点で参考画像に合わせた簡潔な一覧デザインへ更新した。
+
+対象ファイル:
+
+- `site/industries/index.html`
+- `site/styles.css`
+- `site/assets/industry-index/`
+- `publish/ai-sabi-lp/industries/index.html`
+- `publish/ai-sabi-lp/styles.css`
+- `publish/ai-sabi-lp/assets/industry-index/`
+
+不動産・士業のリンク先は、現行の新LPを反映した canonical slug とする。
+
+- 不動産: `/industries/main-real-estate/`
+- 士業: `/industries/main-shigyo/`
+
+一覧ページの右上ビジュアル、セクションアイコン、カードアイコン、矢印は、ユーザー指示により imagegen の image-2 で生成したPNGを使う。SVGやコードネイティブの仮アイコンは本番表示へ残さない。
+
+現行アセット:
+
+- `site/assets/industry-index/city-line-image2-v1.png`
+- `site/assets/industry-index/icon-house-image2-v1.png`
+- `site/assets/industry-index/icon-building-image2-v1.png`
+- `site/assets/industry-index/icon-hardhat-image2-v1.png`
+- `site/assets/industry-index/icon-crane-image2-v1.png`
+- `site/assets/industry-index/icon-bridge-image2-v1.png`
+- `site/assets/industry-index/icon-bulb-image2-v1.png`
+- `site/assets/industry-index/icon-truck-image2-v1.png`
+- `site/assets/industry-index/icon-chevron-image2-v1.png`
