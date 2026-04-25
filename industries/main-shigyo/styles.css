@@ -459,6 +459,8 @@ img {
   display: block;
   object-fit: cover;
   object-position: center;
+  transform: scale(1.035);
+  transform-origin: center;
 }
 
 .metrics-grid {
@@ -653,9 +655,26 @@ img {
   overflow: hidden;
 }
 
+.problem-visual::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(29, 25, 20, 0.06) 0%, rgba(29, 25, 20, 0.22) 42%, rgba(29, 25, 20, 0.68) 72%, rgba(29, 25, 20, 0.62) 100%),
+    radial-gradient(ellipse at 76% 50%, rgba(20, 28, 24, 0.58) 0%, rgba(20, 28, 24, 0.34) 44%, rgba(20, 28, 24, 0) 72%);
+}
+
+.problem-visual-media {
+  transform: scale(1.045);
+  transform-origin: center;
+}
+
 .problem-visual-copy {
   position: absolute;
   inset: 0 0 0 42%;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -670,7 +689,7 @@ img {
   font-size: clamp(1.22rem, 1.48vw, 1.76rem);
   line-height: 1.58;
   letter-spacing: 0.02em;
-  text-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.48), 0 12px 26px rgba(0, 0, 0, 0.34);
 }
 
 .section-heading {
