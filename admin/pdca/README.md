@@ -1,6 +1,7 @@
 # AI-SABI 問い合わせ営業PDCA 管理画面
 
 作成日: 2026-04-25
+最終更新日: 2026-04-26
 
 ## 概要
 
@@ -21,9 +22,14 @@
 - `index.html`: 画面本体
 - `styles.css`: UIスタイル
 - `data.js`: 既存配信ツールの確認結果を反映した静的データ
+- `auth.js`: GitHub Pages公開用の簡易ログインゲート
 - `app.js`: 画面描画、ナビ切り替え、承認/送信デモ、同期デモ、Codex向け分析プロンプト生成
 - `assets/ai-sabi-pdca-icons-image2-v1.png`: image-2生成アイコンシートを透過化した採用素材
 - `assets/ai-sabi-pdca-icons-image2-v1-source.png`: 透過前の生成元
+
+採用モック:
+
+- `output/mockups/outreach-pdca-admin-realdata-redesign-image2-v1.png`
 
 ## ローカル確認
 
@@ -43,6 +49,19 @@ http://127.0.0.1:8140/
 python3 tools/stop_preview_server.py --site-name outreach-pdca-admin-v1 --port 8140
 ```
 
+## 公開URL
+
+GitHub Pages公開用コピー:
+
+- `../AIコンサル/site/admin/pdca/`
+- `../AIコンサル/publish/ai-sabi-lp/admin/pdca/`
+
+公開URL:
+
+```text
+https://mswpaff-stack.github.io/ai-sabi-lp/admin/pdca/
+```
+
 ## 現在の連携状態
 
 現時点ではデモ連携。
@@ -53,6 +72,14 @@ python3 tools/stop_preview_server.py --site-name outreach-pdca-admin-v1 --port 8
 - `配信実行`: 本番送信ではなく、送信実行のデモ状態へ変更する
 
 実データ連携は、別途バックエンドプロキシを作成し、既存配信ツールAPIと安全に接続する。
+
+## ログインについて
+
+公開URLでは `auth.js` の簡易ログインを挟む。
+
+ただし、GitHub Pagesは静的ホスティングのため、これは本物のサーバー認証ではない。ソースとハッシュは公開リポジトリ上で見えるため、機密情報、個人情報、既存配信ツールの認証情報、送信権限は置かない。
+
+実運用で保護が必要になった場合は、Cloudflare Access、Vercel/Netlifyの認証、Basic認証付きサーバー、または新PDCA管理画面用バックエンドのセッション認証へ切り替える。
 
 ## 現在反映している実データ
 
@@ -67,6 +94,7 @@ python3 tools/stop_preview_server.py --site-name outreach-pdca-admin-v1 --port 8
 ## UI調整メモ
 
 - 自社用ツールのため、左下の相談・問い合わせ導線は削除済み
+- ダッシュボード上部に `次にやること` と `今回の推奨フロー` を表示し、最初に確認すべき順番が見えるようにした
 - UIアイコンは `assets/ai-sabi-pdca-icons-image2-v1.png` のimage-2生成PNGスプライトに統一
 - トレンド矢印などの文字記号アイコンは使わず、生成PNGスプライトのアイコンを使う
-- 主要PC幅では、KPI、ボタン、テーブル、サイドバーの文字はみ出しがないことを確認済み
+- 主要PC幅では、KPI、ボタン、テーブル、サイドバーの文字はみ出しと、1文字だけの改行がないことを確認済み
