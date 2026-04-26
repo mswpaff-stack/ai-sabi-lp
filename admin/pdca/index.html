@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI-SABI 問い合わせ営業PDCA</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <section class="login-screen" id="loginScreen" hidden>
+      <div class="login-card">
+        <a class="brand login-brand" href="#dashboard" aria-label="AI-SABI">
+          <span class="brand-mark icon icon-building" aria-hidden="true"></span>
+          <span class="brand-text">AI-SABI</span>
+        </a>
+        <p class="eyebrow">OUTREACH PDCA</p>
+        <h1>管理画面ログイン</h1>
+        <p class="login-lead">
+          問い合わせ営業PDCAの確認画面です。公開URLでは簡易ログインを挟みます。
+        </p>
+        <form class="login-form" id="loginForm">
+          <label>
+            <span>ID</span>
+            <input id="loginId" name="loginId" type="text" autocomplete="username" required />
+          </label>
+          <label>
+            <span>PASS</span>
+            <input id="loginPassword" name="loginPassword" type="password" autocomplete="current-password" required />
+          </label>
+          <p class="login-error" id="loginError" role="alert" hidden>IDまたはPASSが違います。</p>
+          <button class="primary-button login-submit" type="submit">
+            <span class="icon icon-lock" aria-hidden="true"></span>
+            ログイン
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <div class="app-shell" id="appShell" hidden>
+      <aside class="sidebar" aria-label="メインナビゲーション">
+        <a class="brand" href="#dashboard" aria-label="AI-SABI ダッシュボード">
+          <span class="brand-mark icon icon-building" aria-hidden="true"></span>
+          <span class="brand-text">AI-SABI</span>
+        </a>
+
+        <nav class="side-nav" id="sideNav"></nav>
+
+        <section class="user-card" aria-label="ログインユーザー">
+          <span class="avatar">落</span>
+          <span class="user-meta">
+            <strong>落合</strong>
+            <small>ユーザー</small>
+          </span>
+          <button class="logout-button" id="logoutButton" type="button">ログアウト</button>
+        </section>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">OUTREACH PDCA</p>
+            <h1 id="pageTitle">問い合わせ営業PDCA</h1>
+            <p id="pageLead" class="lead">次回配信の準備状況と、まず確認すべき内容を整理します。</p>
+          </div>
+          <div class="top-actions">
+            <button class="ghost-button" type="button" id="syncButton">
+              <span class="icon icon-sync" aria-hidden="true"></span>
+              既存ツール数値を同期
+            </button>
+            <button class="ghost-button" type="button" id="analysisButton">
+              <span class="icon icon-improve" aria-hidden="true"></span>
+              AI分析を実行
+            </button>
+            <button class="primary-button" type="button" id="createButton">
+              <span class="icon icon-ab" aria-hidden="true"></span>
+              新規テスト案を作成
+            </button>
+            <div class="date-pill">
+              <span class="icon icon-calendar" aria-hidden="true"></span>
+              2026/04/26（日）
+            </div>
+          </div>
+        </header>
+
+        <section class="sync-banner" id="syncBanner" aria-live="polite"></section>
+        <section id="viewRoot" class="view-root"></section>
+      </main>
+    </div>
+
+    <dialog class="modal" id="actionModal">
+      <form method="dialog" class="modal-card">
+        <div class="modal-head">
+          <span class="modal-icon icon icon-warning" aria-hidden="true"></span>
+          <div>
+            <h2 id="modalTitle">確認</h2>
+            <p id="modalLead">操作内容を確認してください。</p>
+          </div>
+        </div>
+        <div class="modal-body" id="modalBody"></div>
+        <div class="modal-actions">
+          <button class="ghost-button" value="cancel">閉じる</button>
+          <button class="primary-button" value="confirm" id="modalConfirm">実行する</button>
+        </div>
+      </form>
+    </dialog>
+
+    <script src="./auth.js"></script>
+    <script src="./data.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
