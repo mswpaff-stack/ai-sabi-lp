@@ -50,6 +50,10 @@ function escapeHtml(value) {
     .replace(/'/g, "&#039;");
 }
 
+function formatMultiline(value) {
+  return escapeHtml(value).replace(/\n/g, "<br />");
+}
+
 async function sha256(value) {
   const bytes = new TextEncoder().encode(value);
   const hashBuffer = await crypto.subtle.digest("SHA-256", bytes);
@@ -332,15 +336,18 @@ function renderAbTest() {
           <h2 class="panel-title">${icon("ab")}テスト設計一覧</h2>
           <button class="primary-button" type="button">${icon("ab")}新規テスト案を作成</button>
         </div>
-        <table>
-          <thead><tr><th>テスト名</th><th>業種</th><th>仮説</th><th>対象セグメント</th><th>A訴求</th><th>B訴求</th><th>成功指標</th><th>状態</th></tr></thead>
+        <table class="ab-test-table">
+          <thead><tr><th>テスト名</th><th>対象</th><th>仮説</th><th>A/B差分</th><th>状態</th></tr></thead>
           <tbody>
             ${state.data.abTests
               .map(
                 (test) => `
                   <tr>
-                    <td><strong>${test.name}</strong></td><td>${test.industry}</td><td>${test.hypothesis}</td><td>${test.segment}</td>
-                    <td>${test.appealA}</td><td>${test.appealB}</td><td>${test.success}</td><td><span class="status ${statusClass(test.status)}">${test.status}</span></td>
+                    <td><strong>${test.name}</strong><small>${test.industry}</small></td>
+                    <td>${test.segment}</td>
+                    <td>${test.hypothesis}</td>
+                    <td><strong>A:</strong> ${test.appealA}<br><strong>B:</strong> ${test.appealB}<br><small>${test.success}</small></td>
+                    <td><span class="status ${statusClass(test.status)}">${test.status}</span></td>
                   </tr>
                 `,
               )
@@ -357,6 +364,8 @@ function renderAbTest() {
           <div class="detail-box"><strong>冒頭A</strong><p>${selected.introA}</p></div>
           <div class="detail-box"><strong>冒頭B</strong><p>${selected.introB}</p></div>
           <div class="detail-box"><strong>CTA</strong><p>${selected.cta}</p></div>
+          ${selected.bodyA ? `<div class="detail-box body-preview"><strong>本文A</strong><p>${formatMultiline(selected.bodyA)}</p></div>` : ""}
+          ${selected.bodyB ? `<div class="detail-box body-preview"><strong>本文B</strong><p>${formatMultiline(selected.bodyB)}</p></div>` : ""}
         </div>
       </aside>
     </section>
@@ -607,6 +616,13 @@ function buildAnalysisPrompt() {
         `- ${item.name}: 業種=${item.industry} / 訴求=${item.appeal} / 件名=${item.subject} / LP=${item.lp} / 使用${item.count}回 / クリック=${item.click} / 判定=${item.label}`,
     )
     .join("\n");
+  const abBodyLines = state.data.abTests
+    .filter((item) => item.bodyA || item.bodyB)
+    .map(
+      (item) =>
+        `- ${item.name}\n  件名A=${item.subjectA}\n  本文A=${item.bodyA || "-"}\n  件名B=${item.subjectB}\n  本文B=${item.bodyB || "-"}`,
+    )
+    .join("\n");
   const resultLines = state.data.results.improvements.map((item) => `- ${item.title}: ${item.text}`).join("\n");
 
   return `あなたはこのワークスペースのCodexです。以下の実データをもとに、問い合わせフォーム営業の次回小ロット配信案を改善してください。
@@ -647,6 +663,9 @@ ${approvalLines}
 
 # テンプレート状況
 ${templateLines}
+
+# 現在のA/B本文案
+${abBodyLines}
 
 # 現時点の改善メモ
 ${resultLines}

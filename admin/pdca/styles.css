@@ -922,6 +922,12 @@ tr:last-child td {
   line-height: 1.7;
 }
 
+.body-preview p {
+  max-height: 260px;
+  overflow: auto;
+  padding-right: 4px;
+}
+
 .memo-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -967,6 +973,35 @@ tr:last-child td {
 .status {
   width: fit-content;
   min-height: 24px;
+  min-width: 54px;
+  white-space: nowrap;
+}
+
+.ab-test-table th,
+.ab-test-table td {
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.ab-test-table th:nth-child(1),
+.ab-test-table td:nth-child(1) {
+  width: 170px;
+}
+
+.ab-test-table th:nth-child(2),
+.ab-test-table td:nth-child(2) {
+  width: 210px;
+}
+
+.ab-test-table th:nth-child(5),
+.ab-test-table td:nth-child(5) {
+  width: 82px;
+}
+
+.ab-test-table small {
+  display: block;
+  margin-top: 5px;
+  color: var(--ink-500);
 }
 
 .status.design,

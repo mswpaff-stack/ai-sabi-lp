@@ -88,8 +88,10 @@ https://mswpaff-stack.github.io/ai-sabi-lp/admin/pdca/
 - 既存キャンペーン: 鳥取県・徳島県の `IT・ソフトウェア` 向けWeb制作テスト
 - 既存結果: 送信23件、クリック0件、LP閲覧2件、LINEクリック0件
 - 次回対象: `IT・サービス` DBの `広告・デザイン`
-- 初回候補: 鳥取県15件、徳島県15件
+- 初回候補: 鳥取県A15件、徳島県B15件
+- A案: 制作進行短縮、B案: 提案・更新報告品質の安定
 - LP誘導ルール: 本文に実URLを直書きせず、必ず `{{tracking_url}}` を使う
+- 確定した件名・本文・作成名: `content/outreach-pdca/web-production-ad-design-small-lot-2026-04-26.md`
 
 ## UI調整メモ
 
