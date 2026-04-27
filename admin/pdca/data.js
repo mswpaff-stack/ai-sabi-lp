@@ -41,7 +41,7 @@ window.PDCA_DATA = {
   nav: [
     { id: "dashboard", label: "ダッシュボード", icon: "dashboard" },
     { id: "ab-test", label: "ABテスト設計", icon: "ab" },
-    { id: "approval", label: "承認待ち", icon: "approval", badge: 2 },
+    { id: "approval", label: "送信待ち", icon: "approval", badge: 2 },
     { id: "results", label: "結果分析", icon: "results" },
     { id: "templates", label: "テンプレート", icon: "template" },
     { id: "segments", label: "セグメント", icon: "segment" },

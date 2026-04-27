@@ -15,7 +15,7 @@ const viewMeta = {
     lead: "業種ごとに仮説、文面意図、成功指標を設計します。",
   },
   approval: {
-    title: "承認待ち",
+    title: "送信待ち",
     lead: "Codexが作成した配信準備内容を確認し、送信前判断を行います。",
   },
   results: {
@@ -620,7 +620,7 @@ ${context.existingToolState.campaigns.map((item) => `- ${item}`).join("\n")}
 # 次回候補セグメント
 ${segmentLines}
 
-# 承認待ちとして準備したいキャンペーン案
+# 送信待ちとして準備済みのキャンペーン案
 ${approvalLines}
 
 # テンプレート状況
