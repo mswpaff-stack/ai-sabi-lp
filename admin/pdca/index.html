@@ -7,36 +7,7 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <section class="login-screen" id="loginScreen" hidden>
-      <div class="login-card">
-        <a class="brand login-brand" href="#dashboard" aria-label="AI-SABI">
-          <span class="brand-mark icon icon-building" aria-hidden="true"></span>
-          <span class="brand-text">AI-SABI</span>
-        </a>
-        <p class="eyebrow">OUTREACH PDCA</p>
-        <h1>管理画面ログイン</h1>
-        <p class="login-lead">
-          問い合わせ営業PDCAの確認画面です。公開URLでは簡易ログインを挟みます。
-        </p>
-        <form class="login-form" id="loginForm">
-          <label>
-            <span>ID</span>
-            <input id="loginId" name="loginId" type="text" autocomplete="username" required />
-          </label>
-          <label>
-            <span>PASS</span>
-            <input id="loginPassword" name="loginPassword" type="password" autocomplete="current-password" required />
-          </label>
-          <p class="login-error" id="loginError" role="alert" hidden>IDまたはPASSが違います。</p>
-          <button class="primary-button login-submit" type="submit">
-            <span class="icon icon-lock" aria-hidden="true"></span>
-            ログイン
-          </button>
-        </form>
-      </div>
-    </section>
-
-    <div class="app-shell" id="appShell" hidden>
+    <div class="app-shell" id="appShell">
       <aside class="sidebar" aria-label="メインナビゲーション">
         <a class="brand" href="#dashboard" aria-label="AI-SABI ダッシュボード">
           <span class="brand-mark icon icon-building" aria-hidden="true"></span>
@@ -45,13 +16,12 @@
 
         <nav class="side-nav" id="sideNav"></nav>
 
-        <section class="user-card" aria-label="ログインユーザー">
+        <section class="user-card" aria-label="ユーザー">
           <span class="avatar">落</span>
           <span class="user-meta">
             <strong>落合</strong>
             <small>ユーザー</small>
           </span>
-          <button class="logout-button" id="logoutButton" type="button">ログアウト</button>
         </section>
       </aside>
 
@@ -104,7 +74,6 @@
       </form>
     </dialog>
 
-    <script src="./auth.js"></script>
     <script src="./data.js"></script>
     <script src="./app.js"></script>
   </body>

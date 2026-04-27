@@ -3,10 +3,7 @@ const state = {
   data: window.PDCA_DATA,
   pendingAction: null,
   syncCount: 0,
-  authenticated: false,
 };
-
-const authConfig = window.PDCA_AUTH || { enabled: false };
 
 const viewMeta = {
   dashboard: {
@@ -52,41 +49,6 @@ function escapeHtml(value) {
 
 function formatMultiline(value) {
   return escapeHtml(value).replace(/\n/g, "<br />");
-}
-
-async function sha256(value) {
-  const bytes = new TextEncoder().encode(value);
-  const hashBuffer = await crypto.subtle.digest("SHA-256", bytes);
-  return Array.from(new Uint8Array(hashBuffer))
-    .map((byte) => byte.toString(16).padStart(2, "0"))
-    .join("");
-}
-
-function showAuthenticatedApp() {
-  state.authenticated = true;
-  $("#loginScreen").hidden = true;
-  $("#appShell").hidden = false;
-  render();
-}
-
-function showLoginScreen() {
-  state.authenticated = false;
-  $("#appShell").hidden = true;
-  $("#loginScreen").hidden = false;
-  $("#loginId")?.focus();
-}
-
-function isAuthenticatedSession() {
-  if (!authConfig.enabled) return true;
-  return sessionStorage.getItem(authConfig.sessionKey) === "true";
-}
-
-function initAuth() {
-  if (!authConfig.enabled || isAuthenticatedSession()) {
-    showAuthenticatedApp();
-    return;
-  }
-  showLoginScreen();
 }
 
 function statusClass(label) {
@@ -696,7 +658,6 @@ function showAnalysisPrompt() {
 }
 
 function render() {
-  if (authConfig.enabled && !state.authenticated) return;
   const current = viewMeta[state.currentView] || viewMeta.dashboard;
   $("#pageTitle").textContent = current.title;
   $("#pageLead").textContent = current.lead;
@@ -816,29 +777,6 @@ document.addEventListener("click", (event) => {
 $("#syncButton").addEventListener("click", simulateSync);
 $("#analysisButton").addEventListener("click", showAnalysisPrompt);
 $("#createButton").addEventListener("click", () => navigate("ab-test"));
-$("#logoutButton").addEventListener("click", () => {
-  sessionStorage.removeItem(authConfig.sessionKey);
-  showLoginScreen();
-});
-
-$("#loginForm").addEventListener("submit", async (event) => {
-  event.preventDefault();
-  const loginId = $("#loginId").value.trim();
-  const loginPassword = $("#loginPassword").value;
-  const error = $("#loginError");
-  try {
-    const [usernameHash, passwordHash] = await Promise.all([sha256(loginId), sha256(loginPassword)]);
-    if (usernameHash === authConfig.usernameHash && passwordHash === authConfig.passwordHash) {
-      sessionStorage.setItem(authConfig.sessionKey, "true");
-      error.hidden = true;
-      showAuthenticatedApp();
-      return;
-    }
-  } catch (errorObject) {
-    console.warn("Login check failed", errorObject);
-  }
-  error.hidden = false;
-});
 
 $("#actionModal").addEventListener("close", () => {
   if ($("#actionModal").returnValue === "confirm" && typeof state.pendingAction === "function") {
@@ -851,10 +789,10 @@ window.addEventListener("hashchange", () => {
   const next = location.hash.replace("#", "");
   if (next && viewMeta[next]) {
     state.currentView = next;
-    if (state.authenticated || !authConfig.enabled) render();
+    render();
   }
 });
 
 const initialHash = location.hash.replace("#", "");
 state.currentView = viewMeta[initialHash] ? initialHash : "dashboard";
-initAuth();
+render();
