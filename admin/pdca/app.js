@@ -8,7 +8,7 @@ const state = {
 const viewMeta = {
   dashboard: {
     title: "問い合わせ営業PDCA",
-    lead: "次回配信の準備状況と、まず確認すべき内容を整理します。",
+    lead: "配信結果とトラッキング補正値を整理します。",
   },
   "ab-test": {
     title: "ABテスト設計",
@@ -240,7 +240,7 @@ function renderDashboard() {
             .join("")}
         </div>
         <div class="notice">
-          <span><strong>結果から次に変えること</strong><br />既存Web制作テストはクリック0件のため、次回は広告・デザイン企業へ対象を寄せ、制作現場の具体業務を件名に入れます。</span>
+          <span><strong>結果から次に変えること</strong><br />クリックは出ているため文面方向は維持し、次回は地方県の別グループを追加して送信成功数を増やします。</span>
           <button class="ghost-button" data-view="results" type="button">詳細を見る</button>
         </div>
       </article>
