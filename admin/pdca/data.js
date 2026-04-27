@@ -253,7 +253,7 @@ window.PDCA_DATA = {
     { name: "WEB制作（テスト）", industry: "IT・ソフトウェア", appeal: "Web制作業務のAI活用", subject: "Web制作業務のAI活用・業務改善について", lp: "Web制作向けLP", count: 23, click: "0%", updated: "2026/04/20", label: "見直し" },
     { name: "AI-SABI_Web制作_制作進行短縮_A_20260427", industry: "広告・デザイン", appeal: "制作進行の時短", subject: "{{company_name}}様へ、Web制作の提案文・進行連絡を整えるご案内", lp: "Web制作向けLP / {{tracking_url}}", count: 0, click: "-", updated: "承認待ち", label: "承認待ち" },
     { name: "AI-SABI_Web制作_提案報告品質_B_20260427", industry: "広告・デザイン", appeal: "提案・報告文の品質安定", subject: "{{company_name}}様へ、提案・更新報告の品質を揃えるAI活用のご案内", lp: "Web制作向けLP / {{tracking_url}}", count: 0, click: "-", updated: "承認待ち", label: "承認待ち" },
-    { name: "システム開発_候補", industry: "IT・ソフトウェア", appeal: "開発進行の整理", subject: "開発案件の要件整理・進行共有をAIで整えるご提案", lp: "システム開発向けLP / {{tracking_url}}", count: 0, click: "-", updated: "保留", label: "保留" },
+    { name: "システム開発_候補", industry: "IT・ソフトウェア", appeal: "開発進行の整理", subject: "開発案件の要件整理・進行共有をAIで整えるご案内", lp: "システム開発向けLP / {{tracking_url}}", count: 0, click: "-", updated: "保留", label: "保留" },
   ],
   segments: [
     { name: "広告デザイン_鳥取_pending", db: "IT・サービス", industry: "広告・デザイン", pref: "鳥取県", estimated: 47, sendable: 24, excluded: "フォーム不明 / CAPTCHA / 送信済み", order: "1位", group: "作成予定" },
