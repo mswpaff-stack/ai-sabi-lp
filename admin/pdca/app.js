@@ -81,7 +81,7 @@ function renderNav() {
 }
 
 function renderSyncBanner() {
-  const steps = ["送信結果を確認", "トラッキング補正集計", "次回地方グループ設計"];
+  const steps = ["6県ドラフト確認", "ユーザーが配信実行", "トラッキング補正で判定"];
   $("#syncBanner").innerHTML = `
     <div class="next-action-main">
       ${icon("approval")}
@@ -348,19 +348,20 @@ function renderAbTest() {
 }
 
 function renderApproval() {
+  const approvalMetrics = state.data.approvalMetrics || [
+    { label: "配信済み", value: "2", unit: "件", icon: "approval" },
+    { label: "送信成功", value: "58", unit: "件", icon: "campaign" },
+    { label: "補正クリック", value: "5", unit: "社", icon: "results" },
+    { label: "要確認", value: "2", unit: "件", icon: "warning" },
+    { label: "公開PII", value: "0", unit: "件", icon: "lock" },
+  ];
   return `
-    ${renderKpis([
-      { label: "配信済み", value: "2", unit: "件", icon: "approval" },
-      { label: "送信成功", value: "58", unit: "件", icon: "campaign" },
-      { label: "補正クリック", value: "5", unit: "社", icon: "results" },
-      { label: "要確認", value: "2", unit: "件", icon: "warning" },
-      { label: "公開PII", value: "0", unit: "件", icon: "lock" },
-    ])}
+    ${renderKpis(approvalMetrics)}
     <section class="grid content-two" style="margin-top:16px">
       <article class="panel">
         <div class="panel-head">
-          <h2 class="panel-title">${icon("approval")}配信済みキャンペーン</h2>
-          <span class="panel-sub">クリックはキャンペーン詳細ではなく、トラッキングタブ優先の補正値で見ています。</span>
+          <h2 class="panel-title">${icon("approval")}配信管理キャンペーン</h2>
+          <span class="panel-sub">送信待ちドラフトと送信済み結果を同じ画面で確認します。配信実行はユーザーが行います。</span>
         </div>
         <table>
           <thead><tr><th>キャンペーン名</th><th>業種</th><th>既存ツール側グループ</th><th>対象</th><th>指定</th><th>集計</th><th>状態</th></tr></thead>
