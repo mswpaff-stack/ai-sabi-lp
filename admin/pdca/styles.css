@@ -1153,3 +1153,141 @@ tr:last-child td {
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 640px) {
+  .sidebar {
+    padding: 18px 14px;
+  }
+
+  .brand {
+    padding: 0 6px 18px;
+  }
+
+  .brand-mark {
+    width: 24px;
+    height: 24px;
+  }
+
+  .brand-text {
+    font-size: 24px;
+  }
+
+  .side-nav {
+    gap: 6px;
+  }
+
+  .nav-link {
+    justify-content: center;
+    min-height: 44px;
+    padding: 6px 4px;
+    gap: 4px;
+    font-size: 12px;
+    line-height: 1.25;
+    text-align: center;
+  }
+
+  .nav-link .icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .nav-badge {
+    position: absolute;
+    top: 3px;
+    right: 4px;
+    min-width: 20px;
+    min-height: 20px;
+    padding: 1px 6px;
+  }
+
+  .main {
+    padding: 24px 14px 30px;
+  }
+
+  .topbar {
+    gap: 14px;
+  }
+
+  .top-actions {
+    gap: 8px;
+  }
+
+  .sync-banner {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .next-action-main {
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 13px;
+    line-height: 1.55;
+    white-space: normal;
+  }
+
+  .step-inline {
+    flex: 1 1 100%;
+  }
+
+  .step-separator {
+    display: none;
+  }
+
+  .action-chip {
+    max-width: 100%;
+    white-space: normal;
+  }
+
+  .kpi-card {
+    grid-template-columns: 36px minmax(0, 1fr);
+    min-height: 98px;
+    padding: 16px 14px;
+  }
+
+  .kpi-label,
+  .kpi-value {
+    white-space: normal;
+  }
+
+  .kpi-value {
+    font-size: 30px;
+  }
+
+  .flow-card {
+    padding: 12px;
+  }
+
+  .flow-title {
+    white-space: normal;
+  }
+
+  .flow-step strong,
+  .flow-step small {
+    white-space: normal;
+  }
+
+  .dashboard-main .panel {
+    overflow-x: auto;
+  }
+
+  .panel-head,
+  .notice {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .task {
+    grid-template-columns: 22px minmax(0, 1fr) 44px;
+    gap: 10px;
+  }
+
+  .task > small {
+    grid-column: 2 / -1;
+  }
+
+  .risk-card {
+    align-items: flex-start;
+  }
+}
