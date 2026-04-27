@@ -61,6 +61,8 @@ GitHub Pages公開用コピー:
 https://mswpaff-stack.github.io/ai-sabi-lp/admin/pdca/
 ```
 
+`data.js` の内容を変えて即時公開確認する場合は、GitHub Pagesやブラウザキャッシュで古いデータを読むことがある。必要に応じて `index.html` の `data.js` 参照に `?v=<更新日や意図>` を付け、公開URLと `data.js` 直URLの両方で新しい文面が表示されることを確認する。
+
 ## 現在の連携状態
 
 現時点ではデモ連携。
