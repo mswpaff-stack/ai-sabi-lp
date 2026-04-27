@@ -15,8 +15,8 @@ const viewMeta = {
     lead: "業種ごとに仮説、文面意図、成功指標を設計します。",
   },
   approval: {
-    title: "送信待ち",
-    lead: "Codexが作成した配信準備内容を確認し、送信前判断を行います。",
+    title: "配信管理",
+    lead: "実配信後の送信成功数、失敗理由、トラッキング補正値を確認します。",
   },
   results: {
     title: "結果分析",
@@ -81,7 +81,7 @@ function renderNav() {
 }
 
 function renderSyncBanner() {
-  const steps = ["ABテスト案を確認", "グループ/テンプレート作成", "ユーザーが送信実行"];
+  const steps = ["送信結果を確認", "トラッキング補正集計", "次回地方グループ設計"];
   $("#syncBanner").innerHTML = `
     <div class="next-action-main">
       ${icon("approval")}
@@ -105,13 +105,13 @@ function renderSyncBanner() {
 function renderFlowCard() {
   return `
     <section class="panel flow-card">
-      <div class="flow-title">${icon("sync")}今回の推奨フロー</div>
+      <div class="flow-title">${icon("sync")}次回の推奨フロー</div>
       <div class="flow-steps">
         ${[
-          ["対象確認", "広告・デザインへ寄せる"],
-          ["文面A/B確認", "件名と冒頭を比較"],
-          ["既存ツールへ作成", "グループ・テンプレ登録"],
-          ["送信はユーザー実行", "Codexは送信しない"],
+          ["結果確認", "送信成功率と失敗理由を見る"],
+          ["補正集計", "トラッキングタブを優先"],
+          ["母数拡張", "地方県を追加"],
+          ["大都市圏温存", "勝ち筋確認後に展開"],
         ]
           .map(
             (item, index) => `
@@ -177,7 +177,7 @@ function renderDashboard() {
         <table>
           <thead>
             <tr>
-              <th>対象</th><th>企画中</th><th>グループ</th><th>テンプレ</th><th>キャンペーン</th><th>送信待ち</th><th>分析中</th>
+              <th>対象</th><th>企画中</th><th>グループ</th><th>テンプレ</th><th>キャンペーン</th><th>未処理</th><th>分析中</th>
             </tr>
           </thead>
           <tbody>
@@ -277,7 +277,7 @@ function renderFilters(labels, buttonLabel = "絞り込む") {
             (label) => `
               <div class="field">
                 <label>${label}</label>
-                <select><option>すべて</option><option>広告・デザイン</option><option>IT・ソフトウェア</option><option>Web制作向けLP</option></select>
+                <select><option>すべて</option><option>広告・デザイン</option><option>IT・ソフトウェア</option><option>広告・デザイン向けLP</option></select>
               </div>
             `,
           )
@@ -350,20 +350,20 @@ function renderAbTest() {
 function renderApproval() {
   return `
     ${renderKpis([
-      { label: "作成済み", value: "2", unit: "件", icon: "approval" },
-      { label: "要修正", value: "0", unit: "件", icon: "warning" },
-      { label: "送信実行待ち", value: "2", unit: "件", icon: "campaign" },
-      { label: "本日確認", value: "2", unit: "件", icon: "calendar" },
-      { label: "上限超過", value: "0", unit: "件", icon: "lock" },
+      { label: "配信済み", value: "2", unit: "件", icon: "approval" },
+      { label: "送信成功", value: "58", unit: "件", icon: "campaign" },
+      { label: "補正クリック", value: "5", unit: "社", icon: "results" },
+      { label: "要確認", value: "2", unit: "件", icon: "warning" },
+      { label: "公開PII", value: "0", unit: "件", icon: "lock" },
     ])}
     <section class="grid content-two" style="margin-top:16px">
       <article class="panel">
         <div class="panel-head">
-          <h2 class="panel-title">${icon("approval")}送信待ちキャンペーン</h2>
-          <span class="panel-sub">既存ツール側ではdraftのため、ユーザーが送信件数を入力して実行します。</span>
+          <h2 class="panel-title">${icon("approval")}配信済みキャンペーン</h2>
+          <span class="panel-sub">クリックはキャンペーン詳細ではなく、トラッキングタブ優先の補正値で見ています。</span>
         </div>
         <table>
-          <thead><tr><th>キャンペーン名</th><th>業種</th><th>既存ツール側グループ</th><th>対象</th><th>推奨</th><th>Codex</th><th>確認</th><th>操作</th></tr></thead>
+          <thead><tr><th>キャンペーン名</th><th>業種</th><th>既存ツール側グループ</th><th>対象</th><th>指定</th><th>集計</th><th>状態</th></tr></thead>
           <tbody>
             ${state.data.approvals
               .map(
@@ -373,10 +373,6 @@ function renderApproval() {
                     <td>${item.industry}</td><td>${item.group}</td><td>${item.target}件</td><td>${item.recommended}件</td>
                     <td><span class="status ${statusClass(item.check)}">${item.check}</span></td>
                     <td><span class="status ${statusClass(item.userStatus)}">${item.userStatus}</span></td>
-                    <td>
-                      <button class="ghost-button" data-approve="${item.id}" type="button">承認</button>
-                      <button class="ghost-button" data-send="${item.id}" type="button">配信実行</button>
-                    </td>
                   </tr>
                 `,
               )
@@ -386,7 +382,7 @@ function renderApproval() {
       </article>
 
       <aside class="panel pad">
-        <h2 class="panel-title">${icon("lock")}送信前レビュー</h2>
+        <h2 class="panel-title">${icon("lock")}結果確認メモ</h2>
         <div class="detail-list" style="margin-top:14px">
           ${state.data.approvals
             .slice(0, 1)
@@ -401,7 +397,7 @@ function renderApproval() {
             .join("")}
         </div>
         <div class="notice">
-          <span><strong>実送信は本番API接続後に有効化</strong><br />この画面では承認・送信キュー・実行確認を一元管理します。</span>
+          <span><strong>企業名・IDは公開画面に載せない</strong><br />クリック企業の特定は既存ツール内で行い、この画面では集計値だけを扱います。</span>
         </div>
       </aside>
     </section>
@@ -502,10 +498,10 @@ function renderTemplates() {
       <aside class="panel pad">
         <h2 class="panel-title">${icon("target")}文面意図と改善履歴</h2>
         <div class="detail-list" style="margin-top:14px">
-          <div class="detail-box"><strong>作成意図</strong><p>Web制作向けLPと相性が高い広告・デザイン企業に絞り、制作進行・提案文・更新報告の負担を具体化する。</p></div>
-          <div class="detail-box"><strong>期待する反応</strong><p>制作現場の文章業務に近いと感じ、本文中の {{tracking_url}} からWeb制作向けLPを確認する。</p></div>
-          <div class="detail-box"><strong>過去結果</strong><p>既存のIT・ソフトウェア向けWeb制作テストは送信23件、クリック0件、LP閲覧2件。</p></div>
-          <div class="detail-box"><strong>次回変える表現</strong><p>抽象的なAI活用ではなく、提案文、要件整理、進行連絡、更新報告など業務名を入れる。</p></div>
+          <div class="detail-box"><strong>作成意図</strong><p>広告・デザイン企業に絞り、制作進行・提案文・更新報告の負担を具体化する。</p></div>
+          <div class="detail-box"><strong>期待する反応</strong><p>制作現場の文章業務に近いと感じ、本文中の {{tracking_url}} から広告・デザイン向けLPを確認する。</p></div>
+          <div class="detail-box"><strong>今回結果</strong><p>静岡Aは35件送信で補正クリック3社、長野Bは23件送信で補正クリック2社。キャンペーン詳細側のクリックは0件のため、トラッキング補正で見る。</p></div>
+          <div class="detail-box"><strong>次回変えること</strong><p>文面の方向性は維持し、送信成功数を増やすため地方県の別グループを追加する。</p></div>
           <div class="detail-box"><strong>停止する表現</strong><p>システム開発寄り、IT全般向け、大企業向けに見える表現は今回使わない。</p></div>
         </div>
       </aside>
@@ -516,14 +512,14 @@ function renderTemplates() {
 function renderSegments() {
   const estimatedTotal = state.data.segments.reduce((sum, item) => sum + item.estimated, 0);
   const sendableTotal = state.data.segments.reduce((sum, item) => sum + item.sendable, 0);
-  const createdGroups = state.data.segments.filter((item) => item.group === "作成済み").length;
+  const createdGroups = state.data.segments.filter((item) => item.group.includes("作成済み")).length;
   return `
     ${renderFilters(["DB", "大カテゴリ", "詳細業種", "都道府県", "状態"], "セグメント候補を更新")}
     ${renderKpis([
       { label: "候補推定対象", value: estimatedTotal.toLocaleString(), unit: "件", icon: "database" },
       { label: "送信可能見込み", value: sendableTotal.toLocaleString(), unit: "件", icon: "approval" },
       { label: "除外見込み", value: (estimatedTotal - sendableTotal).toLocaleString(), unit: "件", icon: "warning" },
-      { label: "推奨初回ロット", value: "15", unit: "件", icon: "target" },
+      { label: "次回指定目安", value: "600", unit: "件", icon: "target" },
       { label: "作成済みグループ", value: String(createdGroups), unit: "件", icon: "segment" },
     ])}
     <section class="grid content-two" style="margin-top:16px">
@@ -548,9 +544,9 @@ function renderSegments() {
       <aside class="panel pad">
         <h2 class="panel-title">${icon("target")}対象選定メモ</h2>
         <div class="detail-list" style="margin-top:14px">
-          <div class="detail-box"><strong>なぜこの企業群を選ぶか</strong><p>Web制作向けLPとの課題一致度が、IT・ソフトウェア広めの企業群より高いと判断できるため。</p></div>
-          <div class="detail-box"><strong>ABテスト向きの切り方</strong><p>鳥取県A・徳島県Bで15件ずつ配信し、制作進行の時短訴求と提案・報告文の品質安定訴求を比較する。</p></div>
-          <div class="detail-box"><strong>結果が悪い場合に対象側で変えること</strong><p>広告・デザイン内でも、Web制作色が強い企業名・サイト内容・フォーム品質を優先して再抽出する。</p></div>
+          <div class="detail-box"><strong>なぜこの企業群を選ぶか</strong><p>広告・デザイン向けLPとの課題一致度が、IT・ソフトウェア広めの企業群より高いと判断できるため。</p></div>
+          <div class="detail-box"><strong>次回の切り方</strong><p>静岡A・長野Bでクリックは出たが母数不足のため、新潟県・山口県・宮崎県・熊本県などを別グループで追加する。</p></div>
+          <div class="detail-box"><strong>大都市圏の扱い</strong><p>東京・神奈川・大阪は、地方県で訴求と送信成功率を確認してから最適パターンを当てる。</p></div>
           <div class="detail-box"><strong>除外条件チェック</strong><p><span class="label-chip">旧Pending除外</span><span class="label-chip">送信済み除外</span><span class="label-chip">CAPTCHA除外</span></p></div>
         </div>
       </aside>
@@ -593,7 +589,8 @@ function buildAnalysisPrompt() {
 - API連携は使いません。管理画面で生成したこのプロンプトをCodexに貼り付け、Codexが分析・文面作成・必要なソース/ドキュメント更新を行う運用です。
 - 実送信はユーザーが行います。Codexはグループ、テンプレート、キャンペーン作成までを担当し、配信実行ボタンは押しません。
 - テンプレート本文にLP実URLを直書きせず、LP誘導には必ず {{tracking_url}} を使います。
-- リダイレクト先LP URLでは、今回は「Web制作向けLP」を選びます。
+- リダイレクト先LP URLでは、今回は「広告・デザイン向けLP」を選びます。
+- 公開管理画面にはクリック企業名・企業IDなどの個社情報を載せず、集計値だけを反映します。
 
 # 今回の目的
 ${context.target}
@@ -620,7 +617,7 @@ ${context.existingToolState.campaigns.map((item) => `- ${item}`).join("\n")}
 # 次回候補セグメント
 ${segmentLines}
 
-# 送信待ちとして準備済みのキャンペーン案
+# 配信済みキャンペーンと補正集計
 ${approvalLines}
 
 # テンプレート状況
@@ -633,10 +630,10 @@ ${abBodyLines}
 ${resultLines}
 
 # Codexに出力してほしいこと
-1. 鳥取県A・徳島県Bの15件ずつで進めてよいか、リスク込みで判断してください。
-2. 件名A/B、本文A/Bを作成してください。本文には {{company_name}}、{{prefecture}}、{{tracking_url}} を自然に使ってください。
-3. 既存ツールで作るグループ名、テンプレート名、キャンペーン名を命名規則に沿って出してください。
-4. 配信前にユーザーが確認すべきチェックリストを出してください。
+1. 今回の静岡A・長野Bの結果を、送信成功率・トラッキング補正クリック・LP閲覧・LINEクリックの観点で判断してください。
+2. 配信対象を増やすべきか、増やす場合の目安件数と地方県の優先順を出してください。
+3. A/Bどちらを継続するか、または両方継続するかをリスク込みで判断してください。
+4. 次回作るグループ名、テンプレート名、キャンペーン名を命名規則に沿って出してください。
 5. 必要であれば、この管理画面の data.js や関連ドキュメントを更新してください。`;
 }
 
@@ -732,7 +729,7 @@ function sendCampaign(id) {
 
 function simulateSync() {
   state.syncCount += 1;
-  state.data.integration.lastSyncedAt = "2026/04/27 11:" + String(30 + state.syncCount).padStart(2, "0");
+  state.data.integration.lastSyncedAt = "2026/04/27 16:" + String(20 + state.syncCount).padStart(2, "0");
   render();
 }
 
