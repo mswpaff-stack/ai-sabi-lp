@@ -732,7 +732,7 @@ function sendCampaign(id) {
 
 function simulateSync() {
   state.syncCount += 1;
-  state.data.integration.lastSyncedAt = "2026/04/26 12:" + String(35 + state.syncCount).padStart(2, "0");
+  state.data.integration.lastSyncedAt = "2026/04/27 11:" + String(30 + state.syncCount).padStart(2, "0");
   render();
 }
 
