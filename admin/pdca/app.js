@@ -350,17 +350,17 @@ function renderAbTest() {
 function renderApproval() {
   return `
     ${renderKpis([
-      { label: "承認待ち", value: "2", unit: "件", icon: "approval" },
+      { label: "作成済み", value: "2", unit: "件", icon: "approval" },
       { label: "要修正", value: "0", unit: "件", icon: "warning" },
-      { label: "送信実行待ち", value: "0", unit: "件", icon: "campaign" },
+      { label: "送信実行待ち", value: "2", unit: "件", icon: "campaign" },
       { label: "本日確認", value: "2", unit: "件", icon: "calendar" },
       { label: "上限超過", value: "0", unit: "件", icon: "lock" },
     ])}
     <section class="grid content-two" style="margin-top:16px">
       <article class="panel">
         <div class="panel-head">
-          <h2 class="panel-title">${icon("approval")}承認待ちキャンペーン</h2>
-          <span class="panel-sub">承認後は送信実行キューへ移動します。</span>
+          <h2 class="panel-title">${icon("approval")}送信待ちキャンペーン</h2>
+          <span class="panel-sub">既存ツール側ではdraftのため、ユーザーが送信件数を入力して実行します。</span>
         </div>
         <table>
           <thead><tr><th>キャンペーン名</th><th>業種</th><th>既存ツール側グループ</th><th>対象</th><th>推奨</th><th>Codex</th><th>確認</th><th>操作</th></tr></thead>
