@@ -1101,7 +1101,7 @@ tr:last-child td {
 .icon-improve { background-position: 66.666% 100%; }
 .icon-building { background-position: 100% 100%; }
 
-@media (max-width: 1340px) {
+@media (max-width: 1500px) {
   .topbar {
     grid-template-columns: 1fr;
   }
