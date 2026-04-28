@@ -1101,6 +1101,16 @@ tr:last-child td {
 .icon-improve { background-position: 66.666% 100%; }
 .icon-building { background-position: 100% 100%; }
 
+@media (max-width: 1340px) {
+  .topbar {
+    grid-template-columns: 1fr;
+  }
+
+  .top-actions {
+    justify-self: start;
+  }
+}
+
 @media (max-width: 1180px) {
   html {
     min-width: 0;
