@@ -16,7 +16,7 @@ const viewMeta = {
   },
   approval: {
     title: "配信管理",
-    lead: "実配信後の送信成功数、失敗理由、トラッキング補正値を確認します。",
+    lead: "承認OK、フォーム配信チャネル、予約日時、送信後集計を確認します。",
   },
   results: {
     title: "結果分析",
@@ -51,6 +51,11 @@ function formatMultiline(value) {
   return escapeHtml(value).replace(/\n/g, "<br />");
 }
 
+function toDateTimeLocalValue(value) {
+  const match = String(value || "").match(/^(\d{4})-(\d{2})-(\d{2})\s+(\d{2}):(\d{2})/);
+  return match ? `${match[1]}-${match[2]}-${match[3]}T${match[4]}:${match[5]}` : "";
+}
+
 function statusClass(label) {
   if (/勝ち|OK|作成済み|承認済み/.test(label)) return "ok";
   if (/設計/.test(label)) return "design";
@@ -81,7 +86,7 @@ function renderNav() {
 }
 
 function renderSyncBanner() {
-  const steps = ["6県ドラフト確認", "ユーザーが配信実行", "トラッキング補正で判定"];
+  const steps = ["内容確認", "承認OK + 日時設定", "予約ワーカー実行", "送信後に補正集計"];
   $("#syncBanner").innerHTML = `
     <div class="next-action-main">
       ${icon("approval")}
@@ -109,9 +114,9 @@ function renderFlowCard() {
       <div class="flow-steps">
         ${[
           ["結果確認", "送信成功率と失敗理由を見る"],
-          ["補正集計", "トラッキングタブを優先"],
-          ["母数拡張", "地方県を追加"],
-          ["大都市圏温存", "勝ち筋確認後に展開"],
+          ["次回案作成", "地方県を追加"],
+          ["承認と予約", "OK後に日時を保存"],
+          ["補正集計", "トラッキングを優先"],
         ]
           .map(
             (item, index) => `
@@ -358,28 +363,40 @@ function renderApproval() {
   return `
     ${renderKpis(approvalMetrics)}
     <section class="grid content-two" style="margin-top:16px">
-      <article class="panel">
+      <article class="panel approval-table-panel">
         <div class="panel-head">
           <h2 class="panel-title">${icon("approval")}配信管理キャンペーン</h2>
-          <span class="panel-sub">送信待ちドラフトと送信済み結果を同じ画面で確認します。配信実行はユーザーが行います。</span>
+          <span class="panel-sub">本番連携では、承認OKと配信日時が保存されたキャンペーンだけを予約ワーカーがフォーム配信します。</span>
         </div>
-        <table>
-          <thead><tr><th>キャンペーン名</th><th>業種</th><th>既存ツール側グループ</th><th>対象</th><th>指定</th><th>集計</th><th>状態</th></tr></thead>
-          <tbody>
-            ${state.data.approvals
-              .map(
-                (item) => `
-                  <tr>
-                    <td><strong>${item.campaign}</strong><br><small>${item.lp}</small></td>
-                    <td>${item.industry}</td><td>${item.group}</td><td>${item.target}件</td><td>${item.recommended}件</td>
-                    <td><span class="status ${statusClass(item.check)}">${item.check}</span></td>
-                    <td><span class="status ${statusClass(item.userStatus)}">${item.userStatus}</span></td>
-                  </tr>
-                `,
-              )
-              .join("")}
-          </tbody>
-        </table>
+        <div class="table-scroll">
+          <table class="approval-table">
+            <thead><tr><th>キャンペーン名</th><th>業種</th><th>既存ツール側グループ</th><th>対象</th><th>指定</th><th>送信可能</th><th>チャネル</th><th>予約</th><th>状態</th><th>操作</th></tr></thead>
+            <tbody>
+              ${state.data.approvals
+                .map(
+                  (item) => `
+                    <tr>
+                      <td>
+                        <strong>${item.campaign}</strong><br>
+                        <small>${item.lp}</small><br>
+                        <small>予約: ${item.scheduledAt || "-"} / 送信可能: ${item.sendableEstimate ? `${item.sendableEstimate}件` : "-"}</small>
+                      </td>
+                      <td>${item.industry}</td><td>${item.group}</td><td>${item.target}件</td><td>${item.recommended}件</td><td>${item.sendableEstimate ? `${item.sendableEstimate}件` : "-"}</td>
+                      <td>${item.deliveryChannel || "フォーム配信"}</td>
+                      <td>${item.scheduledAt || "-"}</td>
+                      <td><span class="status ${statusClass(item.userStatus)}">${item.userStatus}</span></td>
+                      <td>${
+                        item.scheduledAt === "配信済み"
+                          ? "-"
+                          : `<button class="ghost-button" data-approve="${item.id}" type="button">日時設定</button>`
+                      }</td>
+                    </tr>
+                  `,
+                )
+                .join("")}
+            </tbody>
+          </table>
+        </div>
       </article>
 
       <aside class="panel pad">
@@ -587,8 +604,10 @@ function buildAnalysisPrompt() {
   return `あなたはこのワークスペースのCodexです。以下の実データをもとに、問い合わせフォーム営業の次回小ロット配信案を改善してください。
 
 # 前提
-- API連携は使いません。管理画面で生成したこのプロンプトをCodexに貼り付け、Codexが分析・文面作成・必要なソース/ドキュメント更新を行う運用です。
-- 実送信はユーザーが行います。Codexはグループ、テンプレート、キャンペーン作成までを担当し、配信実行ボタンは押しません。
+- 現行の静的PDCA画面では、管理画面で生成したこのプロンプトをCodexに貼り付け、Codexが分析・文面作成・必要なソース/ドキュメント更新を行う運用です。
+- 今後の本番連携では、管理画面で内容確認、確認OK、配信日時を保存し、専用バックエンドが承認済みキャンペーンだけを予約配信する設計にします。
+- Codexはグループ、テンプレート、キャンペーン作成と改善案作成までを担当し、実送信や予約送信の実行はCodex単体では行いません。
+- 既存ツールのテンプレート作成では、メール配信ではなくフォーム配信を選びます。API上は channel=form を正とします。
 - テンプレート本文にLP実URLを直書きせず、LP誘導には必ず {{tracking_url}} を使います。
 - リダイレクト先LP URLでは、今回は「広告・デザイン向けLP」を選びます。
 - 公開管理画面にはクリック企業名・企業IDなどの個社情報を載せず、集計値だけを反映します。
@@ -692,16 +711,22 @@ function approveCampaign(id) {
   const item = state.data.approvals.find((campaign) => campaign.id === id);
   if (!item) return;
   showModal({
-    title: "承認して送信キューへ移動しますか？",
+    title: "承認OKと配信日時を保存しますか？",
     lead: item.campaign,
     body: `
-      <p>この操作で、管理画面上のステータスを「承認済み」に変更し、送信実行キューへ移動します。</p>
-      <p><strong>対象条件:</strong> ${item.conditions}<br><strong>推奨送信数:</strong> ${item.recommended}件</p>
+      <p>この操作は静的画面内のデモ更新です。本番では、承認ログ、配信日時、送信上限、二重送信防止キーを保存し、予約ワーカーが時刻到達後にフォーム配信を実行します。</p>
+      <p><strong>対象条件:</strong> ${item.conditions}<br><strong>推奨送信数:</strong> ${item.recommended}件<br><strong>チャネル:</strong> ${item.deliveryChannel || "フォーム配信"}</p>
+      <div class="field">
+        <label for="scheduleAtInput">配信日時</label>
+        <input id="scheduleAtInput" type="datetime-local" value="${toDateTimeLocalValue(item.scheduledAt)}" />
+      </div>
     `,
-    confirmText: "承認する",
+    confirmText: "確認OK・予約保存",
     onConfirm: () => {
-      item.userStatus = "承認済み";
-      item.status = "送信実行待ち";
+      const scheduledValue = $("#scheduleAtInput")?.value;
+      item.scheduledAt = scheduledValue ? `${scheduledValue.replace("T", " ")} JST` : "未設定";
+      item.userStatus = scheduledValue ? "予約設定済み（デモ）" : "予約日時未設定";
+      item.status = "承認済み";
       render();
     },
   });
@@ -730,7 +755,7 @@ function sendCampaign(id) {
 
 function simulateSync() {
   state.syncCount += 1;
-  state.data.integration.lastSyncedAt = "2026/04/27 16:" + String(20 + state.syncCount).padStart(2, "0");
+  state.data.integration.lastSyncedAt = "2026/04/28 20:" + String(49 + state.syncCount).padStart(2, "0");
   render();
 }
 

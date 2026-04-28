@@ -492,6 +492,20 @@ h1 {
   grid-template-columns: minmax(560px, 1.18fr) minmax(390px, 0.82fr);
 }
 
+.approval-table-panel {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.table-scroll {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.approval-table {
+  min-width: 1120px;
+}
+
 .dashboard-main {
   align-items: start;
 }
