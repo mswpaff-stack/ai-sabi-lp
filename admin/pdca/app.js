@@ -89,7 +89,7 @@ function renderNav() {
 }
 
 function renderSyncBanner() {
-  const steps = ["3,000候補設計", "フォーム3波予約", "未達分をメール補完", "翌営業日で判定"];
+  const steps = ["5/1結果反映", "未達メール補完", "新比較軸を設計", "連休明けに再開"];
   const apiLabel = "ツール側予約へ切替済み";
   $("#syncBanner").innerHTML = `
     <div class="next-action-main">
@@ -118,9 +118,9 @@ function renderFlowCard() {
       <div class="flow-title">${icon("sync")}次回の推奨フロー</div>
       <div class="flow-steps">
         ${[
-          ["フォーム配信", "未送信中心で3波に分散"],
-          ["結果反映", "成功・失敗・スキップを確認"],
+          ["結果反映", "トラッキング補正で集計"],
           ["メール補完", "未達分だけ別枠で予約"],
+          ["新比較軸", "短縮版CTAを設計"],
           ["判定", "A/Bと地域差を見る"],
         ]
           .map(
@@ -275,9 +275,9 @@ function renderDashboard() {
       <article class="panel pad compact-decision">
         <h2 class="panel-title">${icon("improve")}AB検証サマリー</h2>
         ${renderValueRows([
-          ["A案", "累計92成功 / 7クリック"],
-          ["B案", "累計70成功 / 3クリック"],
-          ["判断", "A厚め・B継続"],
+          ["A案", "累計369成功 / 20クリック"],
+          ["B案", "累計225成功 / 12クリック"],
+          ["判断", "ほぼ同率・新比較軸へ"],
         ])}
       </article>
       <article class="panel pad compact-decision">
@@ -424,7 +424,7 @@ function renderAbTest() {
             ["件名", selected.subjectA],
             ["冒頭", selected.introA],
             ["対象", "制作進行短縮ニーズ"],
-            ["現状", "92成功 / 7クリック"],
+            ["現状", "369成功 / 20クリック"],
           ])}
         </article>
         <article class="ab-card accent-b">
@@ -436,7 +436,7 @@ function renderAbTest() {
             ["件名", selected.subjectB],
             ["冒頭", selected.introB],
             ["対象", "品質安定ニーズ"],
-            ["現状", "70成功 / 3クリック"],
+            ["現状", "225成功 / 12クリック"],
           ])}
         </article>
       </div>
