@@ -195,8 +195,9 @@ function renderFastPdcaPlan() {
 }
 
 function renderKpis(metrics) {
+  const countClass = metrics.length === 4 ? "kpi-four" : metrics.length === 5 ? "kpi-five" : "";
   return `
-    <section class="grid kpi-grid">
+    <section class="grid kpi-grid ${countClass}">
       ${metrics
         .map(
           (item) => `
@@ -212,6 +213,43 @@ function renderKpis(metrics) {
         )
         .join("")}
     </section>
+  `;
+}
+
+function renderValueRows(rows) {
+  return `
+    <div class="value-rows">
+      ${rows
+        .map(
+          ([label, value]) => `
+            <div class="value-row">
+              <span>${label}</span>
+              <strong>${value}</strong>
+            </div>
+          `,
+        )
+        .join("")}
+    </div>
+  `;
+}
+
+function renderNoteCards(cards, className = "") {
+  return `
+    <div class="note-card-grid ${className}">
+      ${cards
+        .map(
+          (card) => `
+            <article class="note-card">
+              ${card.icon ? icon(card.icon) : ""}
+              <div>
+                <h3>${card.title}</h3>
+                <p>${card.text}</p>
+              </div>
+            </article>
+          `,
+        )
+        .join("")}
+    </div>
   `;
 }
 
@@ -232,9 +270,27 @@ function renderDashboard() {
 
   return `
     ${renderKpis(dashboard.metrics)}
-    ${renderFlowCard()}
+    <section class="grid dashboard-focus-grid">
+      ${renderFlowCard()}
+      <article class="panel pad compact-decision">
+        <h2 class="panel-title">${icon("improve")}AB検証サマリー</h2>
+        ${renderValueRows([
+          ["A案", "累計92成功 / 7クリック"],
+          ["B案", "累計70成功 / 3クリック"],
+          ["判断", "A厚め・B継続"],
+        ])}
+      </article>
+      <article class="panel pad compact-decision">
+        <h2 class="panel-title">${icon("warning")}送信ガード</h2>
+        ${renderValueRows([
+          ["フォーム主配信", "未送信中心"],
+          ["メール補完", "未達分だけ"],
+          ["公開画面", "個社情報なし"],
+        ])}
+      </article>
+    </section>
     ${renderFastPdcaPlan()}
-    <section class="grid content-two dashboard-main" style="margin-top:16px">
+    <section class="grid dashboard-main split-wide" style="margin-top:16px">
       <article class="panel">
         <div class="panel-head">
           <h2 class="panel-title">${icon("database")}業種別パイプライン</h2>
@@ -280,13 +336,13 @@ function renderDashboard() {
                   <small>${task.due}</small>
                 </div>
               `,
-            )
-            .join("")}
+          )
+          .join("")}
         </div>
       </article>
     </section>
 
-    <section class="grid content-two" style="margin-top:16px">
+    <section class="grid insight-grid" style="margin-top:16px">
       <article class="panel">
         <div class="panel-head">
           <h2 class="panel-title">${icon("improve")}直近結果サマリー</h2>
@@ -312,22 +368,14 @@ function renderDashboard() {
 
       <article class="panel pad">
         <h2 class="panel-title">${icon("warning")}リスク / 注意</h2>
-        <div style="margin-top:14px">
-          ${dashboard.risks
-            .map(
-              (risk) => `
-                <div class="risk-card">
-                  ${icon("warning")}
-                  <div>
-                    <strong>${risk.title}</strong>
-                    <p>${risk.detail}</p>
-                  </div>
-                  <button class="ghost-button" type="button">${risk.action}</button>
-                </div>
-              `,
-            )
-            .join("")}
-        </div>
+        ${renderNoteCards(
+          dashboard.risks.map((risk) => ({
+            title: risk.title,
+            text: `${risk.detail} / ${risk.action}`,
+            icon: "warning",
+          })),
+          "risk-note-grid",
+        )}
       </article>
     </section>
   `;
@@ -336,6 +384,10 @@ function renderDashboard() {
 function renderFilters(labels, buttonLabel = "絞り込む") {
   return `
     <section class="panel filters-panel">
+      <div class="filter-head">
+        <strong>${icon("target")}条件</strong>
+        <span>横幅に合わせて読みやすい幅で配置します。</span>
+      </div>
       <div class="filter-row">
         ${labels
           .map(
@@ -357,11 +409,44 @@ function renderAbTest() {
   const selected = state.data.abTests[0];
   return `
     ${renderFilters(["業種", "都道府県", "詳細業種", "LP", "状態"])}
-    <section class="grid content-two" style="margin-top:16px">
+    <section class="panel ab-hero-panel">
+      <div class="panel-head">
+        <h2 class="panel-title">${icon("ab")}AB比較軸</h2>
+        <button class="primary-button" type="button">${icon("ab")}新規テスト案を作成</button>
+      </div>
+      <div class="ab-card-grid">
+        <article class="ab-card accent-a">
+          <div class="ab-card-head">
+            <span class="ab-badge">A案</span>
+            <strong>${selected.appealA}</strong>
+          </div>
+          ${renderValueRows([
+            ["件名", selected.subjectA],
+            ["冒頭", selected.introA],
+            ["対象", "制作進行短縮ニーズ"],
+            ["現状", "92成功 / 7クリック"],
+          ])}
+        </article>
+        <article class="ab-card accent-b">
+          <div class="ab-card-head">
+            <span class="ab-badge">B案</span>
+            <strong>${selected.appealB}</strong>
+          </div>
+          ${renderValueRows([
+            ["件名", selected.subjectB],
+            ["冒頭", selected.introB],
+            ["対象", "品質安定ニーズ"],
+            ["現状", "70成功 / 3クリック"],
+          ])}
+        </article>
+      </div>
+    </section>
+
+    <section class="grid split-wide" style="margin-top:16px">
       <article class="panel">
         <div class="panel-head">
           <h2 class="panel-title">${icon("ab")}テスト設計一覧</h2>
-          <button class="primary-button" type="button">${icon("ab")}新規テスト案を作成</button>
+          <span class="panel-sub">比較したい仮説と状態</span>
         </div>
         <table class="ab-test-table">
           <thead><tr><th>テスト名</th><th>対象</th><th>仮説</th><th>A/B差分</th><th>状態</th></tr></thead>
@@ -383,7 +468,7 @@ function renderAbTest() {
         </table>
       </article>
 
-      <aside class="panel pad">
+      <aside class="panel pad preview-panel">
         <h2 class="panel-title">${icon("template")}文面プレビュー</h2>
         <div class="detail-list" style="margin-top:14px">
           <div class="detail-box"><strong>件名A</strong><p>${selected.subjectA}</p></div>
@@ -402,12 +487,12 @@ function renderAbTest() {
         <h2 class="panel-title">${icon("target")}文面設計メモ</h2>
         <span class="panel-sub">この文面がなぜ書かれているか、結果をどう使うか</span>
       </div>
-      <div class="memo-grid">
-        <div class="memo-item"><h3><span class="memo-step">1</span>作成意図</h3><ul><li>${selected.intent}</li><li>業種特有の課題を具体化する</li></ul></div>
-        <div class="memo-item"><h3><span class="memo-step">2</span>期待する反応</h3><ul><li>${selected.reaction}</li><li>最終的に面談・相談を申し込む</li></ul></div>
-        <div class="memo-item"><h3><span class="memo-step">3</span>比較したい差分</h3><ul><li>${selected.diff}</li><li>CTAの種類も次回比較候補にする</li></ul></div>
-        <div class="memo-item"><h3><span class="memo-step">4</span>結果が悪い場合に変える箇所</h3><ul><li>${selected.improve}</li><li>冒頭・CTA・対象条件を順に見直す</li></ul></div>
-      </div>
+      ${renderNoteCards([
+        { title: "作成意図", text: `${selected.intent}。業種特有の課題を具体化する。`, icon: "target" },
+        { title: "期待する反応", text: `${selected.reaction}。最終的に面談・相談を申し込む。`, icon: "results" },
+        { title: "比較したい差分", text: `${selected.diff}。CTAの種類も次回比較候補にする。`, icon: "ab" },
+        { title: "悪い場合に変える箇所", text: `${selected.improve}。冒頭・CTA・対象条件を順に見直す。`, icon: "improve" },
+      ])}
     </section>
   `;
 }
@@ -421,9 +506,8 @@ function renderApproval() {
     { label: "公開PII", value: "0", unit: "件", icon: "lock" },
   ];
   return `
-    ${renderKpis(approvalMetrics)}
-    <section class="grid content-two" style="margin-top:16px">
-      <article class="panel approval-table-panel">
+    ${renderKpis(approvalMetrics.slice(0, 4))}
+    <section class="panel approval-table-panel" style="margin-top:16px">
         <div class="panel-head">
           <h2 class="panel-title">${icon("approval")}配信管理キャンペーン</h2>
           <span class="panel-sub">4/30配信済みキャンペーンの結果です。次回予約は既存ツール側の日時予約を使います。</span>
@@ -457,27 +541,22 @@ function renderApproval() {
             </tbody>
           </table>
         </div>
-      </article>
+    </section>
 
-      <aside class="panel pad">
-        <h2 class="panel-title">${icon("lock")}結果確認メモ</h2>
-        <div class="detail-list" style="margin-top:14px">
-          ${state.data.approvals
-            .slice(0, 1)
-            .map(
-              (item) => `
-                <div class="detail-box"><strong>文面作成意図</strong><p>${item.intent}</p></div>
-                <div class="detail-box"><strong>対象条件</strong><p>${item.conditions}</p></div>
-                <div class="detail-box"><strong>除外条件</strong><p>${item.exclusions}</p></div>
-                <div class="detail-box"><strong>注意事項</strong><p>${item.caution}</p></div>
-              `,
-            )
-            .join("")}
-        </div>
+    <section class="panel pad" style="margin-top:16px">
+      <div class="panel-head">
+        <h2 class="panel-title">${icon("lock")}結果確認メモ / 送信前チェック</h2>
+        <span class="panel-sub">長文メモは幅を確保して下段にまとめる</span>
+      </div>
+      ${renderNoteCards([
+        { title: "文面作成意図", text: state.data.approvals[0].intent, icon: "template" },
+        { title: "対象条件", text: state.data.approvals[0].conditions, icon: "segment" },
+        { title: "除外条件", text: state.data.approvals[0].exclusions, icon: "warning" },
+        { title: "注意事項", text: state.data.approvals[0].caution, icon: "approval" },
+      ])}
         <div class="notice">
           <span><strong>企業名・IDは公開画面に載せない</strong><br />クリック企業の特定は既存ツール内で行い、この画面では集計値だけを扱います。</span>
         </div>
-      </aside>
     </section>
 
     <section class="panel pad" style="margin-top:16px">
@@ -494,9 +573,9 @@ function renderResults() {
   return `
     ${renderFilters(["期間", "業種", "キャンペーン", "テスト", "状態"], "更新")}
     <div style="margin-top:16px">${renderKpis(results.metrics)}</div>
-    <section class="grid content-two" style="margin-top:16px">
+    <section class="grid split-wide results-grid" style="margin-top:16px">
       <article class="panel">
-        <div class="panel-head"><h2 class="panel-title">${icon("results")}A/B比較</h2></div>
+        <div class="panel-head"><h2 class="panel-title">${icon("results")}キャンペーン別結果</h2><span class="panel-sub">補正クリックを優先して判断</span></div>
         <table>
           <thead><tr><th>テスト</th><th>件名</th><th>冒頭</th><th>CTA</th><th>クリック率</th><th>LINE</th><th>判断</th><th>次回方針</th></tr></thead>
           <tbody>
@@ -521,7 +600,7 @@ function renderResults() {
       </aside>
     </section>
 
-    <section class="grid content-two" style="margin-top:16px">
+    <section class="grid insight-grid" style="margin-top:16px">
       <article class="panel pad">
         <h2 class="panel-title">${icon("warning")}失敗理由分布</h2>
         <div class="comparison-bars" style="margin-top:18px">
@@ -544,6 +623,14 @@ function renderResults() {
           ${["次回テンプレ修正", "セグメント再設計", "LP CTA確認", "承認待ちへ反映"].map((chip) => `<span class="label-chip">${chip}</span>`).join("")}
         </div>
       </article>
+      <article class="panel pad">
+        <h2 class="panel-title">${icon("approval")}学びと次回仮説</h2>
+        ${renderValueRows([
+          ["継続すること", "広告・デザインLPとA/B訴求"],
+          ["変えること", "母数と地域の分け方"],
+          ["停止すること", "個社情報の公開表示"],
+        ])}
+      </article>
     </section>
   `;
 }
@@ -551,38 +638,60 @@ function renderResults() {
 function renderTemplates() {
   return `
     ${renderFilters(["業種", "訴求軸", "判定", "LP", "状態"])}
-    <section class="grid content-two" style="margin-top:16px">
-      <article class="panel">
+    ${renderKpis([
+      { label: "使用中テンプレート", value: String(state.data.templates.length), unit: "件", icon: "template" },
+      { label: "A案", value: "1", unit: "件", icon: "ab" },
+      { label: "B案", value: "1", unit: "件", icon: "ab" },
+      { label: "メール補完", value: "1", unit: "件", icon: "results" },
+    ])}
+    <section class="panel template-library" style="margin-top:16px">
         <div class="panel-head">
           <h2 class="panel-title">${icon("template")}テンプレートライブラリ</h2>
           <button class="primary-button" type="button">${icon("template")}新規テンプレート案</button>
         </div>
-        <table>
-          <thead><tr><th>テンプレート名</th><th>業種</th><th>訴求軸</th><th>件名</th><th>使用</th><th>クリック率</th><th>更新</th><th>判定</th></tr></thead>
-          <tbody>
-            ${state.data.templates
-              .map(
-                (item) => `
-                  <tr>
-                    <td><strong>${item.name}</strong><br><small>${item.lp}</small></td><td>${item.industry}</td><td>${item.appeal}</td><td>${item.subject}</td>
-                    <td>${item.count}回</td><td>${item.click}</td><td>${item.updated}</td><td><span class="status ${statusClass(item.label)}">${item.label}</span></td>
-                  </tr>
-                `,
-              )
-              .join("")}
-          </tbody>
-        </table>
-      </article>
-      <aside class="panel pad">
-        <h2 class="panel-title">${icon("target")}文面意図と改善履歴</h2>
-        <div class="detail-list" style="margin-top:14px">
-          <div class="detail-box"><strong>作成意図</strong><p>広告・デザイン企業に絞り、制作進行・提案文・更新報告の負担を具体化する。</p></div>
-          <div class="detail-box"><strong>期待する反応</strong><p>制作現場の文章業務に近いと感じ、本文中の {{tracking_url}} から広告・デザイン向けLPを確認する。</p></div>
-          <div class="detail-box"><strong>今回結果</strong><p>静岡Aは35件送信で補正クリック3社、長野Bは23件送信で補正クリック2社。キャンペーン詳細側のクリックは0件のため、トラッキング補正で見る。</p></div>
-          <div class="detail-box"><strong>次回変えること</strong><p>文面の方向性は維持し、約3,000候補をフォーム3波に分ける。フォーム未達分はメール補完として別枠で扱う。</p></div>
-          <div class="detail-box"><strong>停止する表現</strong><p>システム開発寄り、IT全般向け、大企業向けに見える表現は今回使わない。</p></div>
+        <div class="template-card-list">
+          ${state.data.templates
+            .map(
+              (item) => `
+                <article class="template-card">
+                  <div class="template-card-head">
+                    <div>
+                      <strong>${item.name}</strong>
+                      <small>${item.lp}</small>
+                    </div>
+                    <span class="status ${statusClass(item.label)}">${item.label}</span>
+                  </div>
+                  <div class="template-card-body">
+                    ${renderValueRows([
+                      ["業種", item.industry],
+                      ["訴求軸", item.appeal],
+                      ["件名", item.subject],
+                    ])}
+                    ${renderValueRows([
+                      ["使用", `${item.count}回`],
+                      ["クリック率", item.click],
+                      ["更新", item.updated],
+                    ])}
+                  </div>
+                  <div class="template-actions">
+                    <button class="ghost-button" type="button">プレビュー</button>
+                    <button class="ghost-button" type="button">改善メモ</button>
+                  </div>
+                </article>
+              `,
+            )
+            .join("")}
         </div>
-      </aside>
+    </section>
+    <section class="panel pad" style="margin-top:16px">
+      <h2 class="panel-title">${icon("target")}文面意図と改善履歴</h2>
+      ${renderNoteCards([
+        { title: "作成意図", text: "広告・デザイン企業に絞り、制作進行・提案文・更新報告の負担を具体化する。", icon: "template" },
+        { title: "期待する反応", text: "制作現場の文章業務に近いと感じ、本文中の {{tracking_url}} から広告・デザイン向けLPを確認する。", icon: "results" },
+        { title: "今回結果", text: "静岡Aは35件送信で補正クリック3社、長野Bは23件送信で補正クリック2社。トラッキング補正で見る。", icon: "improve" },
+        { title: "次回変えること", text: "文面の方向性は維持し、約3,000候補をフォーム3波に分ける。フォーム未達分はメール補完として別枠で扱う。", icon: "target" },
+        { title: "停止する表現", text: "システム開発寄り、IT全般向け、大企業向けに見える表現は今回使わない。", icon: "warning" },
+      ])}
     </section>
   `;
 }
@@ -624,12 +733,12 @@ function renderSegments() {
       </article>
       <aside class="panel pad segment-memo">
         <h2 class="panel-title">${icon("target")}対象選定メモ</h2>
-        <div class="detail-list" style="margin-top:18px">
-          <div class="detail-box"><strong>なぜこの企業群を選ぶか</strong><p>広告・デザイン向けLPとの課題一致度が、IT・ソフトウェア広めの企業群より高いと判断できるため。</p></div>
-          <div class="detail-box"><strong>次回の切り方</strong><p>約3,000候補をフォーム配信3波に分ける。Aを厚めにしつつBも残し、都道府県は重複しない別グループにする。</p></div>
-          <div class="detail-box"><strong>メール補完の扱い</strong><p>フォーム配信後、失敗・スキップ済みでメールありの企業だけを別グループ化する。同時予約はせず、1アカウント1日100件を上限にする。</p></div>
-          <div class="detail-box"><strong>除外条件チェック</strong><p><span class="label-chip">旧Pending除外</span><span class="label-chip">送信済み除外</span><span class="label-chip">フォーム未達補完</span></p></div>
-        </div>
+        ${renderNoteCards([
+          { title: "なぜこの企業群を選ぶか", text: "広告・デザイン向けLPとの課題一致度が、IT・ソフトウェア広めの企業群より高いと判断できるため。", icon: "target" },
+          { title: "次回の切り方", text: "約3,000候補をフォーム配信3波に分ける。Aを厚めにしつつBも残し、都道府県は重複しない別グループにする。", icon: "segment" },
+          { title: "メール補完の扱い", text: "フォーム配信後、失敗・スキップ済みでメールありの企業だけを別グループ化する。同時予約はせず、1アカウント1日100件を上限にする。", icon: "results" },
+          { title: "除外条件チェック", text: "旧Pending除外 / 送信済み除外 / フォーム未達補完", icon: "warning" },
+        ])}
       </aside>
     </section>
   `;
