@@ -60,6 +60,14 @@ function statusClass(label) {
   return "review";
 }
 
+function renderPrefCell(value) {
+  const text = String(value);
+  const parts = text.split("・").map((part) => part.trim()).filter(Boolean);
+  if (parts.length <= 5) return escapeHtml(text);
+  const summary = `${parts.slice(0, 3).join("・")} ほか${parts.length - 3}都道府県`;
+  return `<span title="${escapeHtml(text)}">${escapeHtml(summary)}</span>`;
+}
+
 function priorityClass(priority) {
   if (priority === "高") return "high";
   if (priority === "中") return "medium";
@@ -327,7 +335,7 @@ function renderDashboard() {
 
 function renderFilters(labels, buttonLabel = "絞り込む") {
   return `
-    <section class="panel">
+    <section class="panel filters-panel">
       <div class="filter-row">
         ${labels
           .map(
@@ -593,28 +601,30 @@ function renderSegments() {
       { label: "次回指定目安", value: nextTarget.toLocaleString(), unit: "件", icon: "target" },
       { label: "作成済みグループ", value: String(createdGroups), unit: "件", icon: "segment" },
     ])}
-    <section class="grid content-two" style="margin-top:16px">
-      <article class="panel">
+    <section class="grid content-stack segment-layout" style="margin-top:22px">
+      <article class="panel segment-table-panel">
         <div class="panel-head"><h2 class="panel-title">${icon("segment")}セグメント候補</h2></div>
-        <table>
-          <thead><tr><th>セグメント名</th><th>DB</th><th>業種</th><th>都道府県</th><th>推定</th><th>送信可能</th><th>除外理由</th><th>配信順</th><th>既存ツール側</th></tr></thead>
-          <tbody>
-            ${state.data.segments
-              .map(
-                (item) => `
-                  <tr>
-                    <td><strong>${item.name}</strong></td><td>${item.db}</td><td>${item.industry}</td><td>${item.pref}</td><td>${item.estimated.toLocaleString()}件</td>
-                    <td>${item.sendable.toLocaleString()}件</td><td>${item.excluded}</td><td>${item.order}</td><td><span class="status ${statusClass(item.group)}">${item.group}</span></td>
-                  </tr>
-                `,
-              )
-              .join("")}
-          </tbody>
-        </table>
+        <div class="table-scroll segment-table-scroll">
+          <table class="segment-table">
+            <thead><tr><th>セグメント名</th><th>DB</th><th>業種</th><th>都道府県</th><th>推定</th><th>送信可能</th><th>除外理由</th><th>配信順</th><th>既存ツール側</th></tr></thead>
+            <tbody>
+              ${state.data.segments
+                .map(
+                  (item) => `
+                    <tr>
+                      <td><strong>${item.name}</strong></td><td>${item.db}</td><td>${item.industry}</td><td>${renderPrefCell(item.pref)}</td><td>${item.estimated.toLocaleString()}件</td>
+                      <td>${item.sendable.toLocaleString()}件</td><td>${item.excluded}</td><td>${item.order}</td><td><span class="status ${statusClass(item.group)}">${item.group}</span></td>
+                    </tr>
+                  `,
+                )
+                .join("")}
+            </tbody>
+          </table>
+        </div>
       </article>
-      <aside class="panel pad">
+      <aside class="panel pad segment-memo">
         <h2 class="panel-title">${icon("target")}対象選定メモ</h2>
-        <div class="detail-list" style="margin-top:14px">
+        <div class="detail-list" style="margin-top:18px">
           <div class="detail-box"><strong>なぜこの企業群を選ぶか</strong><p>広告・デザイン向けLPとの課題一致度が、IT・ソフトウェア広めの企業群より高いと判断できるため。</p></div>
           <div class="detail-box"><strong>次回の切り方</strong><p>約3,000候補をフォーム配信3波に分ける。Aを厚めにしつつBも残し、都道府県は重複しない別グループにする。</p></div>
           <div class="detail-box"><strong>メール補完の扱い</strong><p>フォーム配信後、失敗・スキップ済みでメールありの企業だけを別グループ化する。同時予約はせず、1アカウント1日100件を上限にする。</p></div>
