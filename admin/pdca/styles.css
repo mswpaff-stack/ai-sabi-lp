@@ -25,7 +25,7 @@
 }
 
 html {
-  min-width: 1360px;
+  min-width: 0;
   background: var(--page);
   color: var(--ink-900);
   font-family:
@@ -1381,5 +1381,255 @@ tr:last-child td {
 
   .risk-card {
     align-items: flex-start;
+  }
+}
+
+/* Full-page vertical layout: keep every view free from horizontal scrolling. */
+html,
+body,
+.app-shell,
+.main,
+.view-root,
+.panel {
+  max-width: 100%;
+}
+
+body,
+.main {
+  overflow-x: hidden;
+}
+
+.topbar,
+.view-root,
+.sync-banner {
+  width: 100%;
+  max-width: min(100%, 1560px);
+}
+
+.topbar,
+.top-actions,
+.kpi-grid,
+.content-two,
+.content-three,
+.content-stack,
+.filter-row,
+.filter-row.four,
+.memo-grid,
+.summary-row,
+.flow-card,
+.flow-steps {
+  grid-template-columns: 1fr;
+}
+
+.flow-steps {
+  display: grid;
+}
+
+.top-actions {
+  justify-self: stretch;
+  width: 100%;
+}
+
+.top-actions .primary-button,
+.top-actions .ghost-button,
+.date-pill,
+.action-chip,
+.kpi-label,
+.kpi-value,
+.flow-title,
+.flow-step strong,
+.flow-step small,
+.fast-plan-table th:nth-child(-n + 4),
+.fast-plan-table td:nth-child(-n + 4),
+.dashboard-main table th:not(:first-child),
+.dashboard-main table td:not(:first-child),
+.status {
+  white-space: normal;
+}
+
+.sync-banner,
+.notice,
+.risk-card {
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.next-action-main {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  width: 100%;
+  white-space: normal;
+}
+
+.step-inline {
+  width: 100%;
+}
+
+.step-separator {
+  display: none;
+}
+
+.panel-head {
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.summary-row {
+  text-align: left;
+}
+
+.summary-cell,
+.memo-item {
+  border-right: 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.summary-cell:last-child,
+.memo-item:last-child {
+  border-bottom: 0;
+}
+
+.table-scroll {
+  overflow-x: visible;
+}
+
+.approval-table,
+.segment-table {
+  min-width: 0;
+}
+
+.segment-table th:nth-child(1),
+.segment-table td:nth-child(1),
+.segment-table th:nth-child(2),
+.segment-table td:nth-child(2),
+.segment-table th:nth-child(3),
+.segment-table td:nth-child(3),
+.segment-table th:nth-child(7),
+.segment-table td:nth-child(7),
+.segment-table th:nth-child(8),
+.segment-table td:nth-child(8),
+.segment-table th:nth-child(9),
+.segment-table td:nth-child(9),
+.dashboard-main table th:first-child,
+.dashboard-main table td:first-child,
+.ab-test-table th:nth-child(1),
+.ab-test-table td:nth-child(1),
+.ab-test-table th:nth-child(2),
+.ab-test-table td:nth-child(2),
+.ab-test-table th:nth-child(5),
+.ab-test-table td:nth-child(5) {
+  width: auto;
+  min-width: 0;
+}
+
+table.stacked-table {
+  display: block;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.panel > table.stacked-table {
+  padding: 14px 18px 18px;
+}
+
+.table-scroll > table.stacked-table {
+  padding: 14px 18px 18px;
+}
+
+.stacked-table thead {
+  display: none;
+}
+
+.stacked-table tbody {
+  display: grid;
+  gap: 12px;
+}
+
+.stacked-table tr {
+  display: grid;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+}
+
+.stacked-table tr.total-row {
+  background: var(--green-50);
+}
+
+.stacked-table th,
+.stacked-table td {
+  display: grid;
+  grid-template-columns: minmax(126px, 28%) minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+  width: 100%;
+  min-width: 0;
+  padding: 12px 14px;
+  border-bottom: 1px solid #edf0f2;
+  text-align: left;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+.stacked-table td::before {
+  content: attr(data-label);
+  color: var(--ink-500);
+  font-size: 12px;
+  font-weight: 900;
+  line-height: 1.55;
+}
+
+.stacked-table tr:last-child td {
+  border-bottom: 1px solid #edf0f2;
+}
+
+.stacked-table td:last-child,
+.stacked-table tr:last-child td:last-child {
+  border-bottom: 0;
+}
+
+.stacked-table .row-title {
+  align-items: flex-start;
+}
+
+.stacked-table .status,
+.stacked-table .label-chip {
+  justify-self: start;
+  width: fit-content;
+}
+
+.task {
+  grid-template-columns: 22px minmax(0, 1fr);
+}
+
+.task > small,
+.task > .task-priority {
+  grid-column: 2 / -1;
+  justify-self: start;
+}
+
+.bar-row {
+  grid-template-columns: 1fr;
+  align-items: stretch;
+}
+
+.side-nav {
+  grid-template-columns: 1fr !important;
+}
+
+@media (max-width: 640px) {
+  .nav-link {
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  .stacked-table th,
+  .stacked-table td {
+    grid-template-columns: 1fr;
+    gap: 4px;
   }
 }

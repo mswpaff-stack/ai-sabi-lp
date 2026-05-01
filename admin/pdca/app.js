@@ -783,6 +783,7 @@ function render() {
     segments: renderSegments,
   };
   $("#viewRoot").innerHTML = (viewRenderers[state.currentView] || renderDashboard)();
+  enhanceResponsiveTables();
 }
 
 function navigate(view) {
@@ -798,6 +799,18 @@ function showModal({ title, lead, body, confirmText = "実行する", onConfirm 
   $("#modalBody").innerHTML = body;
   $("#modalConfirm").textContent = confirmText;
   $("#actionModal").showModal();
+}
+
+function enhanceResponsiveTables(root = $("#viewRoot")) {
+  root.querySelectorAll("table").forEach((table) => {
+    const headers = Array.from(table.querySelectorAll("thead th")).map((th) => th.textContent.trim());
+    table.classList.add("stacked-table");
+    table.querySelectorAll("tbody tr").forEach((row) => {
+      Array.from(row.children).forEach((cell, index) => {
+        cell.dataset.label = headers[index] || "";
+      });
+    });
+  });
 }
 
 function approveCampaign(id) {
