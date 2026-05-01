@@ -8,7 +8,7 @@ const state = {
 const viewMeta = {
   dashboard: {
     title: "問い合わせ営業PDCA",
-    lead: "配信結果とトラッキング補正値を整理します。",
+    lead: "配信結果、フォーム未達補完、次回の高速検証計画を整理します。",
   },
   "ab-test": {
     title: "ABテスト設計",
@@ -51,11 +51,6 @@ function formatMultiline(value) {
   return escapeHtml(value).replace(/\n/g, "<br />");
 }
 
-function toDateTimeLocalValue(value) {
-  const match = String(value || "").match(/^(\d{4})-(\d{2})-(\d{2})\s+(\d{2}):(\d{2})/);
-  return match ? `${match[1]}-${match[2]}-${match[3]}T${match[4]}:${match[5]}` : "";
-}
-
 function statusClass(label) {
   if (/勝ち|OK|作成済み|承認済み/.test(label)) return "ok";
   if (/設計/.test(label)) return "design";
@@ -86,7 +81,8 @@ function renderNav() {
 }
 
 function renderSyncBanner() {
-  const steps = ["内容確認", "承認OK + 日時設定", "予約ワーカー実行", "送信後に補正集計"];
+  const steps = ["3,000候補設計", "フォーム3波予約", "未達分をメール補完", "翌営業日で判定"];
+  const apiLabel = "ツール側予約へ切替済み";
   $("#syncBanner").innerHTML = `
     <div class="next-action-main">
       ${icon("approval")}
@@ -104,6 +100,7 @@ function renderSyncBanner() {
         .join("")}
     </div>
     <span class="label-chip action-chip">${state.data.integration.message}</span>
+    <span class="label-chip">${apiLabel}</span>
   `;
 }
 
@@ -113,10 +110,10 @@ function renderFlowCard() {
       <div class="flow-title">${icon("sync")}次回の推奨フロー</div>
       <div class="flow-steps">
         ${[
-          ["結果確認", "送信成功率と失敗理由を見る"],
-          ["次回案作成", "地方県を追加"],
-          ["承認と予約", "OK後に日時を保存"],
-          ["補正集計", "トラッキングを優先"],
+          ["フォーム配信", "未送信中心で3波に分散"],
+          ["結果反映", "成功・失敗・スキップを確認"],
+          ["メール補完", "未達分だけ別枠で予約"],
+          ["判定", "A/Bと地域差を見る"],
         ]
           .map(
             (item, index) => `
@@ -129,6 +126,61 @@ function renderFlowCard() {
             `,
           )
           .join("")}
+      </div>
+    </section>
+  `;
+}
+
+function renderFastPdcaPlan() {
+  const plan = state.data.fastPdcaPlan;
+  if (!plan) return "";
+  return `
+    <section class="panel" style="margin-top:16px">
+      <div class="panel-head">
+        <div>
+          <h2 class="panel-title">${icon("line")}${plan.title}</h2>
+          <span class="panel-sub">${plan.goal}</span>
+        </div>
+        <span class="status ${statusClass("設計")}">設計反映済み</span>
+      </div>
+      <div class="summary-row">
+        <div class="summary-cell"><span>実行候補</span><strong>${plan.targetCandidates.toLocaleString()}<small>件</small></strong></div>
+        <div class="summary-cell"><span>想定成功</span><strong>${plan.expectedSuccess}</strong></div>
+        <div class="summary-cell"><span>想定クリック</span><strong>${plan.expectedClicks}</strong></div>
+        <div class="summary-cell"><span>A/B配分</span><strong>65/35<small>目安</small></strong></div>
+      </div>
+      <table class="fast-plan-table" style="margin-top:16px">
+        <thead>
+          <tr><th>段階</th><th>タイミング</th><th>チャネル</th><th>目安</th><th>設定</th><th>目的</th></tr>
+        </thead>
+        <tbody>
+          ${plan.waves
+            .map(
+              (wave) => `
+                <tr>
+                  <td><strong>${wave.step}</strong></td>
+                  <td>${wave.timing}</td>
+                  <td>${wave.channel}</td>
+                  <td>${wave.volume}</td>
+                  <td>${wave.settings}</td>
+                  <td>${wave.purpose}</td>
+                </tr>
+              `,
+            )
+            .join("")}
+        </tbody>
+      </table>
+      <div class="notice" style="margin-top:16px">
+        <span><strong>A/B配分</strong><br />${plan.abAllocation}</span>
+      </div>
+      <div class="notice" style="margin-top:10px">
+        <span><strong>フォーム主配信</strong><br />${plan.primaryFormSettings}</span>
+      </div>
+      <div class="notice" style="margin-top:10px">
+        <span><strong>メール補完</strong><br />${plan.emailFallbackSettings}</span>
+      </div>
+      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:14px">
+        ${plan.gates.map((gate) => `<span class="label-chip">${gate}</span>`).join("")}
       </div>
     </section>
   `;
@@ -173,6 +225,7 @@ function renderDashboard() {
   return `
     ${renderKpis(dashboard.metrics)}
     ${renderFlowCard()}
+    ${renderFastPdcaPlan()}
     <section class="grid content-two dashboard-main" style="margin-top:16px">
       <article class="panel">
         <div class="panel-head">
@@ -210,7 +263,6 @@ function renderDashboard() {
         </div>
         <div class="task-list">
           ${dashboard.tasks
-            .slice(0, 4)
             .map(
               (task) => `
                 <div class="task">
@@ -245,7 +297,7 @@ function renderDashboard() {
             .join("")}
         </div>
         <div class="notice">
-          <span><strong>結果から次に変えること</strong><br />クリックは出ているため文面方向は維持し、次回は地方県の別グループを追加して送信成功数を増やします。</span>
+          <span><strong>結果から次に変えること</strong><br />クリックは出ているため文面方向は維持し、次回は約3,000件の実行候補を3波に分け、フォーム未達分だけをメールで補完します。</span>
           <button class="ghost-button" data-view="results" type="button">詳細を見る</button>
         </div>
       </article>
@@ -366,7 +418,7 @@ function renderApproval() {
       <article class="panel approval-table-panel">
         <div class="panel-head">
           <h2 class="panel-title">${icon("approval")}配信管理キャンペーン</h2>
-          <span class="panel-sub">本番連携では、承認OKと配信日時が保存されたキャンペーンだけを予約ワーカーがフォーム配信します。</span>
+          <span class="panel-sub">4/30配信済みキャンペーンの結果です。次回予約は既存ツール側の日時予約を使います。</span>
         </div>
         <div class="table-scroll">
           <table class="approval-table">
@@ -386,7 +438,7 @@ function renderApproval() {
                       <td>${item.scheduledAt || "-"}</td>
                       <td><span class="status ${statusClass(item.userStatus)}">${item.userStatus}</span></td>
                       <td>${
-                        item.scheduledAt === "配信済み"
+                        String(item.scheduledAt || "").includes("配信済み") || item.userStatus === "送信済み"
                           ? "-"
                           : `<button class="ghost-button" data-approve="${item.id}" type="button">日時設定</button>`
                       }</td>
@@ -519,7 +571,7 @@ function renderTemplates() {
           <div class="detail-box"><strong>作成意図</strong><p>広告・デザイン企業に絞り、制作進行・提案文・更新報告の負担を具体化する。</p></div>
           <div class="detail-box"><strong>期待する反応</strong><p>制作現場の文章業務に近いと感じ、本文中の {{tracking_url}} から広告・デザイン向けLPを確認する。</p></div>
           <div class="detail-box"><strong>今回結果</strong><p>静岡Aは35件送信で補正クリック3社、長野Bは23件送信で補正クリック2社。キャンペーン詳細側のクリックは0件のため、トラッキング補正で見る。</p></div>
-          <div class="detail-box"><strong>次回変えること</strong><p>文面の方向性は維持し、送信成功数を増やすため地方県の別グループを追加する。</p></div>
+          <div class="detail-box"><strong>次回変えること</strong><p>文面の方向性は維持し、約3,000候補をフォーム3波に分ける。フォーム未達分はメール補完として別枠で扱う。</p></div>
           <div class="detail-box"><strong>停止する表現</strong><p>システム開発寄り、IT全般向け、大企業向けに見える表現は今回使わない。</p></div>
         </div>
       </aside>
@@ -531,13 +583,14 @@ function renderSegments() {
   const estimatedTotal = state.data.segments.reduce((sum, item) => sum + item.estimated, 0);
   const sendableTotal = state.data.segments.reduce((sum, item) => sum + item.sendable, 0);
   const createdGroups = state.data.segments.filter((item) => item.group.includes("作成済み")).length;
+  const nextTarget = state.data.fastPdcaPlan?.targetCandidates || 3000;
   return `
     ${renderFilters(["DB", "大カテゴリ", "詳細業種", "都道府県", "状態"], "セグメント候補を更新")}
     ${renderKpis([
       { label: "候補推定対象", value: estimatedTotal.toLocaleString(), unit: "件", icon: "database" },
       { label: "送信可能見込み", value: sendableTotal.toLocaleString(), unit: "件", icon: "approval" },
       { label: "除外見込み", value: (estimatedTotal - sendableTotal).toLocaleString(), unit: "件", icon: "warning" },
-      { label: "次回指定目安", value: "600", unit: "件", icon: "target" },
+      { label: "次回指定目安", value: nextTarget.toLocaleString(), unit: "件", icon: "target" },
       { label: "作成済みグループ", value: String(createdGroups), unit: "件", icon: "segment" },
     ])}
     <section class="grid content-two" style="margin-top:16px">
@@ -563,9 +616,9 @@ function renderSegments() {
         <h2 class="panel-title">${icon("target")}対象選定メモ</h2>
         <div class="detail-list" style="margin-top:14px">
           <div class="detail-box"><strong>なぜこの企業群を選ぶか</strong><p>広告・デザイン向けLPとの課題一致度が、IT・ソフトウェア広めの企業群より高いと判断できるため。</p></div>
-          <div class="detail-box"><strong>次回の切り方</strong><p>静岡A・長野Bでクリックは出たが母数不足のため、新潟県・山口県・宮崎県・熊本県などを別グループで追加する。</p></div>
-          <div class="detail-box"><strong>大都市圏の扱い</strong><p>東京・神奈川・大阪は、地方県で訴求と送信成功率を確認してから最適パターンを当てる。</p></div>
-          <div class="detail-box"><strong>除外条件チェック</strong><p><span class="label-chip">旧Pending除外</span><span class="label-chip">送信済み除外</span><span class="label-chip">CAPTCHA除外</span></p></div>
+          <div class="detail-box"><strong>次回の切り方</strong><p>約3,000候補をフォーム配信3波に分ける。Aを厚めにしつつBも残し、都道府県は重複しない別グループにする。</p></div>
+          <div class="detail-box"><strong>メール補完の扱い</strong><p>フォーム配信後、失敗・スキップ済みでメールありの企業だけを別グループ化する。同時予約はせず、1アカウント1日100件を上限にする。</p></div>
+          <div class="detail-box"><strong>除外条件チェック</strong><p><span class="label-chip">旧Pending除外</span><span class="label-chip">送信済み除外</span><span class="label-chip">フォーム未達補完</span></p></div>
         </div>
       </aside>
     </section>
@@ -574,6 +627,16 @@ function renderSegments() {
 
 function buildAnalysisPrompt() {
   const context = state.data.analysisContext;
+  const plan = state.data.fastPdcaPlan;
+  const waveLines = plan
+    ? plan.waves
+        .map(
+          (wave) =>
+            `- ${wave.step}: ${wave.timing} / ${wave.channel} / ${wave.volume} / 設定=${wave.settings} / 目的=${wave.purpose}`,
+        )
+        .join("\n")
+    : "";
+  const gateLines = plan ? plan.gates.map((item) => `- ${item}`).join("\n") : "";
   const approvalLines = state.data.approvals
     .map(
       (item) =>
@@ -601,22 +664,41 @@ function buildAnalysisPrompt() {
     .join("\n");
   const resultLines = state.data.results.improvements.map((item) => `- ${item.title}: ${item.text}`).join("\n");
 
-  return `あなたはこのワークスペースのCodexです。以下の実データをもとに、問い合わせフォーム営業の次回小ロット配信案を改善してください。
+  return `あなたはこのワークスペースのCodexです。以下の実データをもとに、問い合わせフォーム営業の爆速PDCA配信案を改善してください。
 
 # 前提
-- 現行の静的PDCA画面では、管理画面で生成したこのプロンプトをCodexに貼り付け、Codexが分析・文面作成・必要なソース/ドキュメント更新を行う運用です。
-- 今後の本番連携では、管理画面で内容確認、確認OK、配信日時を保存し、専用バックエンドが承認済みキャンペーンだけを予約配信する設計にします。
+- 4/30の地方6県配信は完了済みです。
+- 今後の予約配信は、既存ツール側のキャンペーン詳細にある「実行タイミング: 日時を予約」を使います。
+- この端末のローカル予約ワーカーは二重送信防止のため停止済みです。
 - Codexはグループ、テンプレート、キャンペーン作成と改善案作成までを担当し、実送信や予約送信の実行はCodex単体では行いません。
 - 既存ツールのテンプレート作成では、メール配信ではなくフォーム配信を選びます。API上は channel=form を正とします。
 - テンプレート本文にLP実URLを直書きせず、LP誘導には必ず {{tracking_url}} を使います。
 - リダイレクト先LP URLでは、今回は「広告・デザイン向けLP」を選びます。
 - 公開管理画面にはクリック企業名・企業IDなどの個社情報を載せず、集計値だけを反映します。
+- 次回は単なる10倍ではなく、送信成功1,000件前後と補正クリック50社前後を作って判断ブレを減らすことが目的です。
+- フォーム配信を先に行い、失敗・スキップ済みだけをメールで補完します。フォーム配信とメール補完は同時予約せず、メール補完は1アカウント1日100件を初期上限にします。
 
 # 今回の目的
 ${context.target}
 
 # なぜこの方向にするか
 ${context.reason}
+
+# 爆速PDCAの運用計画
+- タイトル: ${plan?.title || "-"}
+- 目的: ${plan?.goal || "-"}
+- 実行候補: ${plan?.targetCandidates?.toLocaleString() || "-"}件
+- 想定成功: ${plan?.expectedSuccess || "-"}
+- 想定クリック: ${plan?.expectedClicks || "-"}
+- A/B配分: ${plan?.abAllocation || "-"}
+- フォーム主配信設定: ${plan?.primaryFormSettings || "-"}
+- メール補完設定: ${plan?.emailFallbackSettings || "-"}
+
+## 配信波
+${waveLines}
+
+## 守る条件
+${gateLines}
 
 # 現在のLP選択肢
 ${context.currentLpOptions.map((item) => `- ${item}`).join("\n")}
@@ -650,11 +732,12 @@ ${abBodyLines}
 ${resultLines}
 
 # Codexに出力してほしいこと
-1. 今回の静岡A・長野Bの結果を、送信成功率・トラッキング補正クリック・LP閲覧・LINEクリックの観点で判断してください。
-2. 配信対象を増やすべきか、増やす場合の目安件数と地方県の優先順を出してください。
-3. A/Bどちらを継続するか、または両方継続するかをリスク込みで判断してください。
-4. 次回作るグループ名、テンプレート名、キャンペーン名を命名規則に沿って出してください。
-5. 必要であれば、この管理画面の data.js や関連ドキュメントを更新してください。`;
+1. 4/30地方6県と累計結果を、送信成功率・トラッキング補正クリック・LP閲覧・LINEクリックの観点で判断してください。
+2. 次回3,000候補をどの都道府県・時間帯・A/B配分で分けるかを出してください。
+3. フォーム主配信のグループ設定と、フォーム未達メール補完のグループ設定を分け、メール補完は1日100件/アカウント上限を守る分割案で出してください。
+4. A/Bどちらを継続するか、または両方継続するかをリスク込みで判断してください。
+5. 次回作るグループ名、テンプレート名、キャンペーン名を命名規則に沿って出してください。
+6. 必要であれば、この管理画面の data.js や関連ドキュメントを更新してください。`;
 }
 
 function showAnalysisPrompt() {
@@ -711,22 +794,14 @@ function approveCampaign(id) {
   const item = state.data.approvals.find((campaign) => campaign.id === id);
   if (!item) return;
   showModal({
-    title: "承認OKと配信日時を保存しますか？",
+    title: "ツール側で日時予約してください",
     lead: item.campaign,
     body: `
-      <p>この操作は静的画面内のデモ更新です。本番では、承認ログ、配信日時、送信上限、二重送信防止キーを保存し、予約ワーカーが時刻到達後にフォーム配信を実行します。</p>
-      <p><strong>対象条件:</strong> ${item.conditions}<br><strong>推奨送信数:</strong> ${item.recommended}件<br><strong>チャネル:</strong> ${item.deliveryChannel || "フォーム配信"}</p>
-      <div class="field">
-        <label for="scheduleAtInput">配信日時</label>
-        <input id="scheduleAtInput" type="datetime-local" value="${toDateTimeLocalValue(item.scheduledAt)}" />
-      </div>
+      <p>今後の予約配信は、既存ツール側のキャンペーン詳細にある「実行タイミング: 日時を予約」を使います。この管理画面からローカル予約APIへ新規予約は保存しません。</p>
+      <p><strong>対象条件:</strong> ${item.conditions}<br><strong>送信上限:</strong> ${item.recommended}件<br><strong>チャネル:</strong> ${item.deliveryChannel || "フォーム配信"}</p>
     `,
-    confirmText: "確認OK・予約保存",
-    onConfirm: () => {
-      const scheduledValue = $("#scheduleAtInput")?.value;
-      item.scheduledAt = scheduledValue ? `${scheduledValue.replace("T", " ")} JST` : "未設定";
-      item.userStatus = scheduledValue ? "予約設定済み（デモ）" : "予約日時未設定";
-      item.status = "承認済み";
+    confirmText: "閉じる",
+    onConfirm: async () => {
       render();
     },
   });
@@ -736,26 +811,29 @@ function sendCampaign(id) {
   const item = state.data.approvals.find((campaign) => campaign.id === id);
   if (!item) return;
   showModal({
-    title: "配信実行の確認",
-    lead: "現在はデモ実行です。本番では既存ツールAPIの送信エンドポイントへ連携します。",
+    title: "配信実行は既存ツール側で行います",
+    lead: "今後は既存ツール側の日時予約を使います。この画面は結果管理と改善判断に専念します。",
     body: `
-      <p><strong>${item.campaign}</strong> を ${item.recommended}件で送信実行する想定です。</p>
-      <p>本連携時は、承認ログ、送信上限、二重送信防止、停止条件を確認してから送信APIを呼び出します。</p>
+      <p><strong>${item.campaign}</strong> の送信操作や日時予約は、既存ツールのキャンペーン詳細で行います。</p>
+      <p>この画面には、送信後の成功数、失敗、スキップ、補正クリックなどの集計だけを反映します。</p>
     `,
-    confirmText: "デモ実行する",
+    confirmText: "閉じる",
     onConfirm: () => {
-      item.userStatus = "送信済み（デモ）";
-      item.status = "送信後分析";
-      state.data.dashboard.metrics[1].value = "7";
-      state.data.results.metrics[0].value = String(Number(state.data.results.metrics[0].value) + item.recommended);
       render();
     },
   });
 }
 
-function simulateSync() {
+async function simulateSync() {
   state.syncCount += 1;
-  state.data.integration.lastSyncedAt = "2026/04/28 20:" + String(49 + state.syncCount).padStart(2, "0");
+  state.data.integration.lastSyncedAt = new Intl.DateTimeFormat("ja-JP", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).format(new Date());
   render();
 }
 
@@ -803,7 +881,12 @@ $("#createButton").addEventListener("click", () => navigate("ab-test"));
 
 $("#actionModal").addEventListener("close", () => {
   if ($("#actionModal").returnValue === "confirm" && typeof state.pendingAction === "function") {
-    state.pendingAction();
+    const result = state.pendingAction();
+    if (result && typeof result.catch === "function") {
+      result.catch((error) => {
+        alert(error.message || "操作に失敗しました。");
+      });
+    }
   }
   state.pendingAction = null;
 });
