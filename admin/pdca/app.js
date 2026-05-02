@@ -52,7 +52,7 @@ function formatMultiline(value) {
 }
 
 function statusClass(label) {
-  if (/勝ち|OK|作成済み|承認済み/.test(label)) return "ok";
+  if (/勝ち|OK|作成済み|承認済み|送信済み|配信済み/.test(label)) return "ok";
   if (/設計/.test(label)) return "design";
   if (/待ち|準備|送信|作成予定|候補/.test(label)) return "wait";
   if (/修正|停止|要確認/.test(label)) return "fix";
@@ -143,7 +143,7 @@ function renderFastPdcaPlan() {
   const plan = state.data.fastPdcaPlan;
   if (!plan) return "";
   return `
-    <section class="panel" style="margin-top:16px">
+    <section class="panel plan-panel">
       <div class="panel-head">
         <div>
           <h2 class="panel-title">${icon("line")}${plan.title}</h2>
@@ -151,43 +151,19 @@ function renderFastPdcaPlan() {
         </div>
         <span class="status ${statusClass("設計")}">設計反映済み</span>
       </div>
-      <div class="summary-row">
+      <div class="summary-row plan-summary">
         <div class="summary-cell"><span>実行候補</span><strong>${plan.targetCandidates.toLocaleString()}<small>件</small></strong></div>
         <div class="summary-cell"><span>想定成功</span><strong>${plan.expectedSuccess}</strong></div>
         <div class="summary-cell"><span>想定クリック</span><strong>${plan.expectedClicks}</strong></div>
         <div class="summary-cell"><span>A/B配分</span><strong>65/35<small>目安</small></strong></div>
       </div>
-      <table class="fast-plan-table" style="margin-top:16px">
-        <thead>
-          <tr><th>段階</th><th>タイミング</th><th>チャネル</th><th>目安</th><th>設定</th><th>目的</th></tr>
-        </thead>
-        <tbody>
-          ${plan.waves
-            .map(
-              (wave) => `
-                <tr>
-                  <td><strong>${wave.step}</strong></td>
-                  <td>${wave.timing}</td>
-                  <td>${wave.channel}</td>
-                  <td>${wave.volume}</td>
-                  <td>${wave.settings}</td>
-                  <td>${wave.purpose}</td>
-                </tr>
-              `,
-            )
-            .join("")}
-        </tbody>
-      </table>
-      <div class="notice" style="margin-top:16px">
-        <span><strong>A/B配分</strong><br />${plan.abAllocation}</span>
+      ${renderPlanWaveCards(plan.waves)}
+      <div class="notice-stack">
+        <div class="notice"><span><strong>A/B配分</strong><br />${plan.abAllocation}</span></div>
+        <div class="notice"><span><strong>フォーム主配信</strong><br />${plan.primaryFormSettings}</span></div>
+        <div class="notice"><span><strong>メール補完</strong><br />${plan.emailFallbackSettings}</span></div>
       </div>
-      <div class="notice" style="margin-top:10px">
-        <span><strong>フォーム主配信</strong><br />${plan.primaryFormSettings}</span>
-      </div>
-      <div class="notice" style="margin-top:10px">
-        <span><strong>メール補完</strong><br />${plan.emailFallbackSettings}</span>
-      </div>
-      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:14px">
+      <div class="chip-row">
         ${plan.gates.map((gate) => `<span class="label-chip">${gate}</span>`).join("")}
       </div>
     </section>
@@ -253,6 +229,146 @@ function renderNoteCards(cards, className = "") {
   `;
 }
 
+function renderKeyValueGrid(rows, className = "") {
+  return `
+    <div class="kv-grid ${className}">
+      ${rows
+        .map(
+          ([label, value]) => `
+            <div class="kv-item">
+              <span>${label}</span>
+              <strong>${value}</strong>
+            </div>
+          `,
+        )
+        .join("")}
+    </div>
+  `;
+}
+
+function renderPlanWaveCards(waves) {
+  return `
+    <div class="wave-card-list">
+      ${waves
+        .map(
+          (wave, index) => `
+            <article class="wave-card">
+              <div class="wave-index">${String(index + 1).padStart(2, "0")}</div>
+              <div class="wave-main">
+                <div class="wave-head">
+                  <div>
+                    <h3>${wave.step}</h3>
+                    <p>${wave.timing}</p>
+                  </div>
+                  <span class="status ${statusClass(wave.channel)}">${wave.channel}</span>
+                </div>
+                ${renderKeyValueGrid([
+                  ["目安", wave.volume],
+                  ["設定", wave.settings],
+                  ["目的", wave.purpose],
+                ])}
+              </div>
+            </article>
+          `,
+        )
+        .join("")}
+    </div>
+  `;
+}
+
+function renderCampaignCards(items) {
+  return `
+    <div class="campaign-card-list">
+      ${items
+        .map(
+          (item) => `
+            <article class="campaign-card">
+              <div class="campaign-card-head">
+                <div>
+                  <h3>${item.campaign}</h3>
+                  <p>${item.lp}</p>
+                </div>
+                <span class="status ${statusClass(item.userStatus)}">${item.userStatus}</span>
+              </div>
+              ${renderKeyValueGrid([
+                ["業種", item.industry],
+                ["グループ", item.group],
+                ["対象 / 指定", `${item.target}件 / ${item.recommended}件`],
+                ["送信可能", item.sendableEstimate ? `${item.sendableEstimate}件` : "-"],
+                ["チャネル", item.deliveryChannel || "フォーム配信"],
+                ["予定日時", item.scheduledAt || "-"],
+              ])}
+              <div class="campaign-actions">
+                ${
+                  String(item.scheduledAt || "").includes("配信済み") || item.userStatus === "送信済み"
+                    ? '<span class="label-chip">集計値のみ表示</span>'
+                    : `<button class="ghost-button" data-approve="${item.id}" type="button">日時設定</button>`
+                }
+              </div>
+            </article>
+          `,
+        )
+        .join("")}
+    </div>
+  `;
+}
+
+function renderComparisonCards(items) {
+  return `
+    <div class="comparison-card-list">
+      ${items
+        .map(
+          (item) => `
+            <article class="comparison-card">
+              <div class="comparison-card-head">
+                <h3>${item.test}</h3>
+                <span class="status ${statusClass(item.decision)}">${item.decision}</span>
+              </div>
+              ${renderKeyValueGrid([
+                ["件名", item.subject],
+                ["冒頭", item.intro],
+                ["CTA", item.cta],
+                ["クリック率", item.click],
+                ["LINE", item.line],
+                ["次回方針", item.next],
+              ])}
+            </article>
+          `,
+        )
+        .join("")}
+    </div>
+  `;
+}
+
+function renderSegmentCards(items) {
+  return `
+    <div class="segment-card-list">
+      ${items
+        .map(
+          (item) => `
+            <article class="segment-card">
+              <div class="segment-card-head">
+                <div>
+                  <h3>${item.name}</h3>
+                  <p>${item.db} / ${item.industry}</p>
+                </div>
+                <span class="status ${statusClass(item.group)}">${item.group}</span>
+              </div>
+              ${renderKeyValueGrid([
+                ["都道府県", renderPrefCell(item.pref)],
+                ["推定", `${item.estimated.toLocaleString()}件`],
+                ["送信可能", `${item.sendable.toLocaleString()}件`],
+                ["除外理由", item.excluded],
+                ["配信順", item.order],
+              ])}
+            </article>
+          `,
+        )
+        .join("")}
+    </div>
+  `;
+}
+
 function renderDashboard() {
   const dashboard = state.data.dashboard;
   const totals = dashboard.pipeline.reduce(
@@ -296,29 +412,36 @@ function renderDashboard() {
           <h2 class="panel-title">${icon("database")}業種別パイプライン</h2>
           <span class="panel-sub">件数は本日時点のステータス別キャンペーン数です。</span>
         </div>
-        <table>
-          <thead>
-            <tr>
-              <th>対象</th><th>企画中</th><th>グループ</th><th>テンプレ</th><th>キャンペーン</th><th>未処理</th><th>分析中</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${dashboard.pipeline
-              .map(
-                (row) => `
-                  <tr>
-                    <td><span class="row-title">${icon(row.icon)}${row.industry}</span></td>
-                    <td>${row.planning}</td><td>${row.group}</td><td>${row.template}</td><td>${row.campaign}</td>
-                    <td class="number-warn">${row.waiting}</td><td>${row.analyzing}</td>
-                  </tr>
-                `,
-              )
-              .join("")}
-            <tr class="total-row">
-              <td>合計</td><td>${totals.planning}</td><td>${totals.group}</td><td>${totals.template}</td><td>${totals.campaign}</td><td class="number-warn">${totals.waiting}</td><td>${totals.analyzing}</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="pipeline-card-list">
+          ${dashboard.pipeline
+            .map(
+              (row) => `
+                <article class="pipeline-card">
+                  <div class="pipeline-title">${icon(row.icon)}<strong>${row.industry}</strong></div>
+                  ${renderKeyValueGrid([
+                    ["企画中", row.planning],
+                    ["グループ", row.group],
+                    ["テンプレ", row.template],
+                    ["キャンペーン", row.campaign],
+                    ["未処理", `<span class="number-warn">${row.waiting}</span>`],
+                    ["分析中", row.analyzing],
+                  ])}
+                </article>
+              `,
+            )
+            .join("")}
+          <article class="pipeline-card total">
+            <div class="pipeline-title">${icon("improve")}<strong>合計</strong></div>
+            ${renderKeyValueGrid([
+              ["企画中", totals.planning],
+              ["グループ", totals.group],
+              ["テンプレ", totals.template],
+              ["キャンペーン", totals.campaign],
+              ["未処理", `<span class="number-warn">${totals.waiting}</span>`],
+              ["分析中", totals.analyzing],
+            ])}
+          </article>
+        </div>
       </article>
 
       <article class="panel">
@@ -448,24 +571,30 @@ function renderAbTest() {
           <h2 class="panel-title">${icon("ab")}テスト設計一覧</h2>
           <span class="panel-sub">比較したい仮説と状態</span>
         </div>
-        <table class="ab-test-table">
-          <thead><tr><th>テスト名</th><th>対象</th><th>仮説</th><th>A/B差分</th><th>状態</th></tr></thead>
-          <tbody>
-            ${state.data.abTests
-              .map(
-                (test) => `
-                  <tr>
-                    <td><strong>${test.name}</strong><small>${test.industry}</small></td>
-                    <td>${test.segment}</td>
-                    <td>${test.hypothesis}</td>
-                    <td><strong>A:</strong> ${test.appealA}<br><strong>B:</strong> ${test.appealB}<br><small>${test.success}</small></td>
-                    <td><span class="status ${statusClass(test.status)}">${test.status}</span></td>
-                  </tr>
-                `,
-              )
-              .join("")}
-          </tbody>
-        </table>
+        <div class="ab-test-card-list">
+          ${state.data.abTests
+            .map(
+              (test) => `
+                <article class="test-design-card">
+                  <div class="test-design-head">
+                    <div>
+                      <h3>${test.name}</h3>
+                      <p>${test.industry}</p>
+                    </div>
+                    <span class="status ${statusClass(test.status)}">${test.status}</span>
+                  </div>
+                  ${renderKeyValueGrid([
+                    ["対象", test.segment],
+                    ["仮説", test.hypothesis],
+                    ["A案", test.appealA],
+                    ["B案", test.appealB],
+                    ["成功指標", test.success],
+                  ])}
+                </article>
+              `,
+            )
+            .join("")}
+        </div>
       </article>
 
       <aside class="panel pad preview-panel">
@@ -512,35 +641,7 @@ function renderApproval() {
           <h2 class="panel-title">${icon("approval")}配信管理キャンペーン</h2>
           <span class="panel-sub">4/30配信済みキャンペーンの結果です。次回予約は既存ツール側の日時予約を使います。</span>
         </div>
-        <div class="table-scroll">
-          <table class="approval-table">
-            <thead><tr><th>キャンペーン名</th><th>業種</th><th>既存ツール側グループ</th><th>対象</th><th>指定</th><th>送信可能</th><th>チャネル</th><th>予約</th><th>状態</th><th>操作</th></tr></thead>
-            <tbody>
-              ${state.data.approvals
-                .map(
-                  (item) => `
-                    <tr>
-                      <td>
-                        <strong>${item.campaign}</strong><br>
-                        <small>${item.lp}</small><br>
-                        <small>予約: ${item.scheduledAt || "-"} / 送信可能: ${item.sendableEstimate ? `${item.sendableEstimate}件` : "-"}</small>
-                      </td>
-                      <td>${item.industry}</td><td>${item.group}</td><td>${item.target}件</td><td>${item.recommended}件</td><td>${item.sendableEstimate ? `${item.sendableEstimate}件` : "-"}</td>
-                      <td>${item.deliveryChannel || "フォーム配信"}</td>
-                      <td>${item.scheduledAt || "-"}</td>
-                      <td><span class="status ${statusClass(item.userStatus)}">${item.userStatus}</span></td>
-                      <td>${
-                        String(item.scheduledAt || "").includes("配信済み") || item.userStatus === "送信済み"
-                          ? "-"
-                          : `<button class="ghost-button" data-approve="${item.id}" type="button">日時設定</button>`
-                      }</td>
-                    </tr>
-                  `,
-                )
-                .join("")}
-            </tbody>
-          </table>
-        </div>
+        ${renderCampaignCards(state.data.approvals)}
     </section>
 
     <section class="panel pad" style="margin-top:16px">
@@ -576,21 +677,7 @@ function renderResults() {
     <section class="grid split-wide results-grid" style="margin-top:16px">
       <article class="panel">
         <div class="panel-head"><h2 class="panel-title">${icon("results")}キャンペーン別結果</h2><span class="panel-sub">補正クリックを優先して判断</span></div>
-        <table>
-          <thead><tr><th>テスト</th><th>件名</th><th>冒頭</th><th>CTA</th><th>クリック率</th><th>LINE</th><th>判断</th><th>次回方針</th></tr></thead>
-          <tbody>
-            ${results.comparisons
-              .map(
-                (item) => `
-                  <tr>
-                    <td><strong>${item.test}</strong></td><td>${item.subject}</td><td>${item.intro}</td><td>${item.cta}</td><td>${item.click}</td><td>${item.line}</td>
-                    <td><span class="status ${statusClass(item.decision)}">${item.decision}</span></td><td>${item.next}</td>
-                  </tr>
-                `,
-              )
-              .join("")}
-          </tbody>
-        </table>
+        ${renderComparisonCards(results.comparisons)}
       </article>
       <aside class="panel pad">
         <h2 class="panel-title">${icon("improve")}Codex改善案</h2>
@@ -713,23 +800,7 @@ function renderSegments() {
     <section class="grid content-stack segment-layout" style="margin-top:22px">
       <article class="panel segment-table-panel">
         <div class="panel-head"><h2 class="panel-title">${icon("segment")}セグメント候補</h2></div>
-        <div class="table-scroll segment-table-scroll">
-          <table class="segment-table">
-            <thead><tr><th>セグメント名</th><th>DB</th><th>業種</th><th>都道府県</th><th>推定</th><th>送信可能</th><th>除外理由</th><th>配信順</th><th>既存ツール側</th></tr></thead>
-            <tbody>
-              ${state.data.segments
-                .map(
-                  (item) => `
-                    <tr>
-                      <td><strong>${item.name}</strong></td><td>${item.db}</td><td>${item.industry}</td><td>${renderPrefCell(item.pref)}</td><td>${item.estimated.toLocaleString()}件</td>
-                      <td>${item.sendable.toLocaleString()}件</td><td>${item.excluded}</td><td>${item.order}</td><td><span class="status ${statusClass(item.group)}">${item.group}</span></td>
-                    </tr>
-                  `,
-                )
-                .join("")}
-            </tbody>
-          </table>
-        </div>
+        ${renderSegmentCards(state.data.segments)}
       </article>
       <aside class="panel pad segment-memo">
         <h2 class="panel-title">${icon("target")}対象選定メモ</h2>
