@@ -278,9 +278,9 @@ window.PDCA_DATA = {
   ],
   dashboard: {
     metrics: [
-      { label: "本日送信成功", value: "126", unit: "件", trend: "5/2夜時点 / ID37-38", icon: "campaign" },
-      { label: "本日クリック企業", value: "7", unit: "社", trend: "成功ベース5.6%", icon: "approval" },
-      { label: "LINEクリック", value: "5", unit: "件", trend: "広告・デザインLP累計表示", icon: "results" },
+      { label: "累計送信成功", value: "720", unit: "件", trend: "4/27-5/2 / ID13-38", icon: "campaign" },
+      { label: "累計クリック企業", value: "40", unit: "社", trend: "成功ベース5.6%", icon: "approval" },
+      { label: "累計LINEクリック", value: "5", unit: "件", trend: "広告・デザインLP累計", icon: "results" },
       { label: "次回フォーム総対象", value: "5,592", unit: "件", trend: "5/3-5/4 + 5/7-5/8予約", icon: "target" },
       { label: "メール補完候補", value: "236", unit: "件", trend: "70 + 92 + 74で分割", icon: "line" },
     ],
@@ -349,13 +349,11 @@ window.PDCA_DATA = {
       },
     ],
     resultSummary: [
-      { label: "本日送信成功", value: "432", unit: "件" },
-      { label: "本日クリック企業", value: "21", unit: "社" },
-      { label: "本日補正クリック率", value: "4.9", unit: "%" },
-      { label: "累計送信成功", value: "594", unit: "件" },
-      { label: "累計クリック企業", value: "32", unit: "社" },
-      { label: "LP閲覧", value: "28", unit: "PV" },
-      { label: "LINEクリック", value: "4", unit: "件" },
+      { label: "累計送信成功", value: "720", unit: "件" },
+      { label: "累計クリック企業", value: "40", unit: "社" },
+      { label: "累計補正クリック率", value: "5.6", unit: "%" },
+      { label: "LP累計閲覧", value: "42", unit: "PV" },
+      { label: "LINEクリック", value: "5", unit: "件" },
     ],
     risks: [
       {

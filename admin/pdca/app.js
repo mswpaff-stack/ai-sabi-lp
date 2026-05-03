@@ -88,53 +88,59 @@ function renderNav() {
     .join("");
 }
 
-function renderSyncBanner() {
-  const steps = ["5/1結果反映", "未達メール補完", "新比較軸を設計", "連休明けに再開"];
-  const apiLabel = "ツール側予約へ切替済み";
-  $("#syncBanner").innerHTML = `
-    <div class="next-action-main">
-      ${icon("approval")}
-      <strong>次にやること:</strong>
-      ${steps
-        .map(
-          (step, index) => `
-            <span class="step-inline">
-              <span class="step-number">${index + 1}</span>
-              ${step}
-            </span>
-            ${index < steps.length - 1 ? '<span class="step-separator">→</span>' : ""}
-          `,
-        )
-        .join("")}
-    </div>
-    <span class="label-chip action-chip">${state.data.integration.message}</span>
-    <span class="label-chip">${apiLabel}</span>
-  `;
-}
-
-function renderFlowCard() {
+function renderAbInsightPanel() {
+  const comparisons = state.data.results?.comparisons || [];
+  const summaryItems = [
+    comparisons.find((item) => item.test === "5/2休日 A_制作進行"),
+    comparisons.find((item) => item.test === "5/2休日 B_品質安定"),
+    comparisons.find((item) => item.test === "累計"),
+  ].filter(Boolean);
+  const insightCards = [
+    {
+      title: "判断",
+      text: "5/2夜時点でもAが優位。5/3-5/4はA厚め/B少量の予約を維持し、Bは比較用に残します。",
+      icon: "approval",
+    },
+    {
+      title: "考察",
+      text: "休日A/Bは母数が小さく都道府県差も混ざるため、A勝ち確定ではなく方向性確認として扱います。",
+      icon: "improve",
+    },
+    {
+      title: "次の検証",
+      text: "5/7-5/8は既存A/Bとは切り分け、短縮CTAのC案とLINE相談導線のD案を予定通り比較します。",
+      icon: "target",
+    },
+  ];
   return `
-    <section class="panel flow-card">
-      <div class="flow-title">${icon("sync")}次回の推奨フロー</div>
-      <div class="flow-steps">
-        ${[
-          ["結果反映", "トラッキング補正で集計"],
-          ["メール補完", "未達分だけ別枠で予約"],
-          ["新比較軸", "短縮版CTAを設計"],
-          ["判定", "A/Bと地域差を見る"],
-        ]
+    <section class="panel ab-insight-panel">
+      <div class="panel-head">
+        <div>
+          <h2 class="panel-title">${icon("ab")}ABテスト結果・考察</h2>
+          <span class="panel-sub">5/2夜時点のトラッキング補正値を正として表示します。</span>
+        </div>
+        <span class="status ok">予約維持</span>
+      </div>
+      <div class="ab-result-card-list">
+        ${summaryItems
           .map(
-            (item, index) => `
-              <div class="flow-step ${index === 0 ? "active" : ""}">
-                <span>${index + 1}</span>
-                <strong>${item[0]}</strong>
-                <small>${item[1]}</small>
-              </div>
-              ${index < 3 ? '<span class="flow-arrow">→</span>' : ""}
+            (item) => `
+              <article class="ab-result-card">
+                <div class="ab-result-head">
+                  <strong>${item.test}</strong>
+                  <span>${item.decision}</span>
+                </div>
+                ${renderKeyValueGrid([
+                  ["クリック", item.click],
+                  ["導線", item.line],
+                  ["次回方針", item.next],
+                ])}
+              </article>
             `,
           )
           .join("")}
       </div>
+      ${renderNoteCards(insightCards, "ab-insight-notes")}
     </section>
   `;
 }
@@ -386,16 +392,8 @@ function renderDashboard() {
 
   return `
     ${renderKpis(dashboard.metrics)}
-    <section class="grid dashboard-focus-grid">
-      ${renderFlowCard()}
-      <article class="panel pad compact-decision">
-        <h2 class="panel-title">${icon("improve")}AB検証サマリー</h2>
-        ${renderValueRows([
-          ["A案", "累計369成功 / 20クリック"],
-          ["B案", "累計225成功 / 12クリック"],
-          ["判断", "ほぼ同率・新比較軸へ"],
-        ])}
-      </article>
+    <section class="grid dashboard-focus-grid dashboard-ab-focus">
+      ${renderAbInsightPanel()}
       <article class="panel pad compact-decision">
         <h2 class="panel-title">${icon("warning")}送信ガード</h2>
         ${renderValueRows([
@@ -468,8 +466,8 @@ function renderDashboard() {
     <section class="grid insight-grid" style="margin-top:16px">
       <article class="panel">
         <div class="panel-head">
-          <h2 class="panel-title">${icon("improve")}直近結果サマリー</h2>
-          <span class="panel-sub">過去7日間</span>
+          <h2 class="panel-title">${icon("improve")}累計結果サマリー</h2>
+          <span class="panel-sub">4/27-5/2のトラッキング補正値</span>
         </div>
         <div class="summary-row">
           ${dashboard.resultSummary
@@ -952,7 +950,6 @@ function render() {
   $("#pageTitle").textContent = current.title;
   $("#pageLead").textContent = current.lead;
   renderNav();
-  renderSyncBanner();
 
   const viewRenderers = {
     dashboard: renderDashboard,

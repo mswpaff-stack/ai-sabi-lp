@@ -2429,6 +2429,73 @@ table.stacked-table {
   background: var(--green-50);
 }
 
+.dashboard-ab-focus {
+  grid-template-columns: minmax(0, 1.55fr) minmax(300px, 0.45fr);
+  align-items: stretch;
+}
+
+.ab-insight-panel {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.ab-result-card-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  padding: 0 18px 16px;
+}
+
+.ab-result-card {
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+}
+
+.ab-result-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.ab-result-head strong {
+  color: var(--ink-900);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.ab-result-head span {
+  flex: 0 0 auto;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: var(--green-100);
+  color: var(--green-800);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.ab-result-card .kv-grid {
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.ab-result-card .kv-item strong {
+  line-height: 1.55;
+}
+
+.ab-insight-notes {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  padding: 0 18px 18px;
+}
+
+.ab-insight-notes .note-card {
+  min-height: 128px;
+}
+
 .pipeline-title {
   justify-content: flex-start;
   align-items: center;
@@ -2506,6 +2573,9 @@ table.stacked-table {
 }
 
 @media (max-width: 1280px) {
+  .dashboard-ab-focus,
+  .ab-result-card-list,
+  .ab-insight-notes,
   .plan-summary,
   .pipeline-card-list,
   .segment-card-list,
@@ -2533,12 +2603,14 @@ table.stacked-table {
   .campaign-card-head,
   .comparison-card-head,
   .test-design-head,
-  .segment-card-head {
+  .segment-card-head,
+  .ab-result-head {
     flex-direction: column;
   }
 
   .chip-row,
   .kv-grid,
+  .ab-result-card .kv-grid,
   .pipeline-card .kv-grid,
   .campaign-card .kv-grid,
   .segment-card .kv-grid {
