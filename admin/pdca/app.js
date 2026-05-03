@@ -91,19 +91,19 @@ function renderNav() {
 function renderAbInsightPanel() {
   const comparisons = state.data.results?.comparisons || [];
   const summaryItems = [
-    comparisons.find((item) => item.test === "5/2休日 A_制作進行"),
-    comparisons.find((item) => item.test === "5/2休日 B_品質安定"),
+    comparisons.find((item) => item.test === "5/3休日 A_制作進行"),
+    comparisons.find((item) => item.test === "5/3休日 B_品質安定"),
     comparisons.find((item) => item.test === "累計"),
   ].filter(Boolean);
   const insightCards = [
     {
       title: "判断",
-      text: "5/2夜時点でもAが優位。5/3-5/4はA厚め/B少量の予約を維持し、Bは比較用に残します。",
+      text: "5/3は休日反応が弱く、成功68件から補正クリック1社に留まりました。5/4-5/6は大きく張らず、A厚め/B少量で小規模継続します。",
       icon: "approval",
     },
     {
       title: "考察",
-      text: "休日A/Bは母数が小さく都道府県差も混ざるため、A勝ち確定ではなく方向性確認として扱います。",
+      text: "5/3単日ではBだけがクリックしましたが母数が小さいため、累計A優位を崩す材料ではなく曜日差の弱さとして扱います。",
       icon: "improve",
     },
     {
@@ -117,9 +117,9 @@ function renderAbInsightPanel() {
       <div class="panel-head">
         <div>
           <h2 class="panel-title">${icon("ab")}ABテスト結果・考察</h2>
-          <span class="panel-sub">5/2夜時点のトラッキング補正値を正として表示します。</span>
+          <span class="panel-sub">5/3時点のトラッキング補正値を正として表示します。</span>
         </div>
-        <span class="status ok">予約維持</span>
+        <span class="status ok">小規模継続</span>
       </div>
       <div class="ab-result-card-list">
         ${summaryItems
