@@ -88,6 +88,26 @@ function renderNav() {
     .join("");
 }
 
+function renderProgressBanner() {
+  return `
+    <section class="sync-banner">
+      <div class="next-action-main">
+        ${icon("approval")}
+        <strong>次にやること:</strong>
+        <span class="step-inline"><span class="step-number">1</span>5/1結果反映</span>
+        <span class="step-separator">→</span>
+        <span class="step-inline"><span class="step-number">2</span>未達メール補完</span>
+        <span class="step-separator">→</span>
+        <span class="step-inline"><span class="step-number">3</span>新比較軸を設計</span>
+        <span class="step-separator">→</span>
+        <span class="step-inline"><span class="step-number">4</span>連休明けに再開</span>
+      </div>
+      <span class="label-chip action-chip">5/1未達メール補完ID43・44のツール側予約済み状態を反映</span>
+      <span class="label-chip action-chip">ツール側予約へ切替済み</span>
+    </section>
+  `;
+}
+
 function renderAbInsightPanel() {
   const comparisons = state.data.results?.comparisons || [];
   const summaryItems = [
@@ -421,6 +441,7 @@ function renderFilters(labels, buttonLabel = "絞り込む") {
 function renderAbTest() {
   const selected = state.data.abTests[0];
   return `
+    ${renderProgressBanner()}
     ${renderFilters(["業種", "都道府県", "詳細業種", "LP", "状態"])}
     <section class="panel ab-hero-panel">
       <div class="panel-head">
@@ -525,6 +546,7 @@ function renderApproval() {
     { label: "公開PII", value: "0", unit: "件", icon: "lock" },
   ];
   return `
+    ${renderProgressBanner()}
     ${renderKpis(approvalMetrics.slice(0, 4))}
     <section class="panel approval-table-panel" style="margin-top:16px">
         <div class="panel-head">
@@ -562,6 +584,7 @@ function renderApproval() {
 function renderResults() {
   const results = state.data.results;
   return `
+    ${renderProgressBanner()}
     ${renderFilters(["期間", "業種", "キャンペーン", "テスト", "状態"], "更新")}
     <div style="margin-top:16px">${renderKpis(results.metrics)}</div>
     <section class="grid split-wide results-grid" style="margin-top:16px">
@@ -614,6 +637,7 @@ function renderResults() {
 
 function renderTemplates() {
   return `
+    ${renderProgressBanner()}
     ${renderFilters(["業種", "訴求軸", "判定", "LP", "状態"])}
     ${renderKpis([
       { label: "使用中テンプレート", value: String(state.data.templates.length), unit: "件", icon: "template" },
@@ -679,6 +703,7 @@ function renderSegments() {
   const createdGroups = state.data.segments.filter((item) => item.group.includes("作成済み")).length;
   const nextTarget = state.data.fastPdcaPlan?.targetCandidates || 3000;
   return `
+    ${renderProgressBanner()}
     ${renderFilters(["DB", "大カテゴリ", "詳細業種", "都道府県", "状態"], "セグメント候補を更新")}
     ${renderKpis([
       { label: "候補推定対象", value: estimatedTotal.toLocaleString(), unit: "件", icon: "database" },

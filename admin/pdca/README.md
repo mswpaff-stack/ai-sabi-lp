@@ -1,7 +1,7 @@
 # AI-SABI 問い合わせ営業PDCA 管理画面
 
 作成日: 2026-04-25
-最終更新日: 2026-05-02
+最終更新日: 2026-05-03
 
 ## 概要
 
@@ -31,6 +31,8 @@
 - `output/mockups/outreach-pdca-admin-realdata-redesign-image2-v1.png`
 - `output/mockups/outreach-pdca-admin-image2-balanced-20260501/`
 - `output/previews/pdca-image2-fullpage-impl-20260502-final/`
+
+2026-05-03以降、ダッシュボードは累計KPIとAB考察だけの短い現行構成を正とする。ダッシュボード以外の5画面は、上記フルページ確認画像を優先基準にし、上部の「次にやること」進行バナーを維持する。
 
 ## ローカル確認
 
