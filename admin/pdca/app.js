@@ -377,18 +377,6 @@ function renderSegmentCards(items) {
 
 function renderDashboard() {
   const dashboard = state.data.dashboard;
-  const totals = dashboard.pipeline.reduce(
-    (acc, row) => {
-      acc.planning += row.planning;
-      acc.group += row.group;
-      acc.template += row.template;
-      acc.campaign += row.campaign;
-      acc.waiting += row.waiting;
-      acc.analyzing += row.analyzing;
-      return acc;
-    },
-    { planning: 0, group: 0, template: 0, campaign: 0, waiting: 0, analyzing: 0 },
-  );
 
   return `
     ${renderKpis(dashboard.metrics)}
@@ -401,102 +389,6 @@ function renderDashboard() {
           ["メール補完", "未達分だけ"],
           ["公開画面", "個社情報なし"],
         ])}
-      </article>
-    </section>
-    ${renderFastPdcaPlan()}
-    <section class="grid dashboard-main split-wide" style="margin-top:16px">
-      <article class="panel">
-        <div class="panel-head">
-          <h2 class="panel-title">${icon("database")}業種別パイプライン</h2>
-          <span class="panel-sub">件数は本日時点のステータス別キャンペーン数です。</span>
-        </div>
-        <div class="pipeline-card-list">
-          ${dashboard.pipeline
-            .map(
-              (row) => `
-                <article class="pipeline-card">
-                  <div class="pipeline-title">${icon(row.icon)}<strong>${row.industry}</strong></div>
-                  ${renderKeyValueGrid([
-                    ["企画中", row.planning],
-                    ["グループ", row.group],
-                    ["テンプレ", row.template],
-                    ["キャンペーン", row.campaign],
-                    ["未処理", `<span class="number-warn">${row.waiting}</span>`],
-                    ["分析中", row.analyzing],
-                  ])}
-                </article>
-              `,
-            )
-            .join("")}
-          <article class="pipeline-card total">
-            <div class="pipeline-title">${icon("improve")}<strong>合計</strong></div>
-            ${renderKeyValueGrid([
-              ["企画中", totals.planning],
-              ["グループ", totals.group],
-              ["テンプレ", totals.template],
-              ["キャンペーン", totals.campaign],
-              ["未処理", `<span class="number-warn">${totals.waiting}</span>`],
-              ["分析中", totals.analyzing],
-            ])}
-          </article>
-        </div>
-      </article>
-
-      <article class="panel">
-        <div class="panel-head">
-          <h2 class="panel-title">${icon("target")}今日の優先タスク</h2>
-        </div>
-        <div class="task-list">
-          ${dashboard.tasks
-            .map(
-              (task) => `
-                <div class="task">
-                  <span class="check"></span>
-                  <span><strong>${task.title}</strong><small>${task.detail}</small></span>
-                  <span class="task-priority ${priorityClass(task.priority)}">${task.priority}</span>
-                  <small>${task.due}</small>
-                </div>
-              `,
-          )
-          .join("")}
-        </div>
-      </article>
-    </section>
-
-    <section class="grid insight-grid" style="margin-top:16px">
-      <article class="panel">
-        <div class="panel-head">
-          <h2 class="panel-title">${icon("improve")}累計結果サマリー</h2>
-          <span class="panel-sub">4/27-5/2のトラッキング補正値</span>
-        </div>
-        <div class="summary-row">
-          ${dashboard.resultSummary
-            .map(
-              (item) => `
-                <div class="summary-cell">
-                  <span>${item.label}</span>
-                  <strong>${item.value}<small>${item.unit}</small></strong>
-                </div>
-              `,
-            )
-            .join("")}
-        </div>
-        <div class="notice">
-          <span><strong>結果から次に変えること</strong><br />クリックは出ているため文面方向は維持し、次回は約3,000件の実行候補を3波に分け、フォーム未達分だけをメールで補完します。</span>
-          <button class="ghost-button" data-view="results" type="button">詳細を見る</button>
-        </div>
-      </article>
-
-      <article class="panel pad">
-        <h2 class="panel-title">${icon("warning")}リスク / 注意</h2>
-        ${renderNoteCards(
-          dashboard.risks.map((risk) => ({
-            title: risk.title,
-            text: `${risk.detail} / ${risk.action}`,
-            icon: "warning",
-          })),
-          "risk-note-grid",
-        )}
       </article>
     </section>
   `;
