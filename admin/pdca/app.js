@@ -111,24 +111,24 @@ function renderProgressBanner() {
 function renderAbInsightPanel() {
   const comparisons = state.data.results?.comparisons || [];
   const summaryItems = [
-    comparisons.find((item) => item.test === "5/3休日 A_制作進行"),
-    comparisons.find((item) => item.test === "5/3休日 B_品質安定"),
+    comparisons.find((item) => item.test === "5/4GW A_制作進行"),
+    comparisons.find((item) => item.test === "5/4GW B_品質安定"),
     comparisons.find((item) => item.test === "累計"),
   ].filter(Boolean);
   const insightCards = [
     {
       title: "判断",
-      text: "5/3は休日反応が弱く、成功68件から補正クリック1社に留まりました。5/4-5/6は大きく張らず、A厚め/B少量で小規模継続します。",
+      text: "5/4は送信成功20件・補正クリック0社に留まり、広告・デザインの有効候補不足が明確になりました。5/5以降は複数業種の地域分割A/Bへ切り替えます。",
       icon: "approval",
     },
     {
       title: "考察",
-      text: "5/3単日ではBだけがクリックしましたが母数が小さいため、累計A優位を崩す材料ではなく曜日差の弱さとして扱います。",
+      text: "グループ総数ではなくsendableUntriedと予約send_countを正として扱います。0件配信を避けるため、全都道府県グループではなく地域別に切ります。",
       icon: "improve",
     },
     {
       title: "次の検証",
-      text: "5/7-5/8は既存A/Bとは切り分け、短縮CTAのC案とLINE相談導線のD案を予定通り比較します。",
+      text: "5/5-5/7は不動産、自動車、建設、物流、食品、ITの地域分割A/Bを見て、平日は配信量を増やして勝ちパターンを探します。",
       icon: "target",
     },
   ];
@@ -137,9 +137,9 @@ function renderAbInsightPanel() {
       <div class="panel-head">
         <div>
           <h2 class="panel-title">${icon("ab")}ABテスト結果・考察</h2>
-          <span class="panel-sub">5/3時点のトラッキング補正値を正として表示します。</span>
+          <span class="panel-sub">5/4時点のトラッキング補正値と予約ジョブsend_countを正として表示します。</span>
         </div>
-        <span class="status ok">小規模継続</span>
+        <span class="status ok">業種横展開へ切替</span>
       </div>
       <div class="ab-result-card-list">
         ${summaryItems
