@@ -1815,6 +1815,88 @@ table.stacked-table {
   margin-top: 12px;
 }
 
+.carryover-watch {
+  display: grid;
+  gap: 12px;
+  margin-top: 16px;
+  padding: 14px;
+  border: 1px solid rgba(239, 138, 23, 0.26);
+  border-radius: var(--radius);
+  background: #fffaf2;
+}
+
+.carryover-watch-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.carryover-watch-head strong {
+  color: var(--ink-900);
+  font-size: 14px;
+}
+
+.carryover-watch-head span,
+.carryover-item span {
+  color: var(--ink-500);
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+.carryover-watch > p {
+  margin: 0;
+  color: var(--ink-700);
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.carryover-item-list {
+  display: grid;
+  gap: 8px;
+}
+
+.carryover-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 4px 10px;
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid rgba(239, 138, 23, 0.18);
+  border-radius: 7px;
+  background: #fff;
+}
+
+.carryover-item strong,
+.carryover-item b {
+  color: var(--ink-900);
+  font-size: 13px;
+}
+
+.carryover-item p {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: var(--ink-700);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.carryover-checks {
+  display: grid;
+  gap: 6px;
+}
+
+.carryover-checks .label-chip {
+  justify-content: flex-start;
+  width: 100%;
+  margin: 0;
+  border-color: rgba(239, 138, 23, 0.26);
+  background: #fff;
+  color: #8a5307;
+  text-align: left;
+}
+
 .value-rows {
   display: grid;
   gap: 0;

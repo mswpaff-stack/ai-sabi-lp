@@ -331,6 +331,13 @@ window.PDCA_DATA = {
       { label: "次回フォーム予約", value: "4,373", unit: "件", trend: "5/7=1,763 / 5/8=2,010", icon: "target" },
       { label: "メール補完候補", value: "236", unit: "件", trend: "70 + 92 + 74で分割", icon: "line" },
     ],
+    guardRows: [
+      ["フォーム主配信", "未送信中心 + 予約前にsendableUntried確認"],
+      ["残候補台帳", "ID160-163の2,363件は今後の候補として保持"],
+      ["次回作成前", "新規グループより先に既存残候補を棚卸し"],
+      ["メール補完", "未達分だけ / 1日100件上限"],
+      ["公開画面", "個社情報なし"],
+    ],
     pipeline: [
       { industry: "前回: 静岡・長野", icon: "template", planning: 0, group: 2, template: 2, campaign: 2, waiting: 0, analyzing: 2 },
       { industry: "今回: 地方6県スケール", icon: "segment", planning: 0, group: 6, template: 2, campaign: 6, waiting: 0, analyzing: 6 },
@@ -421,6 +428,44 @@ window.PDCA_DATA = {
           "失敗＋スキップ全部は送信済み除外ではなく、フォーム未達だけを対象にする条件。主配信では使わず、メール補完で使う。",
         action: "条件修正",
       },
+    ],
+  },
+  carryoverWatchlist: {
+    checkedAt: "2026/05/05 22:40 JST",
+    rule:
+      "配信済み・予約済みグループの残りは、必ずsendableUntried、unsendableTotal、メール補完候補に分けて台帳化する。新規グループを作る前にこの台帳を確認し、使える残候補があれば適切なタイミングの配信案へ含める。",
+    items: [
+      {
+        label: "配信済み残sendable",
+        source: "キャンペーンID160-163",
+        count: "2,363件",
+        handling: "今後の追加フォーム候補。次回で使い切る必要はないが、結果確認・配信設計ごとに必ず候補として見る。",
+      },
+      {
+        label: "送信不可残",
+        source: "キャンペーンID160-163",
+        count: "2,992件",
+        handling: "フォーム再送候補にしない。見直し、メール補完、除外へ分ける。",
+      },
+      {
+        label: "未来予約後の残候補",
+        source: "キャンペーンID164-182 / 39-42",
+        count: "配信後に再集計",
+        handling: "配信完了後、send_countで処理されなかったsendableUntriedを同じ台帳へ追加する。",
+      },
+      {
+        label: "メール補完候補",
+        source: "5/1分ID43-44 + 4/30分70件",
+        count: "236件",
+        handling: "5/1分166件は予約済み。4/30分70件は必要時に新規キャンペーン化する。",
+      },
+    ],
+    preflightChecklist: [
+      "結果確認時は、完了キャンペーンごとにreview-candidatesを再取得する",
+      "残り表示ではなくsendableUntriedを追加フォーム候補として扱う",
+      "unsendableTotalはフォーム再送に混ぜない",
+      "新規グループ作成前に既存残候補の地域・業種・訴求を確認する",
+      "予約前にsendableUntried=0のキャンペーンがないか確認する",
     ],
   },
   abTests: [

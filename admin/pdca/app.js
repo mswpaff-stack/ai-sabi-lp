@@ -302,6 +302,39 @@ function renderPlanWaveCards(waves) {
   `;
 }
 
+function renderCarryoverWatchlist() {
+  const watch = state.data.carryoverWatchlist;
+  if (!watch) return "";
+  return `
+    <div class="carryover-watch">
+      <div class="carryover-watch-head">
+        <strong>残候補チェック</strong>
+        <span>${watch.checkedAt}</span>
+      </div>
+      <p>${watch.rule}</p>
+      <div class="carryover-item-list">
+        ${watch.items
+          .map(
+            (item) => `
+              <article class="carryover-item">
+                <div>
+                  <strong>${item.label}</strong>
+                  <span>${item.source}</span>
+                </div>
+                <b>${item.count}</b>
+                <p>${item.handling}</p>
+              </article>
+            `,
+          )
+          .join("")}
+      </div>
+      <div class="carryover-checks">
+        ${watch.preflightChecklist.map((item) => `<span class="label-chip">${item}</span>`).join("")}
+      </div>
+    </div>
+  `;
+}
+
 function renderCampaignCards(items) {
   return `
     <div class="campaign-card-list">
@@ -397,6 +430,11 @@ function renderSegmentCards(items) {
 
 function renderDashboard() {
   const dashboard = state.data.dashboard;
+  const guardRows = dashboard.guardRows || [
+    ["フォーム主配信", "未送信中心"],
+    ["メール補完", "未達分だけ"],
+    ["公開画面", "個社情報なし"],
+  ];
 
   return `
     ${renderKpis(dashboard.metrics)}
@@ -404,11 +442,8 @@ function renderDashboard() {
       ${renderAbInsightPanel()}
       <article class="panel pad compact-decision">
         <h2 class="panel-title">${icon("warning")}送信ガード</h2>
-        ${renderValueRows([
-          ["フォーム主配信", "未送信中心"],
-          ["メール補完", "未達分だけ"],
-          ["公開画面", "個社情報なし"],
-        ])}
+        ${renderValueRows(guardRows)}
+        ${renderCarryoverWatchlist()}
       </article>
     </section>
   `;
@@ -733,6 +768,11 @@ function renderSegments() {
 function buildAnalysisPrompt() {
   const context = state.data.analysisContext;
   const plan = state.data.fastPdcaPlan;
+  const carryover = state.data.carryoverWatchlist;
+  const carryoverLines = carryover
+    ? carryover.items.map((item) => `- ${item.label}: ${item.source} / ${item.count} / ${item.handling}`).join("\n")
+    : "-";
+  const carryoverCheckLines = carryover ? carryover.preflightChecklist.map((item) => `- ${item}`).join("\n") : "-";
   const waveLines = plan
     ? plan.waves
         .map(
@@ -835,6 +875,13 @@ ${abBodyLines}
 
 # 現時点の改善メモ
 ${resultLines}
+
+# 見落とし防止台帳
+- ルール: ${carryover?.rule || "-"}
+${carryoverLines}
+
+## 新規配信案を作る前の必須チェック
+${carryoverCheckLines}
 
 # Codexに出力してほしいこと
 1. 4/30地方6県と累計結果を、送信成功率・トラッキング補正クリック・LP閲覧・LINEクリックの観点で判断してください。
