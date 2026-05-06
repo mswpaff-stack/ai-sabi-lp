@@ -111,24 +111,24 @@ function renderProgressBanner() {
 function renderAbInsightPanel() {
   const comparisons = state.data.results?.comparisons || [];
   const summaryItems = [
-    comparisons.find((item) => item.test === "5/5複数業種 A_業務整理"),
-    comparisons.find((item) => item.test === "5/5複数業種 B_品質安定"),
+    comparisons.find((item) => item.test === "5/6建設・物流 A_業務整理"),
+    comparisons.find((item) => item.test === "5/6建設・物流 B_品質安定"),
     comparisons.find((item) => item.test === "累計"),
   ].filter(Boolean);
   const insightCards = [
     {
       title: "判断",
-      text: "5/5は不動産・自動車の地域分割A/Bで送信成功199件、補正クリック5社でした。広告・デザイン単一より母数は戻ったため、複数業種横展開を継続します。",
+      text: "5/6は建設・物流の地域分割A/Bで送信成功239件、補正クリック2社でした。建設は0クリックのため増量せず、運送・物流を小さく残します。",
       icon: "approval",
     },
     {
       title: "考察",
-      text: "A/BではBがやや上で、自動車Bが最も強い初速です。ただし業種差と地域差が混ざるため、5/6・5/7の建設/物流/食品/ITも見てから主軸を決めます。",
+      text: "5/6単日ではA/B差はほぼなく、クリックは運送・物流だけでした。5/5で良かった自動車Bと合わせ、5/9は残候補を小規模に検証します。",
       icon: "improve",
     },
     {
       title: "次の検証",
-      text: "5/7-5/8は平日母数を増やし、ID172-182までの複数業種フォローを追加予約済みです。",
+      text: "5/7-5/8の平日予約は維持し、5/9はID183-187で675件だけ追加予約済みです。",
       icon: "target",
     },
   ];
@@ -137,9 +137,9 @@ function renderAbInsightPanel() {
       <div class="panel-head">
         <div>
           <h2 class="panel-title">${icon("ab")}ABテスト結果・考察</h2>
-          <span class="panel-sub">5/5時点のトラッキング補正値と予約ジョブsend_countを正として表示します。</span>
+          <span class="panel-sub">5/6時点のトラッキング補正値と予約ジョブsend_countを正として表示します。</span>
         </div>
-        <span class="status ok">自動車B寄せ追加</span>
+        <span class="status ok">5/9残候補予約済み</span>
       </div>
       <div class="ab-result-card-list">
         ${summaryItems
