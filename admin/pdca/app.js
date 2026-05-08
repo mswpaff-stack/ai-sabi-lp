@@ -102,7 +102,7 @@ function renderProgressBanner() {
         <span class="step-separator">→</span>
         <span class="step-inline"><span class="step-number">4</span>連休明けに再開</span>
       </div>
-      <span class="label-chip action-chip">5/1未達メール補完ID43・44のツール側予約済み状態を反映</span>
+      <span class="label-chip action-chip">5/8結果反映・メールID43は要確認</span>
       <span class="label-chip action-chip">ツール側予約へ切替済み</span>
     </section>
   `;
@@ -111,24 +111,24 @@ function renderProgressBanner() {
 function renderAbInsightPanel() {
   const comparisons = state.data.results?.comparisons || [];
   const summaryItems = [
-    comparisons.find((item) => item.test === "5/7広告・デザイン C_短縮CTA"),
-    comparisons.find((item) => item.test === "5/7横展開 A_業務整理"),
+    comparisons.find((item) => item.test === "5/8自動車 B_品質安定"),
+    comparisons.find((item) => item.test === "5/8保険・金融 A_業務整理"),
     comparisons.find((item) => item.test === "累計"),
   ].filter(Boolean);
   const insightCards = [
     {
       title: "判断",
-      text: "5/7は送信成功579件、補正クリック17社でした。広告・デザインC、小売A、IT A、医療Bの反応が比較的強く、5/8既存予約は維持します。",
+      text: "5/8はフォーム送信成功526件、補正クリック7社でした。広告・デザインC/Dは弱めで、自動車Bと保険・金融Aに反応が残りました。",
       icon: "approval",
     },
     {
       title: "考察",
-      text: "DのLINE相談導線は単日では弱めでした。C短縮CTAとA系業務整理がやや良く、休日は広げすぎず小売A・IT A・医療B・食品Aで小さく見ます。",
+      text: "クリック率は5/7より落ちたため、単純増量ではなく業種の勝ち筋を見ます。5/11は反応が残った複数業種で平日回復を確認します。",
       icon: "improve",
     },
     {
       title: "次の検証",
-      text: "5/8は既存2,010件、5/9は675件、5/10はID189-193で600件を予約済みです。5/8結果が取れたら5/10以降の量を調整します。",
+      text: "5/9は675件、5/10は600件を維持し、5/11はID194-199で1,144件を追加予約済みです。メールID43はrunning 0件のため要確認です。",
       icon: "target",
     },
   ];
@@ -137,9 +137,9 @@ function renderAbInsightPanel() {
       <div class="panel-head">
         <div>
           <h2 class="panel-title">${icon("ab")}ABテスト結果・考察</h2>
-          <span class="panel-sub">5/7時点のトラッキング補正値と予約ジョブsend_countを正として表示します。</span>
+          <span class="panel-sub">5/8時点のトラッキング補正値と予約ジョブsend_countを正として表示します。</span>
         </div>
-        <span class="status ok">5/10小規模予約済み</span>
+        <span class="status ok">5/11平日フォロー予約済み</span>
       </div>
       <div class="ab-result-card-list">
         ${summaryItems
