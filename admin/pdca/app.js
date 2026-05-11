@@ -94,16 +94,16 @@ function renderProgressBanner() {
       <div class="next-action-main">
         ${icon("approval")}
         <strong>次にやること:</strong>
-        <span class="step-inline"><span class="step-number">1</span>5/1結果反映</span>
+        <span class="step-inline"><span class="step-number">1</span>5/11結果反映</span>
         <span class="step-separator">→</span>
-        <span class="step-inline"><span class="step-number">2</span>未達メール補完</span>
+        <span class="step-inline"><span class="step-number">2</span>5/12-5/15予約維持</span>
         <span class="step-separator">→</span>
-        <span class="step-inline"><span class="step-number">3</span>新比較軸を設計</span>
+        <span class="step-inline"><span class="step-number">3</span>結果を再集計</span>
         <span class="step-separator">→</span>
-        <span class="step-inline"><span class="step-number">4</span>連休明けに再開</span>
+        <span class="step-inline"><span class="step-number">4</span>次回配分を更新</span>
       </div>
-      <span class="label-chip action-chip">5/8結果反映・メールID43は要確認</span>
-      <span class="label-chip action-chip">ツール側予約へ切替済み</span>
+      <span class="label-chip action-chip">5/11結果反映済み</span>
+      <span class="label-chip action-chip">5/15までツール側予約済み</span>
     </section>
   `;
 }
@@ -111,24 +111,24 @@ function renderProgressBanner() {
 function renderAbInsightPanel() {
   const comparisons = state.data.results?.comparisons || [];
   const summaryItems = [
-    comparisons.find((item) => item.test === "5/8自動車 B_品質安定"),
-    comparisons.find((item) => item.test === "5/8保険・金融 A_業務整理"),
+    comparisons.find((item) => item.test === "5/11 小売・販売 A_業務整理"),
+    comparisons.find((item) => item.test === "5/11 自動車 B_品質安定"),
     comparisons.find((item) => item.test === "累計"),
   ].filter(Boolean);
   const insightCards = [
     {
       title: "判断",
-      text: "5/8はフォーム送信成功526件、補正クリック7社でした。広告・デザインC/Dは弱めで、自動車Bと保険・金融Aに反応が残りました。",
+      text: "5/11は送信成功667件、補正クリック18社でした。小売A、自動車B、IT A、運送B、食品Aに反応が残りました。",
       icon: "approval",
     },
     {
       title: "考察",
-      text: "クリック率は5/7より落ちたため、単純増量ではなく業種の勝ち筋を見ます。5/11は反応が残った複数業種で平日回復を確認します。",
+      text: "保険Aと医療Aはクリックが弱かったため、大きく増やさず小口で確認します。勝ち筋は地域と時間帯をずらして再現性を見ます。",
       icon: "improve",
     },
     {
       title: "次の検証",
-      text: "5/9は675件、5/10は600件を維持し、5/11はID194-199で1,144件を追加予約済みです。メールID43はrunning 0件のため要確認です。",
+      text: "5/12と5/13の既存予約を維持し、5/14・5/15に自動車B、運送B、IT A/B、小売A、食品A、医療/保険小口を追加しました。",
       icon: "target",
     },
   ];
@@ -137,9 +137,9 @@ function renderAbInsightPanel() {
       <div class="panel-head">
         <div>
           <h2 class="panel-title">${icon("ab")}ABテスト結果・考察</h2>
-          <span class="panel-sub">5/8時点のトラッキング補正値と予約ジョブsend_countを正として表示します。</span>
+          <span class="panel-sub">5/11時点のトラッキング補正値と予約ジョブsend_countを正として表示します。</span>
         </div>
-        <span class="status ok">5/11平日フォロー予約済み</span>
+        <span class="status ok">5/15まで予約済み</span>
       </div>
       <div class="ab-result-card-list">
         ${summaryItems
