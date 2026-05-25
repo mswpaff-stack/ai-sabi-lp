@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI-SABI | 士業事務所向けAI導入伴走コンサル</title>
+  <meta name="description" content="士業事務所の相談対応・文書作成・確認業務をAIで仕組み化。余白を広く取ったセクション画像型LPから無料相談予約へ誘導します。">
+  <link rel="stylesheet" href="style.css?v=20260525-volume-a">
+</head>
+<body>
+  <main id="top" class="page">
+    <h1 class="sr-only">AI-SABI 士業事務所向けAI導入伴走コンサル</h1>
+
+    <div class="visual-stack visual-stack-desktop" aria-label="AI-SABI 士業事務所向けAI導入伴走コンサル LP">
+      <section id="hero" class="visual-section">
+        <img src="assets/pc-01.webp" alt="AI導入を士業事務所の実務に定着させる。導入後に整う業務例とAIツールだけでは変わらない理由。">
+      </section>
+      <section id="problem" class="visual-section">
+        <img src="assets/pc-02.webp" alt="事務所に残る負担、AI-SABIとは、AI-SABIでできること。">
+      </section>
+      <section id="roadmap" class="visual-section">
+        <img src="assets/pc-03.webp" alt="導入前と導入後の違い、90日導入ロードマップ、料金、運用セット。">
+      </section>
+      <section id="flow" class="visual-section">
+        <img src="assets/pc-04-info.webp" alt="安心して相談いただくために、向いている事務所、相談から導入までの流れ、よくある質問。">
+      </section>
+    </div>
+
+    <div class="visual-stack visual-stack-mobile" aria-label="AI-SABI 士業事務所向けAI導入伴走コンサル SP版LP">
+      <section class="visual-section"><img src="assets/sp-01.webp" alt="AI-SABIのスマートフォン向けヒーロー"></section>
+      <section class="visual-section"><img src="assets/sp-02.webp" alt="導入後に整う業務例"></section>
+      <section class="visual-section"><img src="assets/sp-03.webp" alt="AIツールを入れただけでは変わらない理由"></section>
+      <section class="visual-section"><img src="assets/sp-04.webp" alt="事務所に残る負担"></section>
+      <section class="visual-section"><img src="assets/sp-05.webp" alt="AI-SABIとは"></section>
+      <section class="visual-section"><img src="assets/sp-06.webp" alt="AI-SABIでできること"></section>
+      <section class="visual-section"><img src="assets/sp-07.webp" alt="導入前と導入後の違い"></section>
+      <section class="visual-section"><img src="assets/sp-08.webp" alt="90日ロードマップ、料金、運用セット"></section>
+      <section class="visual-section"><img src="assets/sp-09.webp" alt="安心して相談いただくために、向き不向き"></section>
+      <section class="visual-section"><img src="assets/sp-10.webp" alt="相談から導入までの流れ、よくある質問"></section>
+    </div>
+
+    <section id="booking" class="booking-section" aria-labelledby="booking-title">
+      <div class="booking-copy">
+        <p class="booking-kicker">30分無料 / オンライン対応</p>
+        <h2 id="booking-title">無料相談を予約する</h2>
+        <p>下記フォームより、ご希望の日時をご選択ください。現在の業務負担やAI導入で整理したいことを伺い、無理のない進め方をご提案します。</p>
+        <ul class="booking-notes">
+          <li>専門用語なしでご相談いただけます</li>
+          <li>しつこい営業はありません</li>
+          <li>料金は課題と範囲に合わせて個別にご案内します</li>
+        </ul>
+      </div>
+
+      <form class="booking-form" id="consultation-form" data-booking-url="">
+        <div class="field">
+          <label for="company">会社名・事務所名 <span class="required">必須</span></label>
+          <input id="company" name="company" type="text" autocomplete="organization" required placeholder="例）AI-SABI税理士事務所">
+        </div>
+        <div class="field">
+          <label for="name">お名前 <span class="required">必須</span></label>
+          <input id="name" name="name" type="text" autocomplete="name" required placeholder="例）山田 太郎">
+        </div>
+        <div class="field">
+          <label for="email">メールアドレス <span class="required">必須</span></label>
+          <input id="email" name="email" type="email" autocomplete="email" required placeholder="例）yamada@example.com">
+        </div>
+        <div class="field">
+          <label for="tel">電話番号 <span class="optional">任意</span></label>
+          <input id="tel" name="tel" type="tel" autocomplete="tel" placeholder="例）090-1234-5678">
+        </div>
+        <div class="field field-wide">
+          <label for="topic">相談したい内容 <span class="required">必須</span></label>
+          <select id="topic" name="topic" required>
+            <option value="">選択してください</option>
+            <option>問い合わせ対応を整えたい</option>
+            <option>文書作成・確認業務を効率化したい</option>
+            <option>AI導入の進め方を相談したい</option>
+            <option>料金や導入範囲を相談したい</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>希望方法 <span class="required">必須</span></label>
+          <div class="radio-row">
+            <label><input type="radio" name="method" value="online" checked> オンライン相談</label>
+            <label><input type="radio" name="method" value="phone"> 電話相談</label>
+          </div>
+        </div>
+
+        <input type="hidden" name="date" value="">
+        <input type="hidden" name="time" value="">
+
+        <div class="calendar-box field-wide" data-calendar-days="30">
+          <div class="calendar-head">
+            <div>
+              <span>ご希望日</span>
+              <strong>予約日を選択</strong>
+            </div>
+            <p class="selected-date-label" aria-live="polite"></p>
+          </div>
+          <div class="calendar-days" aria-label="予約日を選択"></div>
+          <div class="time-head">ご希望時間</div>
+          <div class="time-grid" aria-label="予約時間を選択">
+            <button type="button" data-time="09:00">09:00</button>
+            <button type="button" data-time="10:00" class="is-selected">10:00</button>
+            <button type="button" data-time="11:00">11:00</button>
+            <button type="button" data-time="12:00">12:00</button>
+            <button type="button" data-time="13:00">13:00</button>
+            <button type="button" data-time="14:00">14:00</button>
+            <button type="button" data-time="15:00">15:00</button>
+            <button type="button" data-time="16:00">16:00</button>
+            <button type="button" data-time="17:00">17:00</button>
+            <button type="button" data-time="18:00">18:00</button>
+            <button type="button" data-time="19:00">19:00</button>
+            <button type="button" data-time="20:00">20:00</button>
+          </div>
+        </div>
+
+        <div class="field field-wide">
+          <label for="message">ご質問・ご要望など <span class="optional">任意</span></label>
+          <textarea id="message" name="message" rows="5" placeholder="例）問い合わせ対応と文書作成のAI活用について相談したいです。"></textarea>
+        </div>
+
+        <button class="submit-button field-wide" type="submit">この内容で予約する <span>›</span></button>
+        <p class="privacy-note field-wide">ご入力いただいた情報は、無料相談のご連絡のみに利用し、第三者に提供することはありません。</p>
+      </form>
+    </section>
+  </main>
+
+  <a class="floating-cta" href="#booking" aria-label="無料相談を予約する">
+    <span class="floating-icon">□</span>
+    <span>無料相談を予約する</span>
+  </a>
+
+  <script src="booking.js?v=20260525-volume-a"></script>
+</body>
+</html>
