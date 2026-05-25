@@ -1623,3 +1623,436 @@ img {
     gap: 2px;
   }
 }
+
+@media (max-width: 980px) {
+  .trust-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .trust-item {
+    min-height: 74px;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px 6px;
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.09);
+    text-align: center;
+    white-space: normal;
+  }
+
+  .pattern-c .trust-item {
+    background: #fff;
+    border: 1px solid var(--line);
+    box-shadow: 0 8px 22px rgba(70, 42, 34, 0.06);
+  }
+
+  .trust-item img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .value-card {
+    min-height: 0;
+    grid-template-columns: 68px minmax(0, 1fr);
+    place-items: stretch;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+    text-align: left;
+  }
+
+  .value-card img {
+    width: 64px;
+    height: 64px;
+    margin: 0;
+  }
+
+  .pattern-a .problem-band,
+  .pattern-c .anxiety-head {
+    margin-top: 42px;
+    padding: 0;
+    background: transparent;
+    color: var(--text);
+    box-shadow: none;
+  }
+
+  .pattern-a .problem-band h2,
+  .pattern-c .anxiety-head h2 {
+    position: relative;
+    padding-bottom: 14px;
+  }
+
+  .pattern-a .problem-band h2::after,
+  .pattern-c .anxiety-head h2::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 44px;
+    height: 3px;
+    border-radius: 999px;
+    background: var(--accent);
+    transform: translateX(-50%);
+  }
+
+  .pattern-a .problem-list,
+  .pattern-c .anxiety-list {
+    gap: 14px;
+    margin-top: 24px;
+  }
+
+  .pattern-a .problem-row {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 12px;
+    align-items: start;
+    min-height: 160px;
+    padding: 18px 43% 18px 18px;
+    background: #fff;
+  }
+
+  .pattern-a .problem-row::after,
+  .pattern-a .feature-row::after,
+  .pattern-c .anxiety-card::after,
+  .pattern-c .timeline-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .pattern-a .problem-row::after,
+  .pattern-a .feature-row::after {
+    background: linear-gradient(90deg, #fff 0%, #fff 51%, rgba(255, 255, 255, 0.82) 66%, rgba(255, 255, 255, 0) 88%);
+  }
+
+  .pattern-a .problem-icon {
+    position: relative;
+    z-index: 2;
+    width: 42px;
+    height: 42px;
+    align-self: start;
+  }
+
+  .pattern-a .problem-row > div {
+    position: relative;
+    z-index: 2;
+  }
+
+  .pattern-a .problem-row h3 {
+    margin-bottom: 8px;
+    font-size: 18px;
+    line-height: 1.45;
+  }
+
+  .pattern-a .problem-row p {
+    font-size: 12px;
+    line-height: 1.75;
+  }
+
+  .pattern-a .problem-row .thumb {
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    grid-column: auto;
+    width: 50%;
+    height: 100%;
+    border-radius: 0;
+    object-fit: cover;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.22) 22%, #000 56%);
+    mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.22) 22%, #000 56%);
+  }
+
+  .pattern-a .feature-list {
+    gap: 16px;
+  }
+
+  .pattern-a .feature-row {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    display: block;
+    min-height: 176px;
+    padding: 18px 43% 18px 18px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: #fff;
+    box-shadow: var(--shadow-card);
+  }
+
+  .pattern-a .feature-image {
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 50%;
+  }
+
+  .pattern-a .feature-image img {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    object-fit: cover;
+    box-shadow: none;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.22) 24%, #000 58%);
+    mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.22) 24%, #000 58%);
+  }
+
+  .pattern-a .feature-copy {
+    position: relative;
+    z-index: 2;
+    padding: 0;
+  }
+
+  .pattern-a .num {
+    display: grid;
+    width: 34px;
+    height: 34px;
+    place-items: center;
+    margin-bottom: 12px;
+    border-radius: 999px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 14px;
+  }
+
+  .pattern-a .feature-copy h3 {
+    margin-bottom: 8px;
+    font-size: 18px;
+  }
+
+  .pattern-a .feature-copy p {
+    font-size: 12px;
+    line-height: 1.75;
+  }
+
+  .pattern-c .anxiety-card {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    display: block;
+    min-height: 178px;
+    padding: 22px 44% 22px 20px;
+    background: #fff;
+  }
+
+  .pattern-c .anxiety-card::after,
+  .pattern-c .timeline-card::after {
+    background: linear-gradient(90deg, #fff 0%, #fff 48%, rgba(255, 255, 255, 0.82) 64%, rgba(255, 255, 255, 0) 88%);
+  }
+
+  .pattern-c .anxiety-card img {
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 52%;
+    height: 100%;
+    border-radius: 0;
+    object-fit: cover;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.22) 24%, #000 58%);
+    mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.22) 24%, #000 58%);
+  }
+
+  .pattern-c .anxiety-card > div {
+    position: relative;
+    z-index: 2;
+  }
+
+  .pattern-c .anxiety-card > div::before {
+    display: grid;
+    width: 42px;
+    height: 42px;
+    place-items: center;
+    margin-bottom: 12px;
+    border: 2px solid var(--accent);
+    border-radius: 999px;
+    color: var(--accent);
+    font-size: 20px;
+    font-weight: 900;
+  }
+
+  .pattern-c .anxiety-card:nth-child(1) > div::before {
+    content: "?";
+  }
+
+  .pattern-c .anxiety-card:nth-child(2) > div::before {
+    content: "鍵";
+    font-size: 15px;
+  }
+
+  .pattern-c .anxiety-card:nth-child(3) > div::before {
+    content: "¥";
+  }
+
+  .pattern-c .anxiety-card h3 {
+    font-size: 20px;
+  }
+
+  .pattern-c .timeline {
+    gap: 14px;
+  }
+
+  .pattern-c .timeline::before {
+    display: none;
+  }
+
+  .pattern-c .timeline-card {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    display: block;
+    min-height: 150px;
+    padding: 20px 43% 20px 78px;
+  }
+
+  .pattern-c .timeline-num {
+    position: absolute;
+    z-index: 2;
+    left: 18px;
+    top: 22px;
+    width: 44px;
+    height: 44px;
+    font-size: 15px;
+  }
+
+  .pattern-c .timeline-card > div {
+    position: relative;
+    z-index: 2;
+  }
+
+  .pattern-c .timeline-card img {
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 50%;
+    height: 100%;
+    border-radius: 0;
+    object-fit: cover;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.22) 24%, #000 58%);
+    mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.22) 24%, #000 58%);
+  }
+
+  .pattern-c .timeline-card h3 {
+    font-size: 17px;
+  }
+
+  .pattern-c .timeline-card p {
+    font-size: 12px;
+    line-height: 1.7;
+  }
+
+  .booking-head img {
+    display: none;
+  }
+
+  .booking-head h2 {
+    font-size: 28px;
+  }
+
+  .booking-head p {
+    font-size: 13px;
+  }
+
+  .booking-form {
+    gap: 14px;
+  }
+
+  .field input,
+  .field textarea {
+    min-height: 52px;
+    font-size: 15px;
+  }
+
+  .calendar-box,
+  .closing-layout .calendar-box {
+    gap: 14px;
+    padding: 12px;
+  }
+
+  .calendar-month strong {
+    padding-top: 12px;
+    font-size: 14px;
+  }
+
+  .selected-date-label {
+    font-size: 12px;
+  }
+
+  .calendar-days {
+    gap: 3px;
+    padding: 10px;
+  }
+
+  .calendar-days span,
+  .calendar-days button,
+  .calendar-days .calendar-blank {
+    min-height: 34px;
+  }
+
+  .calendar-days .weekday {
+    min-height: 22px;
+  }
+
+  .calendar-days .date-month {
+    font-size: 9px;
+  }
+
+  .calendar-days .date-day {
+    font-size: 13px;
+  }
+
+  .time-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .time-grid button {
+    min-height: 44px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 420px) {
+  .trust-item {
+    flex-basis: auto;
+    min-width: 0;
+  }
+
+  .pattern-a .problem-row,
+  .pattern-a .feature-row {
+    padding-right: 40%;
+  }
+
+  .pattern-a .problem-row .thumb,
+  .pattern-a .feature-image {
+    width: 46%;
+  }
+
+  .pattern-c .anxiety-card {
+    padding-right: 40%;
+  }
+
+  .pattern-c .anxiety-card img {
+    width: 48%;
+  }
+
+  .pattern-c .timeline-card {
+    padding-right: 39%;
+  }
+
+  .pattern-c .timeline-card img {
+    width: 46%;
+  }
+}
