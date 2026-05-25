@@ -1656,6 +1656,9 @@ img {
   .value-card {
     min-height: 0;
     grid-template-columns: 68px minmax(0, 1fr);
+    grid-template-areas:
+      "icon title"
+      "body body";
     place-items: stretch;
     align-items: center;
     gap: 16px;
@@ -1664,9 +1667,22 @@ img {
   }
 
   .value-card img {
+    grid-area: icon;
     width: 64px;
     height: 64px;
     margin: 0;
+  }
+
+  .value-card strong {
+    grid-area: title;
+    align-self: center;
+    line-height: 1.45;
+  }
+
+  .value-card span {
+    grid-area: body;
+    width: 100%;
+    line-height: 1.8;
   }
 
   .pattern-a .problem-band,
