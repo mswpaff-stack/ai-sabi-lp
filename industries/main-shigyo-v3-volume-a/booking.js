@@ -127,21 +127,17 @@
 
   const observedSections = [document.querySelector("#faq"), document.querySelector("#booking")].filter(Boolean);
   const floatingCta = document.querySelector(".floating-cta");
-  if (observedSections.length && floatingCta && "IntersectionObserver" in window) {
-    const visibleSections = new Set();
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            visibleSections.add(entry.target);
-          } else {
-            visibleSections.delete(entry.target);
-          }
-        });
-        floatingCta.classList.toggle("is-hidden", visibleSections.size > 0);
-      },
-      { threshold: 0.08 }
-    );
-    observedSections.forEach((section) => observer.observe(section));
+  if (floatingCta) {
+    const refreshFloatingCta = () => {
+      const hiddenBySection = observedSections.some((section) => {
+        const rect = section.getBoundingClientRect();
+        return rect.top < window.innerHeight * 0.86 && rect.bottom > window.innerHeight * 0.14;
+      });
+      const hiddenByTop = window.scrollY < window.innerHeight * 0.72;
+      floatingCta.classList.toggle("is-hidden", hiddenBySection || hiddenByTop);
+    };
+    window.addEventListener("scroll", refreshFloatingCta, { passive: true });
+    window.addEventListener("resize", refreshFloatingCta);
+    refreshFloatingCta();
   }
 })();
